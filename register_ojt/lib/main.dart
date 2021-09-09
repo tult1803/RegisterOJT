@@ -1,6 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:register_ojt/utils/google_login.dart';
 
-void main() {
+void main() async{
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: LoginPage(),
@@ -86,8 +88,10 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _googleSignIn(){
     return GestureDetector(
-      onTap: () {
-        print('Tap Google Sign In - $dropDownValue');
+      onTap: () async{
+        // print('Tap Google Sign In - $dropDownValue');
+        String? fbToken = await signInWithGoogle();
+        print('Token: $fbToken');
       },
       child: Container(
         height: 50,

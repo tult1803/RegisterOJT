@@ -1,36 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
+    <!--
+      If you are serving your web app in a path other than the root, change the
+      href value below to reflect the base path you are serving from.
 
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
+      The path provided below has to start and end with a slash "/" in order for
+      it to work correctly.
 
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-  -->
-  <base href="/">
+      For more details:
+      * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+    -->
+    <base href="/">
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+    <meta charset="UTF-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="description" content="A new Flutter project.">
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="register_ojt">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="register_ojt">
+    <meta name="google-signin-client_id"
+          content="202909952362-lpu45hkmu4cvt91u303a35l738ueiddh.apps.googleusercontent.com">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <title>register_ojt</title>
-  <link rel="manifest" href="manifest.json">
+    <title>register_ojt</title>
+    <link rel="manifest" href="manifest.json">
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyAeNFAXCL8H0ZUGlV_dWoGe_VarM3UP7qc",
+    authDomain: "registerojt.firebaseapp.com",
+    projectId: "registerojt",
+    storageBucket: "registerojt.appspot.com",
+    messagingSenderId: "202909952362",
+    appId: "1:202909952362:web:b6351a45d9104d53e3dd13",
+    measurementId: "G-C8XCC5JDSJ"
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+</script>
 </head>
 <body>
-  <!-- This script installs service_worker.js to provide PWA functionality to
-       application. For more information, see:
-       https://developers.google.com/web/fundamentals/primers/service-workers -->
-  <script>
+
+<!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
+<script>
     var serviceWorkerVersion = null;
     var scriptLoaded = false;
     function loadMainDartJs() {
@@ -93,6 +112,9 @@
       // Service workers not supported. Just drop the <script> tag.
       loadMainDartJs();
     }
-  </script>
+
+
+
+</script>
 </body>
 </html>
