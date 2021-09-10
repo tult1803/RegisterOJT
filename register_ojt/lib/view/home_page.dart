@@ -1,6 +1,10 @@
-
 import 'package:flutter/material.dart';
+import 'package:register_ojt/utils/google_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
+import 'package:register_ojt/view/student/ojt_information.dart';
+import 'package:register_ojt/view/student/profile.dart';
+import 'package:register_ojt/view/student/send_application.dart';
+import 'package:register_ojt/view/student/view_application.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,10 +13,11 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-String currentNamePage = "OJT Information";
-
 class _HomePageState extends State<HomePage> {
+  late Widget _widget;
+  String? currentNamePage;
   var token;
+
   _getToken() async {
     token = await getDataSession(key: "token");
     setState(() {
@@ -24,6 +29,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    currentNamePage = "OJT Information";
+    _widget = OjtInfor();
     _getToken();
   }
 
@@ -33,13 +40,16 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         children: [
           topBar(context),
+          Container(
+            child: _widget,
+          ),
         ],
       ),
     );
   }
 
-  Widget miniContainer(String title, {required bool isHiddenColor}) {
-
+  Widget miniContainer(String title,
+      {required bool isHiddenColor, required int index}) {
     return Container(
       decoration: BoxDecoration(
           color: isHiddenColor == true ? Colors.orangeAccent : Colors.white54,
@@ -47,18 +57,36 @@ class _HomePageState extends State<HomePage> {
       height: 50,
       width: 150,
       child: FlatButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         onPressed: () {
           setState(() {
             currentNamePage = title;
+            switch (index) {
+              case 0:
+                _widget = OjtInfor();
+                break;
+              case 1:
+                _widget = SendApplication();
+                break;
+              case 2:
+                _widget = ViewApplication();
+                break;
+              case 3:
+                _widget = ProfileStudent();
+                break;
+              case 4:
+                signOut(context);
+                break;
+            }
           });
         },
         child: Center(
             child: Text(
-              "$title",
-              style: TextStyle(
-                  color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 15),
-            )),
+          "$title",
+          style: TextStyle(
+              color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 15),
+        )),
       ),
     );
   }
@@ -91,10 +119,16 @@ class _HomePageState extends State<HomePage> {
               child: Wrap(
                 spacing: 10,
                 children: [
-                  miniContainer("OJT Information", isHiddenColor: false),
-                  miniContainer("Send Application", isHiddenColor: false),
-                  miniContainer("View Application", isHiddenColor: false),
-                  miniContainer("Logout", isHiddenColor: true),
+                  miniContainer("OJT Information",
+                      isHiddenColor: false, index: 0),
+                  miniContainer("Send Application",
+                      isHiddenColor: false, index: 1),
+                  miniContainer("View Application",
+                      isHiddenColor: false, index: 2),
+                  miniContainer("Profile",
+                      isHiddenColor: false, index: 3),
+                  miniContainer("Logout",
+                      isHiddenColor: true, index: 4),
                 ],
               ),
             ),
@@ -103,5 +137,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
 }

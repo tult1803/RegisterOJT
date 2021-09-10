@@ -126,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
     return GestureDetector(
       onTap: () async {
         try {
-          String? fbToken = await signInWithGoogle();
+          String? fbToken = await signIn();
           setDataSession(key: "token", value: fbToken!);
           print('Firebase Token saved !!!');
 
