@@ -1,12 +1,42 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/google_login.dart';
+import 'package:register_ojt/view/home_page.dart';
 
-void main() async{
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: LoginPage(),
-  ));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+  configLoading();
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.custom
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..progressColor = colorHexa("7265fa")
+    ..backgroundColor = Colors.white
+    ..indicatorColor = colorHexa("7265fa")
+    ..textColor = Colors.black87
+    ..maskColor = Colors.blue.withOpacity(0.5)
+    ..userInteractions = false
+    ..dismissOnTap = false;
+}
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      builder: EasyLoading.init(),
+      // home: LoginPage(),
+      home: HomePage(),
+    );
+  }
 }
 
 class LoginPage extends StatefulWidget {
@@ -25,6 +55,12 @@ class _LoginPageState extends State<LoginPage> {
     "FU-Quy Nhơn"
   ];
   String? dropDownValue;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _dropDownButton(){
+  Widget _dropDownButton() {
     return Material(
       child: DropdownButton<String>(
         value: dropDownValue,
@@ -86,12 +122,24 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _googleSignIn(){
+  Widget _googleSignIn() {
     return GestureDetector(
-      onTap: () async{
-        // print('Tap Google Sign In - $dropDownValue');
-        String? fbToken = await signInWithGoogle();
-        print('Token: $fbToken');
+      onTap: () async {
+        try {
+          String? fbToken = await signInWithGoogle();
+          setDataSession(key: "token", value: fbToken!);
+          print('Firebase Token saved !!!');
+
+          /// Navigator tạm thời chờ API
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => HomePage()),
+              (route) => false);
+
+        } catch (_) {
+          EasyLoading.showError("Login Failed",
+              maskType: EasyLoadingMaskType.black,
+              duration: Duration(seconds: 2));
+        }
       },
       child: Container(
         height: 50,
@@ -109,9 +157,18 @@ class _LoginPageState extends State<LoginPage> {
         ),
         child: Row(
           children: [
-          Image(image: AssetImage("images/google.png"), fit: BoxFit.fill),
-          Flexible(child: Center(child: Text("Sign in", style: TextStyle(color: Colors.black87, fontSize: 15, decoration: TextDecoration.none),))),
-        ],),
+            Image(image: AssetImage("images/google.png"), fit: BoxFit.fill),
+            Flexible(
+                child: Center(
+                    child: Text(
+              "Sign in",
+              style: TextStyle(
+                  color: Colors.black87,
+                  fontSize: 15,
+                  decoration: TextDecoration.none),
+            ))),
+          ],
+        ),
       ),
     );
   }
