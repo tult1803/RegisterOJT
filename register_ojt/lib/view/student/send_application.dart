@@ -2,6 +2,8 @@ import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:register_ojt/utils/check_data.dart';
 import 'package:register_ojt/view/view_cv.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
@@ -14,6 +16,7 @@ class SendApplication extends StatefulWidget {
 
 class _SendApplicationState extends State<SendApplication> {
   String? cvName, letter, errName, errId;
+  String? studentId, fullName;
   Uint8List? _cv;
   @override
   Widget build(BuildContext context) {
@@ -46,9 +49,9 @@ class _SendApplicationState extends State<SendApplication> {
                 ),
               ),
               _txtFormField("Student Id:",
-                  hintText: "Nhập mã số sinh viên", maxLength: 10),
+                  hintText: "Nhập mã số sinh viên", maxLength: 10,error: errId),
               _txtFormField("Full Name:",
-                  hintText: "Nhập họ và tên", maxLength: 50),
+                  hintText: "Nhập họ và tên", maxLength: 50, error: errName),
               coverLetter(),
               choosePDF(),
               submitButton(),
@@ -146,7 +149,7 @@ class _SendApplicationState extends State<SendApplication> {
   }
 
   Widget _txtFormField(String title,
-      {required String hintText, required int maxLength}) {
+      {required String hintText, required int maxLength, String ? error}) {
     return Container(
       margin: EdgeInsets.only(left: 30, top: 20, right: 30),
       child: Column(
@@ -168,9 +171,17 @@ class _SendApplicationState extends State<SendApplication> {
                 borderSide: BorderSide(color: Colors.redAccent),
               ),
               //Nhận thông báo lỗi
-              // errorText: errorUsername,
+              errorText: error,
             ),
-            onChanged: (value) {},
+            onChanged: (value) {
+              setState(() {
+                if(title.contains("Id")){
+                  studentId = value.trim();
+                }else if(title.contains("Name")){
+                  fullName = value.trim();
+                }
+              });
+            },
           ),
         ],
       ),
@@ -183,13 +194,15 @@ class _SendApplicationState extends State<SendApplication> {
       width: 100,
       height: 40,
       child: ElevatedButton(
-          onPressed: () {
-            print('Pressed Submit button');
-           if( _cv != null){
+          onPressed: () async{
+            bool isEmptyCV = validateCV(context, _cv);
+            setState(() {
+              errId =  validateStudentId(studentId);
+              errName = validateFullName(fullName);
+            });
+            if(isEmptyCV && errId == null && errName == null){
              Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewCV(cv: _cv!),));
-           }else{
-             print('CV is null');
-            }
+           }
           },
           child: Text("Submit")),
     );
