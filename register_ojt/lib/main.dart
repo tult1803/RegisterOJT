@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/google_login.dart';
 import 'package:register_ojt/view/home_page.dart';
+import 'package:register_ojt/view/student/send_application.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
       // home: LoginPage(),
-      home: HomePage(),
+      // home: HomePage(role: 0,),
+      home: SendApplication(),
     );
   }
 }
@@ -106,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
     return Material(
       child: DropdownButton<String>(
         value: dropDownValue,
-        hint: Text("Select Campus"),
+        hint: Text("FU-Hồ Chí Minh"),
         items: listCampus.map((String value) {
           return new DropdownMenuItem<String>(
             value: value,
@@ -129,10 +131,10 @@ class _LoginPageState extends State<LoginPage> {
           String? fbToken = await signIn();
           setDataSession(key: "token", value: fbToken!);
           print('Firebase Token saved !!!');
-
+          int role = 0;
           /// Navigator tạm thời chờ API
           Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => HomePage()),
+              MaterialPageRoute(builder: (context) => HomePage(role: role,)),
               (route) => false);
 
         } catch (_) {

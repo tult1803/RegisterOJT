@@ -17,7 +17,7 @@ class _OjtInforState extends State<OjtInfor> {
       width: size.width * 0.6,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(5),
         boxShadow: [
           BoxShadow(
             color: Colors.black54,
@@ -67,7 +67,7 @@ class _OjtInforState extends State<OjtInfor> {
       height: 100,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
             color: Colors.black54,
@@ -78,7 +78,7 @@ class _OjtInforState extends State<OjtInfor> {
       ),
       child: FlatButton(
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         onPressed: () {},
         child: Row(
           children: [
@@ -98,6 +98,8 @@ class _OjtInforState extends State<OjtInfor> {
                   children: [
                     Text(
                       "$content",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
@@ -106,7 +108,9 @@ class _OjtInforState extends State<OjtInfor> {
                     ),
                     Text(
                       "$company",
-                      style: TextStyle(color: Colors.black54, fontSize: 18),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(color: Colors.black54, fontSize: 18,),
                     ),
                     SizedBox(
                       height: 5,
@@ -117,6 +121,8 @@ class _OjtInforState extends State<OjtInfor> {
                           width: 250,
                           child: Text(
                             "Lương: $salary",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style:
                                 TextStyle(color: Colors.black54, fontSize: 18),
                           ),
@@ -124,6 +130,8 @@ class _OjtInforState extends State<OjtInfor> {
                         Flexible(
                           child: Text(
                             "Khu vực: $location",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style:
                                 TextStyle(color: Colors.black54, fontSize: 18),
                           ),

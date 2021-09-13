@@ -29,7 +29,10 @@
     <link rel="manifest" href="manifest.json">
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
-
+    <script src="//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.min.js"></script>
+    <script type="text/javascript">
+   pdfjsLib.GlobalWorkerOptions.workerSrc = "//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.worker.min.js";
+    </script>
     <script>
       var firebaseConfig = {
         apiKey: "AIzaSyAeNFAXCL8H0ZUGlV_dWoGe_VarM3UP7qc",
@@ -44,7 +47,8 @@
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
 
-</script>
+
+    </script>
 </head>
 <body>
 
@@ -112,6 +116,7 @@
       // Service workers not supported. Just drop the <script> tag.
       loadMainDartJs();
     }
+
 
 
 
