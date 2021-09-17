@@ -35,8 +35,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
       // home: LoginPage(),
-      // home: HomePage(role: 0,),
-      home: SendApplication(),
+      home: HomePage(role: 0,),
+      // home: SendApplication(),
     );
   }
 }

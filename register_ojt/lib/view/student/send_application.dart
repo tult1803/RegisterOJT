@@ -104,7 +104,7 @@ class _SendApplicationState extends State<SendApplication> {
       margin: EdgeInsets.only(left: 30),
       child: Row(
         children: [
-          Text("File Attach: ${cvName == null ? "-----" : cvName}"),
+          Text("File Attach: ${cvName == null ? "-----" : "$cvName"}"),
           Container(
             margin: EdgeInsets.only(left: 20),
             width: 110,

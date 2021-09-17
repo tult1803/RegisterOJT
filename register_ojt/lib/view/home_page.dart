@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
             margin: EdgeInsets.only(left: 20),
             width: size.width * 0.3,
             child: Text(
-              "SE130223 - Lê Thanh Tú | $currentNamePage",
+              "SE130223 - FPT Admin | $currentNamePage",
               style: TextStyle(
                   color: Colors.black87,
                   fontWeight: FontWeight.bold,
@@ -175,8 +175,8 @@ class _HomePageState extends State<HomePage> {
       return Wrap(
         spacing: 10,
         children: [
-          miniContainer("Student", isHiddenColor: false, index: 0),
-          miniContainer("Feed Back", isHiddenColor: false, index: 1),
+          miniContainer("OJT Request", isHiddenColor: false, index: 0),
+          miniContainer("Company Report", isHiddenColor: false, index: 1),
           miniContainer("Logout", isHiddenColor: true, index: 2),
         ],
       );

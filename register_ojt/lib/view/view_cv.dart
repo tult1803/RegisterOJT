@@ -20,17 +20,7 @@ class _ViewCVState extends State<ViewCV> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('View CV'),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.bookmark,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              _pdfViewerKey.currentState?.openBookmarkView();
-            },
-          ),
-        ],
+       centerTitle: true,
       ),
       body: SfPdfViewer.memory(
         widget.cv,
