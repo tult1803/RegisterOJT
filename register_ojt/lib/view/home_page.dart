@@ -39,7 +39,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    currentNamePage = "OJT Information";
     setFirstPage();
     _getToken();
   }
@@ -47,13 +46,16 @@ class _HomePageState extends State<HomePage> {
   setFirstPage() {
     switch (widget.role) {
       case 0:
+        currentNamePage = "OJT Information";
         _widget = OjtInfor();
         break;
       case 1:
+        currentNamePage = "OJT Request";
         _widget = AllStudent();
         ;
         break;
       case 2:
+        currentNamePage = "Application";
         _widget = AllApplications();
         break;
     }
