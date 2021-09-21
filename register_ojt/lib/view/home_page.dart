@@ -40,8 +40,23 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     currentNamePage = "OJT Information";
-    _widget = OjtInfor();
+    setFirstPage();
     _getToken();
+  }
+
+  setFirstPage() {
+    switch (widget.role) {
+      case 0:
+        _widget = OjtInfor();
+        break;
+      case 1:
+        _widget = AllStudent();
+        ;
+        break;
+      case 2:
+        _widget = AllApplications();
+        break;
+    }
   }
 
   @override

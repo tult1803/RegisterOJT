@@ -22,3 +22,4 @@ Widget containerProfile(size, {String? title, String? content,  bool? showBottom
     ),
   );
 }
+
