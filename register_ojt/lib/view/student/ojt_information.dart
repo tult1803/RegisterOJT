@@ -13,7 +13,7 @@ class _OjtInforState extends State<OjtInfor> {
     var size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.only(top: 20),
-      height: size.height,
+      height: size.height * 0.88,
       width: size.width * 0.6,
       decoration: BoxDecoration(
         color: Colors.white,
