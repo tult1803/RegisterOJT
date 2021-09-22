@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:register_ojt/view/student/recruitment_detail.dart';
 
 class OjtInfor extends StatefulWidget {
   @override
@@ -32,6 +33,7 @@ class _OjtInforState extends State<OjtInfor> {
             height: 20,
           ),
           containerInfo(
+              id: "TD01",
               major: "SE",
               company: "Công Ty Thương Mại Điện Tử Magezon",
               content:
@@ -40,18 +42,18 @@ class _OjtInforState extends State<OjtInfor> {
               location: "TP. Hồ Chí Minh",
               deadline: "20/09/2021"),
           containerInfo(
+              id: "TD02",
               major: "AI",
               company: "Công Ty Thương Mại Điện Tử Magezon",
-              content:
-              "Thực tập sinh Python",
+              content: "Thực tập sinh Python",
               salary: "Thỏa thuận",
               location: "Quận 9",
               deadline: "25/09/2021"),
           containerInfo(
+              id: "TD03",
               major: "SS",
               company: "CÔNG TY TNHH MONEY FORWARD VIỆT NAM",
-              content:
-              "Nhân Viên Tư Vấn Bán Hàng",
+              content: "Nhân Viên Tư Vấn Bán Hàng",
               salary: "Thỏa thuận",
               location: "TP. Hồ Chí Minh",
               deadline: "30/09/2021"),
@@ -61,7 +63,7 @@ class _OjtInforState extends State<OjtInfor> {
   }
 
   Widget containerInfo(
-      {String? major, content, company, salary, location, deadline}) {
+      {id, String? major, content, company, salary, location, deadline}) {
     return Container(
       margin: EdgeInsets.only(left: 10, right: 10, bottom: 20),
       height: 100,
@@ -79,7 +81,10 @@ class _OjtInforState extends State<OjtInfor> {
       child: FlatButton(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => RecruimentDetail(id: id)));
+        },
         child: Row(
           children: [
             Container(
@@ -110,7 +115,10 @@ class _OjtInforState extends State<OjtInfor> {
                       "$company",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: Colors.black54, fontSize: 18,),
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 18,
+                      ),
                     ),
                     SizedBox(
                       height: 5,

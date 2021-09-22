@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/google_login.dart';
 import 'package:register_ojt/view/home_page.dart';
+import 'package:register_ojt/view/student/recruitment_detail.dart';
 import 'package:register_ojt/view/student/send_application.dart';
 
 void main() async {
@@ -35,8 +36,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
       // home: LoginPage(),
-      home: HomePage(role: 2,),
-      // home: SendApplication(),
+      home: HomePage(role: 0,),
+      // home: RecruimentDetail(),
     );
   }
 }
