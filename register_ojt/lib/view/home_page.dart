@@ -3,6 +3,7 @@ import 'package:register_ojt/utils/google_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/view/company/evaluate_student_progress.dart';
 import 'package:register_ojt/view/company/view__all_application.dart';
+import 'package:register_ojt/view/company/view_all_recruitment.dart';
 import 'package:register_ojt/view/fpt_admin/company_feedback.dart';
 import 'package:register_ojt/view/student/ojt_information.dart';
 import 'package:register_ojt/view/student/profile.dart';
@@ -55,8 +56,8 @@ class _HomePageState extends State<HomePage> {
         ;
         break;
       case 2:
-        currentNamePage = "Application";
-        _widget = AllApplications();
+        currentNamePage = "Recruitment";
+        _widget = AllRecruitment();
         break;
     }
   }
@@ -165,12 +166,15 @@ class _HomePageState extends State<HomePage> {
     } else {
       switch (index) {
         case 0:
-          _widget = AllApplications();
+          _widget = AllRecruitment();
           break;
         case 1:
-          _widget = EvaluateStudent();
+          _widget = AllApplications();
           break;
         case 2:
+          _widget = EvaluateStudent();
+          break;
+        case 3:
           signOut(context);
           break;
       }
@@ -201,9 +205,10 @@ class _HomePageState extends State<HomePage> {
       return Wrap(
         spacing: 10,
         children: [
-          miniContainer("Application", isHiddenColor: false, index: 0),
-          miniContainer("Evaluate", isHiddenColor: false, index: 1),
-          miniContainer("Logout", isHiddenColor: true, index: 2),
+          miniContainer("Recruitment", isHiddenColor: false, index: 0),
+          miniContainer("Application", isHiddenColor: false, index: 1),
+          miniContainer("Evaluate", isHiddenColor: false, index: 2),
+          miniContainer("Logout", isHiddenColor: true, index: 3),
         ],
       );
     }

@@ -5,16 +5,16 @@ import 'package:flutter/rendering.dart';
 import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/view/student/send_application.dart';
 
-class RecruimentDetail extends StatefulWidget {
+class RecruimentDetailCompany extends StatefulWidget {
   String? id;
 
-  RecruimentDetail({this.id});
+  RecruimentDetailCompany({this.id});
 
   @override
-  _RecruimentDetailState createState() => _RecruimentDetailState();
+  _RecruimentDetailCompanyState createState() => _RecruimentDetailCompanyState();
 }
 
-class _RecruimentDetailState extends State<RecruimentDetail> {
+class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
   String? content;
 
   @override
@@ -67,9 +67,9 @@ class _RecruimentDetailState extends State<RecruimentDetail> {
                     width: size.width,
                     child: Center(
                         child: Text(
-                      "${content ?? "-----"}",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    )),
+                          "${content ?? "-----"}",
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        )),
                   ),
                   SizedBox(
                     height: 30,
@@ -114,13 +114,12 @@ class _RecruimentDetailState extends State<RecruimentDetail> {
       color: Colors.orangeAccent,
       child: TextButton(
           onPressed: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (content) => SendApplication(idCompany: widget.id,)));
+            print('Click Delete');
           },
           child: Text(
-            "Apply Now",
+            "Delete",
             style: TextStyle(
-                color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                color: Colors.black87, fontSize: 18, fontWeight: FontWeight.bold),
           )),
     );
   }

@@ -2,13 +2,14 @@ import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/utils/check_data.dart';
 import 'package:register_ojt/view/view_cv.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class SendApplication extends StatefulWidget {
-  const SendApplication({Key? key}) : super(key: key);
+  String? idCompany;
+
+  SendApplication({this.idCompany});
 
   @override
   _SendApplicationState createState() => _SendApplicationState();
@@ -18,51 +19,78 @@ class _SendApplicationState extends State<SendApplication> {
   String? cvName, letter, errName, errId;
   String? studentId, fullName;
   Uint8List? _cv;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print('${widget.idCompany}');
+  }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-      child: Center(
-        child: Container(
-          margin: EdgeInsets.only(top: 50),
-          width: size.width * 0.5,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black54,
-                blurRadius: 4,
-                offset: Offset(0, 0), // Shadow position
-              ),
-            ],
+        child: Center(
+      child: Container(
+        margin: EdgeInsets.only(top: 50),
+        width: size.width * 0.5,
+        height: size.height * 0.9,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black54,
+              blurRadius: 4,
+              offset: Offset(0, 0), // Shadow position
+            ),
+          ],
+        ),
+        child: Scaffold(
+          appBar: AppBar(
+            leading: leadingAppbar(context, colorIcon: Colors.black87),
+            centerTitle: true,
+            backgroundColor: Colors.white,
+            title: Text(
+              "Apply Application",
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.black87),
+            ),
           ),
-          child: Column(
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 20),
-                child: Text(
-                  "Registration Application",
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                // Container(
+                //   margin: EdgeInsets.only(top: 20),
+                //   child: Text(
+                //     "Registration Application",
+                //     maxLines: 1,
+                //     overflow: TextOverflow.ellipsis,
+                //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                //   ),
+                // ),
+                _txtFormField("Student Id:",
+                    hintText: "Nhập mã số sinh viên",
+                    maxLength: 10,
+                    error: errId),
+                _txtFormField("Full Name:",
+                    hintText: "Nhập họ và tên", maxLength: 50, error: errName),
+                coverLetter(),
+                choosePDF(),
+                submitButton(),
+                SizedBox(
+                  height: 40,
                 ),
-              ),
-              _txtFormField("Student Id:",
-                  hintText: "Nhập mã số sinh viên", maxLength: 10,error: errId),
-              _txtFormField("Full Name:",
-                  hintText: "Nhập họ và tên", maxLength: 50, error: errName),
-              coverLetter(),
-              choosePDF(),
-              submitButton(),
-              SizedBox(
-                height: 40,
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
-    );
+    ));
   }
 
   Widget coverLetter() {
@@ -107,7 +135,7 @@ class _SendApplicationState extends State<SendApplication> {
           Text("File Attach: ${cvName == null ? "-----" : "$cvName"}"),
           Container(
             margin: EdgeInsets.only(left: 20),
-            width: 110,
+            width: 120,
             height: 30,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -149,7 +177,7 @@ class _SendApplicationState extends State<SendApplication> {
   }
 
   Widget _txtFormField(String title,
-      {required String hintText, required int maxLength, String ? error}) {
+      {required String hintText, required int maxLength, String? error}) {
     return Container(
       margin: EdgeInsets.only(left: 30, top: 20, right: 30),
       child: Column(
@@ -175,9 +203,9 @@ class _SendApplicationState extends State<SendApplication> {
             ),
             onChanged: (value) {
               setState(() {
-                if(title.contains("Id")){
+                if (title.contains("Id")) {
                   studentId = value.trim();
-                }else if(title.contains("Name")){
+                } else if (title.contains("Name")) {
                   fullName = value.trim();
                 }
               });
@@ -194,15 +222,17 @@ class _SendApplicationState extends State<SendApplication> {
       width: 100,
       height: 40,
       child: ElevatedButton(
-          onPressed: () async{
+          onPressed: () async {
             bool isEmptyCV = validateCV(context, _cv);
             setState(() {
-              errId =  validateStudentId(studentId);
+              errId = validateStudentId(studentId);
               errName = validateFullName(fullName);
             });
-            if(isEmptyCV && errId == null && errName == null){
-             Navigator.of(context).push(MaterialPageRoute(builder: (context) => ViewCV(cv: _cv!),));
-           }
+            if (isEmptyCV && errId == null && errName == null) {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ViewCV(cv: _cv!),
+              ));
+            }
           },
           child: Text("Submit")),
     );
