@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/model/get/get_student_profile.dart';
 import 'package:register_ojt/model/model_profile_student.dart';
+import 'package:register_ojt/utils/helpers.dart';
 
 class ProfileStudent extends StatefulWidget {
   const ProfileStudent({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class _ProfileStudentState extends State<ProfileStudent> {
 
   getData() async{
     StudentProfile data = StudentProfile();
-    _student = await data.getProfile(idStudent: "SE130223");
+    _student = await data.getProfile(idStudent: "SE130223", token: await getDataSession(key: "token"));
     setState(() {
       _student = _student;
     });

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:register_ojt/model/post/post_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/google_login.dart';
 import 'package:register_ojt/view/home_page.dart';
@@ -35,8 +36,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
-      // home: LoginPage(),
-      home: HomePage(role: 2,),
+      home: LoginPage(),
+      // home: HomePage(role: 0,),
       // home: RecruimentDetail(),
     );
   }
@@ -51,18 +52,19 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   var listCampus = [
-    "FU-Hòa Lạc",
-    "FU-Hồ Chí Minh",
-    "FU-Đà Nẵng",
-    "FU-Cần Thơ",
-    "FU-Quy Nhơn"
+    "Sinh viên",
+    "Doanh Nghiệp",
+    "FU-Staff",
   ];
   String? dropDownValue;
+  int? roleValue;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    dropDownValue = "Sinh viên";
+    roleValue = 0;
   }
 
   @override
@@ -109,7 +111,6 @@ class _LoginPageState extends State<LoginPage> {
     return Material(
       child: DropdownButton<String>(
         value: dropDownValue,
-        hint: Text("FU-Hồ Chí Minh"),
         items: listCampus.map((String value) {
           return new DropdownMenuItem<String>(
             value: value,
@@ -119,25 +120,56 @@ class _LoginPageState extends State<LoginPage> {
         onChanged: (value) {
           setState(() {
             dropDownValue = value;
+            switch (value) {
+              case "Sinh viên":
+                roleValue = 0;
+                break;
+              case "Doanh Nghiệp":
+                roleValue = 1;
+                break;
+              case "FU-Staff":
+                roleValue = 2;
+                break;
+              default:
+                roleValue = -1;
+                break;
+            }
           });
         },
       ),
     );
   }
 
+  checkLogin({firebaseToken, role}) async{
+    PostLogin postLogin = PostLogin();
+    var status = await postLogin.login(firebaseToken: firebaseToken, role: role);
+   return status;
+  }
   Widget _googleSignIn() {
     return GestureDetector(
       onTap: () async {
         try {
           String? fbToken = await signIn();
-          setDataSession(key: "token", value: fbToken!);
-          print('Firebase Token saved !!!');
-          int role = 0;
-          /// Navigator tạm thời chờ API
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) => HomePage(role: role,)),
-              (route) => false);
 
+          if(await checkLogin(firebaseToken: fbToken, role: roleValue) == 200){
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder: (context) => HomePage(
+                          role: roleValue!,
+                        )),
+                (route) => false);
+          }else{
+            EasyLoading.showError("Login Failed",
+                maskType: EasyLoadingMaskType.black,
+                duration: Duration(seconds: 2));
+          }
+          // /// Navigator tạm thời chờ API
+          // Navigator.of(context).pushAndRemoveUntil(
+          //     MaterialPageRoute(
+          //         builder: (context) => HomePage(
+          //               role: role,
+          //             )),
+          //     (route) => false);
         } catch (_) {
           EasyLoading.showError("Login Failed",
               maskType: EasyLoadingMaskType.black,

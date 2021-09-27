@@ -9,10 +9,11 @@ class StudentProfile {
     try {
       var response = await http.get(
           Uri.https('$urlMain', '$urlStudent/$idStudent'),
-          // Uri.https('jsonplaceholder.typicode.com', 'albums/1'),
+          // Uri.https("ojt-registration.herokuapp.com","api/students/tultse130223%40fpt.edu.vn"),
           headers: {
             "Accept": "application/json",
             "Access-Control-Allow-Origin": "*",
+            'Authorization': 'Bearer $token',
             // "Access-Control-Allow-Headers":
             //     "Access-Control-Allow-Origin, Accept"
           });

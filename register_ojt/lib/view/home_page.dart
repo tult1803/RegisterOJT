@@ -26,14 +26,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late Widget _widget;
-  String? currentNamePage;
+  String? currentNamePage, code, name;
   var token;
 
-  _getToken() async {
+  _getData() async {
     token = await getDataSession(key: "token");
-    setState(() {
-      token = token;
-    });
+    code = await getDataSession(key: "code");
+    name = await getDataSession(key: "name");
+    setState(() {});
   }
 
   @override
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     setFirstPage();
-    _getToken();
+    _getData();
   }
 
   setFirstPage() {
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
             margin: EdgeInsets.only(left: 20),
             width: size.width * 0.3,
             child: Text(
-              "SE130223 - FPT Admin | $currentNamePage",
+              "${code ?? "---"} - ${name ?? "---"} | $currentNamePage",
               style: TextStyle(
                   color: Colors.black87,
                   fontWeight: FontWeight.bold,
