@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:register_ojt/model/post/post_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/google_login.dart';
@@ -65,7 +66,9 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     dropDownValue = "Sinh viên";
     roleValue = 0;
+
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -145,10 +148,12 @@ class _LoginPageState extends State<LoginPage> {
     var status = await postLogin.login(firebaseToken: firebaseToken, role: role);
    return status;
   }
+
   Widget _googleSignIn() {
     return GestureDetector(
       onTap: () async {
         try {
+          EasyLoading.show(status: "Processing...", maskType: EasyLoadingMaskType.black,);
           String? fbToken = await signIn();
 
           if(await checkLogin(firebaseToken: fbToken, role: roleValue) == 200){
@@ -163,13 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                 maskType: EasyLoadingMaskType.black,
                 duration: Duration(seconds: 2));
           }
-          // /// Navigator tạm thời chờ API
-          // Navigator.of(context).pushAndRemoveUntil(
-          //     MaterialPageRoute(
-          //         builder: (context) => HomePage(
-          //               role: role,
-          //             )),
-          //     (route) => false);
+
         } catch (_) {
           EasyLoading.showError("Login Failed",
               maskType: EasyLoadingMaskType.black,
