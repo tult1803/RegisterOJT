@@ -155,8 +155,8 @@ class _LoginPageState extends State<LoginPage> {
         try {
           EasyLoading.show(status: "Processing...", maskType: EasyLoadingMaskType.black,);
           String? fbToken = await signIn();
-
           if(await checkLogin(firebaseToken: fbToken, role: roleValue) == 200){
+            EasyLoading.dismiss();
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
                     builder: (context) => HomePage(
@@ -164,13 +164,13 @@ class _LoginPageState extends State<LoginPage> {
                         )),
                 (route) => false);
           }else{
-            EasyLoading.showError("Login Failed",
+            EasyLoading.showError("Login Failed - ${await checkLogin(firebaseToken: fbToken, role: roleValue)}",
                 maskType: EasyLoadingMaskType.black,
                 duration: Duration(seconds: 2));
           }
 
-        } catch (_) {
-          EasyLoading.showError("Login Failed",
+        } catch (e) {
+          EasyLoading.showError("Login Failed !!! \n $e",
               maskType: EasyLoadingMaskType.black,
               duration: Duration(seconds: 2));
         }
