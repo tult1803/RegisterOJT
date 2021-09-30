@@ -8,6 +8,8 @@ import 'package:register_ojt/view/home_page.dart';
 import 'package:register_ojt/view/student/recruitment_detail.dart';
 import 'package:register_ojt/view/student/send_application.dart';
 
+import 'components/component.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
@@ -72,9 +74,41 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        child: Container(
+    var size = MediaQuery.of(context).size;
+    return Container(
+      width: size.width,
+      height: size.height,
+      child: Column(
+        children: [
+          header(context),
+          Expanded(child: body(context)),
+          footer(context, content: "Sinh viên cần hỗ trợ vui lòng liên hệ điện thoại : 028.73005585 , email: sschcm@fe.edu.vn"),
+        ],
+      ),
+    );
+  }
+
+  Widget header(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Container(
+      width: size.width,
+      height: 90,
+      color: Colors.orangeAccent,
+              child: Container(
+                margin: EdgeInsets.only(left: 30),
+                alignment: Alignment.center,
+                width: size.width,
+                child: Image.asset("images/fpt_logo.png"),
+              )
+    );
+  }
+
+  Widget body(BuildContext context){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
           width: 400,
           height: 300,
           decoration: BoxDecoration(
@@ -106,10 +140,9 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
-      ),
+      ],
     );
   }
-
   Widget _dropDownButton() {
     return Material(
       child: DropdownButton<String>(

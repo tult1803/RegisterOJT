@@ -13,7 +13,7 @@ class _OjtInforState extends State<OjtInfor> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(top: 20),
+      margin: EdgeInsets.only(top: 10),
       height: size.height * 0.88,
       width: size.width * 0.6,
       decoration: BoxDecoration(

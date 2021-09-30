@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/utils/google_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/view/company/evaluate_student_progress.dart';
@@ -67,43 +68,70 @@ class _HomePageState extends State<HomePage> {
     return SingleChildScrollView(
       child: Column(
         children: [
+          header(context),
           topBar(context),
           Container(
             child: _widget,
           ),
+          footer(context, content: "Sinh viên cần hỗ trợ vui lòng liên hệ Trung tâm Dịch vụ Sinh viên tại Phòng 202, điện thoại : 028.73005585 , email: sschcm@fe.edu.vn"),
         ],
       ),
     );
   }
 
+  Widget header(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Container(
+      width: size.width,
+      height: 90,
+      color: Colors.orangeAccent,
+      child: Row(
+        children: [
+          Flexible(
+              flex: 10,
+              child: Container(
+                margin: EdgeInsets.only(left: 30),
+                alignment: Alignment.centerLeft,
+                width: size.width,
+                child: Image.asset("images/fpt_logo.png"),
+              )),
+          Flexible(
+              flex: 1,
+              child: miniContainer("Logout", isHiddenColor: true, index: 3)),
+        ],
+      ),
+    );
+  }
   Widget topBar(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20, top: 20),
-      width: size.width,
-      height: 70,
+      margin: EdgeInsets.only(left: 20, right: 20, top: 5),
+      width: size.width * 0.6,
       decoration: BoxDecoration(
-          color: Colors.orangeAccent, borderRadius: BorderRadius.circular(20)),
-      child: Row(
-        children: [
-          Container(
-            margin: EdgeInsets.only(left: 20),
-            width: size.width * 0.3,
-            child: Text(
-              "${code ?? "---"} - ${name ?? "---"} | $currentNamePage",
-              style: TextStyle(
-                  color: Colors.black87,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
+          color: Colors.orangeAccent, borderRadius: BorderRadius.circular(10)),
+      child: Container(
+        margin: EdgeInsets.only(top: 10, bottom: 10),
+        child: Row(
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: 20),
+              // width: size.width * 0.3,
+              child: Text(
+                "${code ?? "---"} - ${name ?? "---"} | $currentNamePage",
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+              ),
             ),
-          ),
-          Expanded(
-            child: Container(
-                alignment: Alignment.centerRight,
-                margin: EdgeInsets.only(right: 20),
-                child: _wrapRole()),
-          ),
-        ],
+            Expanded(
+              child: Container(
+                  alignment: Alignment.centerRight,
+                  margin: EdgeInsets.only(right: 20),
+                  child: _wrapRole()),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -159,7 +187,7 @@ class _HomePageState extends State<HomePage> {
         case 1:
           _widget = FeedBackCompany();
           break;
-        case 2:
+        case 3:
           signOut(context);
           break;
       }
@@ -189,7 +217,7 @@ class _HomePageState extends State<HomePage> {
           miniContainer("OJT Information", isHiddenColor: false, index: 0),
           miniContainer("View Application", isHiddenColor: false, index: 1),
           miniContainer("Profile", isHiddenColor: false, index: 2),
-          miniContainer("Logout", isHiddenColor: true, index: 3),
+          // miniContainer("Logout", isHiddenColor: true, index: 3),
         ],
       );
     } else if (widget.role == 1) {
@@ -198,7 +226,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           miniContainer("OJT Request", isHiddenColor: false, index: 0),
           miniContainer("Company Report", isHiddenColor: false, index: 1),
-          miniContainer("Logout", isHiddenColor: true, index: 2),
+          // miniContainer("Logout", isHiddenColor: true, index: 2),
         ],
       );
     } else {
@@ -208,7 +236,7 @@ class _HomePageState extends State<HomePage> {
           miniContainer("Recruitment", isHiddenColor: false, index: 0),
           miniContainer("Application", isHiddenColor: false, index: 1),
           miniContainer("Evaluate", isHiddenColor: false, index: 2),
-          miniContainer("Logout", isHiddenColor: true, index: 3),
+          // miniContainer("Logout", isHiddenColor: true, index: 3),
         ],
       );
     }

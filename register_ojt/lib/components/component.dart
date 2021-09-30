@@ -1,5 +1,26 @@
 import 'package:flutter/material.dart';
 
+
+Widget footer(BuildContext context, {String? content}) {
+  var size = MediaQuery.of(context).size;
+  return Container(
+    alignment: Alignment.center,
+    margin: EdgeInsets.only(top: 10),
+    width: size.width,
+    color: Colors.orangeAccent,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SizedBox(height: 10,),
+        Text("${content ?? ""}", style: TextStyle(fontSize: 15),),
+        Text("© Powered by FPT Student", style: TextStyle(fontSize: 15),),
+        SizedBox(height: 10,),
+      ],
+    ),
+  );
+}
+
 Widget containerProfile(size, {String? title, String? content,  bool? showBottom}) {
   return Container(
     height: 80,
