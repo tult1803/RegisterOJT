@@ -35,6 +35,7 @@ class _HomePageState extends State<HomePage> {
     code = await getDataSession(key: "code");
     name = await getDataSession(key: "name");
     setState(() {});
+
   }
 
   @override

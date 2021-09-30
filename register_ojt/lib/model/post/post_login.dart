@@ -7,7 +7,7 @@ import 'package:register_ojt/utils/url.dart';
 class PostLogin {
   login({String? firebaseToken, int? role}) async {
     final response = await http.post(
-      Uri.http('$urlMain', '$urlLogin'),
+      Uri.https('$urlMain', '$urlLogin'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         "Accept": "application/json",
@@ -23,7 +23,6 @@ class PostLogin {
     data = ModelLogin.fromJson(json.decode(response.body));
     if(response.statusCode == 200){
       print('Code: ${data.code} - Role: ${data.role}');
-      print("${data.token}");
       setDataSession(key: "token", value: "${data.token}");
       setDataSession(key: "code", value: "${data.code}");
       setDataSession(key: "name", value: "${data.name}");
