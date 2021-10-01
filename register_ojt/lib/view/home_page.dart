@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
   Widget topBar(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20, top: 5),
+      margin: EdgeInsets.only(left: 20, right: 20, top: 10),
       width: size.width * 0.6,
       decoration: BoxDecoration(
           color: Colors.orangeAccent, borderRadius: BorderRadius.circular(10)),

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:register_ojt/model/post/post_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/google_login.dart';
 import 'package:register_ojt/view/home_page.dart';
-import 'package:register_ojt/view/student/recruitment_detail.dart';
-import 'package:register_ojt/view/student/send_application.dart';
+import 'package:register_ojt/view/student/profile.dart';
 
 import 'components/component.dart';
 
@@ -41,7 +39,6 @@ class MyApp extends StatelessWidget {
       builder: EasyLoading.init(),
       home: LoginPage(),
       // home: HomePage(role: 0,),
-      // home: RecruimentDetail(),
     );
   }
 }
