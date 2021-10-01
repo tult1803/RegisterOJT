@@ -68,9 +68,7 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     dropDownValue = "Sinh viên";
     roleValue = 0;
-
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +80,9 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           header(context),
           Expanded(child: body(context)),
-          footer(context, content: "Sinh viên cần hỗ trợ vui lòng liên hệ điện thoại : 028.73005585 , email: sschcm@fe.edu.vn"),
+          footer(context,
+              content:
+                  "Sinh viên cần hỗ trợ vui lòng liên hệ điện thoại : 028.73005585 , email: sschcm@fe.edu.vn"),
         ],
       ),
     );
@@ -91,19 +91,18 @@ class _LoginPageState extends State<LoginPage> {
   Widget header(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      width: size.width,
-      height: 90,
-      color: Colors.orangeAccent,
-              child: Container(
-                margin: EdgeInsets.only(left: 30),
-                alignment: Alignment.center,
-                width: size.width,
-                child: Image.asset("images/fpt_logo.png"),
-              )
-    );
+        width: size.width,
+        height: 90,
+        color: Colors.orangeAccent,
+        child: Container(
+          margin: EdgeInsets.only(left: 30),
+          alignment: Alignment.center,
+          width: size.width,
+          child: Image.asset("images/fpt_logo.png"),
+        ));
   }
 
-  Widget body(BuildContext context){
+  Widget body(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -143,6 +142,7 @@ class _LoginPageState extends State<LoginPage> {
       ],
     );
   }
+
   Widget _dropDownButton() {
     return Material(
       child: DropdownButton<String>(
@@ -176,19 +176,21 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  checkLogin({firebaseToken, role}) async{
+  checkLogin({firebaseToken, role}) async {
     PostLogin postLogin = PostLogin();
-    var status = await postLogin.login(firebaseToken: firebaseToken, role: role);
-   return status;
+    var status =
+        await postLogin.login(firebaseToken: firebaseToken, role: role);
+    return status;
   }
 
   Widget _googleSignIn() {
     return GestureDetector(
       onTap: () async {
         try {
-          EasyLoading.show(status: "Processing...", maskType: EasyLoadingMaskType.black,);
+          loadingLoad(status: "Processing...");
           String? fbToken = await signIn();
-          if(await checkLogin(firebaseToken: fbToken, role: roleValue) == 200){
+          if (await checkLogin(firebaseToken: fbToken, role: roleValue) ==
+              200) {
             EasyLoading.dismiss();
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
@@ -196,16 +198,13 @@ class _LoginPageState extends State<LoginPage> {
                           role: roleValue!,
                         )),
                 (route) => false);
-          }else{
-            EasyLoading.showError("Login Failed - ${await checkLogin(firebaseToken: fbToken, role: roleValue)}",
-                maskType: EasyLoadingMaskType.black,
-                duration: Duration(seconds: 2));
+          } else {
+            loadingFail(
+                status:
+                    "Login Failed - ${await checkLogin(firebaseToken: fbToken, role: roleValue)}");
           }
-
         } catch (e) {
-          EasyLoading.showError("Login Failed !!! \n $e",
-              maskType: EasyLoadingMaskType.black,
-              duration: Duration(seconds: 2));
+          loadingFail(status: "Login Failed !!! \n $e");
         }
       },
       child: Container(

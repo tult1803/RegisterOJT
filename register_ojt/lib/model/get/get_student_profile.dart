@@ -23,7 +23,6 @@ class StudentProfile {
         throw Exception('Failed to load data');
       }
     } catch (e) {
-
       print('$e');
     }
   }

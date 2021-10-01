@@ -24,11 +24,13 @@ class _ProfileStudentState extends State<ProfileStudent> {
   }
 
   getData() async{
+    loadingLoad(status: "Loading...");
     StudentProfile data = StudentProfile();
-    _student = await data.getProfile(idStudent: "SE130223", token: await getDataSession(key: "token"));
-    setState(() {
-      _student = _student;
-    });
+     _student = await data.getProfile(idStudent: await getDataSession(key: "code"), token: await getDataSession(key: "token"));
+    setState(() {});
+    if(_student?.stuCode == null){
+      loadingFail(status: "Failed to load data !!!");
+    }else loadingSuccess(status: 'Successed !!!');
   }
 
   @override
@@ -36,7 +38,7 @@ class _ProfileStudentState extends State<ProfileStudent> {
     var size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Container(
-        margin: EdgeInsets.only(top: 20),
+        margin: EdgeInsets.only(top: 20, bottom: 20),
         child: new ConstrainedBox(
           constraints: new BoxConstraints(
             minWidth: size.width * 0.6,
