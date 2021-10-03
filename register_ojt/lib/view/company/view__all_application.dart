@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:register_ojt/utils/helpers.dart';
+import 'package:register_ojt/components/component.dart';
 
 class AllApplications extends StatefulWidget {
   const AllApplications({Key? key}) : super(key: key);
@@ -102,10 +103,20 @@ class _AllApplicationsState extends State<AllApplications> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return SingleChildScrollView(
-      child: Center(
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.orange.shade600,
+        title: Text(
+          "Applications",
+          maxLines: 1,
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
+        ),
+      ),
+      body: Center(
         child: Container(
-          margin: EdgeInsets.only(top: 35),
+          margin: EdgeInsets.only(top: 15),
           width: size.width * 0.5,
           height: size.height * 0.9,
           padding: EdgeInsets.all(20),
@@ -113,26 +124,36 @@ class _AllApplicationsState extends State<AllApplications> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
           ),
-          child: Column(
-            children: [
-              _application(),
-              SizedBox(
-                height: 20,
-              ),
-              _application(),
-              SizedBox(
-                height: 20,
-              ),
-              _application(),
-              SizedBox(
-                height: 20,
-              ),
-              _application(),
-              SizedBox(
-                height: 20,
-              ),
-              _application(),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                _application(),
+                SizedBox(
+                  height: 20,
+                ),
+                _application(),
+                SizedBox(
+                  height: 20,
+                ),
+                _application(),
+                SizedBox(
+                  height: 20,
+                ),
+                _application(),
+                SizedBox(
+                  height: 20,
+                ),
+                _application(),
+                SizedBox(
+                  height: 20,
+                ),
+                _application(),
+                SizedBox(
+                  height: 20,
+                ),
+                _application(),
+              ],
+            ),
           ),
         ),
       ),
