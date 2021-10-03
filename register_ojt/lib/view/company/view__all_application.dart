@@ -11,6 +11,7 @@ class AllApplications extends StatefulWidget {
 
 class _AllApplicationsState extends State<AllApplications> {
   String? token;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -103,60 +104,46 @@ class _AllApplicationsState extends State<AllApplications> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.orange.shade600,
-        title: Text(
-          "Applications",
-          maxLines: 1,
-          style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
-        ),
-      ),
-      body: Center(
+    return Center(
         child: Container(
-          margin: EdgeInsets.only(top: 15),
-          width: size.width * 0.5,
-          height: size.height * 0.9,
-          padding: EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                _application(),
-                SizedBox(
-                  height: 20,
-                ),
-                _application(),
-                SizedBox(
-                  height: 20,
-                ),
-                _application(),
-                SizedBox(
-                  height: 20,
-                ),
-                _application(),
-                SizedBox(
-                  height: 20,
-                ),
-                _application(),
-                SizedBox(
-                  height: 20,
-                ),
-                _application(),
-                SizedBox(
-                  height: 20,
-                ),
-                _application(),
-              ],
+            margin: EdgeInsets.only(top: 15),
+            width: size.width * 0.5,
+            height: size.height * 0.9,
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
             ),
-          ),
-        ),
-      ),
-    );
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _application(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _application(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _application(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _application(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _application(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _application(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _application(),
+                ],
+              ),
+            )));
   }
 }
