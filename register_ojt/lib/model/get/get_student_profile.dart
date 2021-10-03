@@ -16,7 +16,7 @@ class StudentProfile {
           });
 
       print("Status getApi Student Profile:${response.statusCode}");
-
+      print(Uri.https('$urlMain', '$urlStudent/$idStudent'));
       if (response.statusCode == 200) {
         return Student.fromJson(jsonDecode(response.body));
       } else {

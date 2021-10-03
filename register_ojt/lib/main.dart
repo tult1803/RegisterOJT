@@ -54,8 +54,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   var listCampus = [
     "Sinh viên",
-    "Doanh Nghiệp",
     "FU-Staff",
+    "Doanh Nghiệp",
   ];
   String? dropDownValue;
   int? roleValue;
@@ -158,10 +158,10 @@ class _LoginPageState extends State<LoginPage> {
               case "Sinh viên":
                 roleValue = 0;
                 break;
-              case "Doanh Nghiệp":
+              case "FU-Staff":
                 roleValue = 1;
                 break;
-              case "FU-Staff":
+              case "Doanh Nghiệp":
                 roleValue = 2;
                 break;
               default:
