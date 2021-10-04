@@ -54,6 +54,8 @@ class _ProfileState extends State<Profile> {
         containerProfile(size,
             title: "Phone", content: "${_student?.phone ?? "-----"}"),
         containerProfile(size,
+            title: "Birthday", content: "${_student?.birthDate ?? "-----"}"),
+        containerProfile(size,
             title: "Gender", content: "${_student?.gender ?? "-----"}"),
         containerProfile(size,
             title: "Email",

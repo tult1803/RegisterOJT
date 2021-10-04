@@ -1,11 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/controller/student/profile.dart';
-import 'package:register_ojt/model/get/get_student_profile.dart';
-import 'package:register_ojt/model/model_profile_student.dart';
-import 'package:register_ojt/utils/helpers.dart';
 
 class ProfileStudent extends StatefulWidget {
   const ProfileStudent({Key? key}) : super(key: key);
