@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
       home: LoginPage(),
-      // home: HomePage(role: 2,),
+      // home: HomePage(role: 0,),
     );
   }
 }
