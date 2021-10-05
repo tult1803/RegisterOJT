@@ -168,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Container(
                 width: 40,
-                child: Text("-OR-"),
+                child: Text("--OR--"),
               ),
               Container(
                 width: 480,
