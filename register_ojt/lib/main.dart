@@ -6,8 +6,8 @@ import 'package:register_ojt/model/post/post_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/google_login.dart';
 import 'package:register_ojt/view/home_page.dart';
-import 'package:register_ojt/view/student/profile.dart';
-import 'package:register_ojt/view/company/view__all_application.dart';
+// import 'package:register_ojt/view/student/profile.dart';
+// import 'package:register_ojt/view/company/view__all_application.dart';
 
 import 'components/component.dart';
 
@@ -168,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Container(
                 width: 40,
-                child: Text("-vs-"),
+                child: Text("-OR-"),
               ),
               Container(
                 width: 480,
