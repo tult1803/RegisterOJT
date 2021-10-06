@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class ViewCV extends StatefulWidget {
-  final Uint8List cv;
+  final cv;
 
   ViewCV({required this.cv});
 
@@ -17,6 +17,7 @@ class _ViewCVState extends State<ViewCV> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('View CV'),

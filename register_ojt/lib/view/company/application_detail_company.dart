@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:register_ojt/components/component.dart';
+import 'package:register_ojt/utils/helpers.dart';
 
 import '../view_cv.dart';
 
@@ -58,10 +62,8 @@ class _ApplicationDetailCompanyState extends State<ApplicationDetailCompany> {
             width: 50,
           ),
           GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ViewCV(cv: cv),
-              ));
+            onTap: () async{
+
             },
             child: Text(
               "Click to show",

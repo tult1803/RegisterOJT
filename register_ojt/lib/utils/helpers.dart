@@ -8,7 +8,7 @@ getDataSession({required String key}) async {
   return prefs.get(key);
 }
 
-setDataSession({required String key, required String value}) async {
+setDataSession({required String key, required  value}) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString(key, value);
 }

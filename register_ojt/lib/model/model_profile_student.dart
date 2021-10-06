@@ -15,10 +15,12 @@ class Student {
     this.gender,
     this.address,
     this.email,
+    this.gpa
   });
 
   String? major;
   int? term;
+  double? gpa;
   String? stuCode;
   String? fullName;
   String? birthDate;
@@ -37,6 +39,7 @@ class Student {
     gender: json["gender"],
     address: json["address"],
     email: json["email"],
+    gpa: json["gpa"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -49,5 +52,6 @@ class Student {
     "gender": gender,
     "address": address,
     "email": email,
+    "gpa": gpa
   };
 }

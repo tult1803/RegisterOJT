@@ -44,8 +44,12 @@ void signOut(BuildContext context) async{
    SharedPreferences prefs = await SharedPreferences.getInstance();
   await googleSignIn.signOut();
   await _auth.signOut();
-  prefs.clear();
-   print('All data cleared !!!');
+  /// Demo
+  prefs.remove("token");
+   prefs.remove("code");
+   prefs.remove("name");
+  // prefs.clear();
+   print('All data cleared - token, code, name !!!');
   Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => LoginPage()),
           (route) => false);

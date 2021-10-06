@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/utils/check_data.dart';
+import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/view/view_cv.dart';
 
 class SendApplication extends StatefulWidget {
@@ -18,8 +19,7 @@ class SendApplication extends StatefulWidget {
 class _SendApplicationState extends State<SendApplication> {
   String? cvName, letter, errName, errId;
   String? studentId, fullName;
-  Uint8List? _cv;
-
+  PlatformFile? file;
   @override
   void initState() {
     // TODO: implement initState
@@ -64,15 +64,7 @@ class _SendApplicationState extends State<SendApplication> {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                // Container(
-                //   margin: EdgeInsets.only(top: 20),
-                //   child: Text(
-                //     "Registration Application",
-                //     maxLines: 1,
-                //     overflow: TextOverflow.ellipsis,
-                //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                //   ),
-                // ),
+
                 _txtFormField("Student Id:",
                     hintText: "Nhập mã số sinh viên",
                     maxLength: 10,
@@ -156,13 +148,12 @@ class _SendApplicationState extends State<SendApplication> {
                   );
 
                   if (result != null) {
-                    PlatformFile file = result.files.first;
+                    file = result.files.first;
 
-                    print(file.name);
-                    print(file.size);
+                    print(file?.name);
+                    print(file?.size);
                     setState(() {
-                      cvName = file.name;
-                      _cv = file.bytes;
+                      cvName = file?.name;
                     });
                     // file.bytes là dùng để truyền cho server
                   } else {
@@ -223,16 +214,15 @@ class _SendApplicationState extends State<SendApplication> {
       height: 40,
       child: ElevatedButton(
           onPressed: () async {
-            bool isEmptyCV = validateCV(context, _cv);
+            bool isEmptyCV = validateCV(context, file?.bytes);
             setState(() {
               errId = validateStudentId(studentId);
               errName = validateFullName(fullName);
             });
             if (isEmptyCV && errId == null && errName == null) {
-              print(_cv);
-              // Navigator.of(context).push(MaterialPageRoute(
-              //   builder: (context) => ViewCV(cv: _cv!),
-              // ));
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ViewCV(cv: file!.bytes),
+              ));
             }
           },
           child: Text("Submit")),
