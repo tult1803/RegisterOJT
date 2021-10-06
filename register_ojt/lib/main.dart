@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:register_ojt/model/post/post_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/google_login.dart';
+import 'package:register_ojt/view/fpt_admin/company_feedback.dart';
 import 'package:register_ojt/view/home_page.dart';
 import 'package:register_ojt/view/student/profile.dart';
 import 'package:register_ojt/view/company/view__all_application.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
-      home: LoginPage(),
+      home: FeedBackCompany(),
       // home: HomePage(role: 0,),
     );
   }
