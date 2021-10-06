@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/components/component.dart';
+import 'application_detail_company.dart';
 
 class AllApplications extends StatefulWidget {
   const AllApplications({Key? key}) : super(key: key);
@@ -38,11 +39,12 @@ class _AllApplicationsState extends State<AllApplications> {
             children: [
               Text(
                 "SE130157 - Nguyễn Đức Thắng",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
-              Text("14/09/2021 15:30")
+              Text(
+                "14/09/2021 15:30",
+                style: TextStyle(fontSize: 18),
+              )
             ],
           ),
           SizedBox(
@@ -56,9 +58,7 @@ class _AllApplicationsState extends State<AllApplications> {
                 children: [
                   Text(
                     "Position: Web Developer",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   SizedBox(
                     height: 10,
@@ -69,23 +69,33 @@ class _AllApplicationsState extends State<AllApplications> {
                       children: const <TextSpan>[
                         TextSpan(
                             text: 'Status: ',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16)),
                         TextSpan(
                             text: "Approved",
                             style: TextStyle(
                                 color: Colors.green,
-                                fontWeight: FontWeight.bold)),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18)),
                       ],
                     ),
                   ),
                 ],
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ApplicationDetailCompany()),
+                  );
+                },
                 child: Text(
                   "Detail",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.black),
                 ),
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(EdgeInsets.only(
