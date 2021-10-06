@@ -9,19 +9,19 @@ class FeedBackCompany extends StatefulWidget {
 }
 
 class _FeedBackCompanyState extends State<FeedBackCompany> {
-  String? token;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getData();
-  }
-
-  getData() async {
-    token = await getDataSession(key: "token");
-    setState(() {});
-  }
+  // String? token;
+  //
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   getData();
+  // }
+  //
+  // getData() async {
+  //   token = await getDataSession(key: "token");
+  //   setState(() {});
+  // }
 
   Widget _feedback() {
     return Container(
@@ -96,17 +96,7 @@ class _FeedBackCompanyState extends State<FeedBackCompany> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(
-            color: Colors.black,
-            onPressed: (){}
-        ),
-        title: Text('Company Feedback', style: TextStyle(color: Colors.black, fontSize: 25),),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-      ),
-      body: Container(
+    return Container(
         margin: EdgeInsets.fromLTRB(40, 15, 40, 10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -164,7 +154,6 @@ class _FeedBackCompanyState extends State<FeedBackCompany> {
               )
           ),
         ),
-      ),
     );
   }
 }
