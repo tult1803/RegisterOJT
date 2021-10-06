@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/components/component.dart';
+import 'application_detail_company.dart';
 
 class AllApplications extends StatefulWidget {
   const AllApplications({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class AllApplications extends StatefulWidget {
 
 class _AllApplicationsState extends State<AllApplications> {
   String? token;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -37,11 +39,12 @@ class _AllApplicationsState extends State<AllApplications> {
             children: [
               Text(
                 "SE130157 - Nguyễn Đức Thắng",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
-              Text("14/09/2021 15:30")
+              Text(
+                "14/09/2021 15:30",
+                style: TextStyle(fontSize: 18),
+              )
             ],
           ),
           SizedBox(
@@ -55,9 +58,7 @@ class _AllApplicationsState extends State<AllApplications> {
                 children: [
                   Text(
                     "Position: Web Developer",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   SizedBox(
                     height: 10,
@@ -68,23 +69,33 @@ class _AllApplicationsState extends State<AllApplications> {
                       children: const <TextSpan>[
                         TextSpan(
                             text: 'Status: ',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16)),
                         TextSpan(
                             text: "Approved",
                             style: TextStyle(
                                 color: Colors.green,
-                                fontWeight: FontWeight.bold)),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18)),
                       ],
                     ),
                   ),
                 ],
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ApplicationDetailCompany()),
+                  );
+                },
                 child: Text(
                   "Detail",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.black),
                 ),
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(EdgeInsets.only(
@@ -103,60 +114,46 @@ class _AllApplicationsState extends State<AllApplications> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.orange.shade600,
-        title: Text(
-          "Applications",
-          maxLines: 1,
-          style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
-        ),
-      ),
-      body: Center(
+    return Center(
         child: Container(
-          margin: EdgeInsets.only(top: 15),
-          width: size.width * 0.5,
-          height: size.height * 0.9,
-          padding: EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                _application(),
-                SizedBox(
-                  height: 20,
-                ),
-                _application(),
-                SizedBox(
-                  height: 20,
-                ),
-                _application(),
-                SizedBox(
-                  height: 20,
-                ),
-                _application(),
-                SizedBox(
-                  height: 20,
-                ),
-                _application(),
-                SizedBox(
-                  height: 20,
-                ),
-                _application(),
-                SizedBox(
-                  height: 20,
-                ),
-                _application(),
-              ],
+            margin: EdgeInsets.only(top: 15),
+            width: size.width * 0.5,
+            height: size.height * 0.9,
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
             ),
-          ),
-        ),
-      ),
-    );
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _application(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _application(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _application(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _application(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _application(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _application(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _application(),
+                ],
+              ),
+            )));
   }
 }
