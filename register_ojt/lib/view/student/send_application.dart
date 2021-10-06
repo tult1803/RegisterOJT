@@ -229,9 +229,10 @@ class _SendApplicationState extends State<SendApplication> {
               errName = validateFullName(fullName);
             });
             if (isEmptyCV && errId == null && errName == null) {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ViewCV(cv: _cv!),
-              ));
+              print(_cv);
+              // Navigator.of(context).push(MaterialPageRoute(
+              //   builder: (context) => ViewCV(cv: _cv!),
+              // ));
             }
           },
           child: Text("Submit")),
