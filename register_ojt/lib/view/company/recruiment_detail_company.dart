@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:register_ojt/components/component.dart';
-import 'package:register_ojt/view/student/send_application.dart';
 
 class RecruimentDetailCompany extends StatefulWidget {
   String? id;

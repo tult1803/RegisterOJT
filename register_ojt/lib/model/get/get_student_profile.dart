@@ -16,13 +16,13 @@ class StudentProfile {
           });
 
       print("Status getApi Student Profile:${response.statusCode}");
-
       if (response.statusCode == 200) {
         return Student.fromJson(jsonDecode(response.body));
       } else {
         throw Exception('Failed to load data');
       }
     } catch (e) {
+      print(Uri.https('$urlMain', '$urlStudent/$idStudent'));
       print('$e');
     }
   }
