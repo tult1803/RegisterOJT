@@ -24,6 +24,7 @@ class _RecruimentDetailState extends State<RecruimentDetail> {
     content = "Thực tập sinh Backend Engineer (PHP/Nodejs/C#/Java/Ruby/Go)";
   }
 
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
