@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:register_ojt/utils/url.dart';
 
-import 'get_recruiment_detail.dart';
+import '../model_recruiment_detail.dart';
 class RecDetail{
   getDetail(id) async{
     try{

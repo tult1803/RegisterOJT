@@ -2,6 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:register_ojt/components/component.dart';
+import 'package:register_ojt/model/post/post_cv.dart';
 import 'package:register_ojt/model/post/post_send_application.dart';
 import 'package:register_ojt/utils/check_data.dart';
 import 'package:register_ojt/view/home_page.dart';
@@ -37,10 +38,12 @@ class _SendApplicationsState extends State<SendApplications> {
 
   doSendApplication() async{
     try {
-      PostSendApplication sendApplication = PostSendApplication();
+      // PostSendApplication sendApplication = PostSendApplication();
       loadingLoad(status: "Processing...");
-      int status = await sendApplication.doSend(
-          recruimentId:widget.idCompany, stuId:studentId, stuName:fullName, coverLetter:letter, cv:file!.bytes);
+      PostSendCV sendCV = PostSendCV();
+      int status = await sendCV.doSend(cv: file!.bytes);
+      // int status = await sendApplication.doSend(
+      //     recruimentId:widget.idCompany, stuId:studentId, stuName:fullName, coverLetter:letter, cv:file!.bytes);
       if (status == 200) {
         loadingSuccess(status: "Send Success !!!");
         return true;

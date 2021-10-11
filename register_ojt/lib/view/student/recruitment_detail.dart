@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/model/get/recruiments_detail.dart';
-import 'package:register_ojt/model/get/get_recruiment_detail.dart';
+import 'package:register_ojt/model/model_recruiment_detail.dart';
 import 'package:register_ojt/view/student/send_application.dart';
 
 class RecruimentDetail extends StatefulWidget {
