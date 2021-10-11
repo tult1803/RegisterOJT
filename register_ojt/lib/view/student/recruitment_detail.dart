@@ -2,28 +2,41 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:register_ojt/components/component.dart';
+import 'package:register_ojt/model/get/recruiments_detail.dart';
+import 'package:register_ojt/model/recruiment_detail.dart';
 import 'package:register_ojt/view/student/send_application.dart';
 
 class RecruimentDetail extends StatefulWidget {
-  String? id;
+  String? id, title;
 
-  RecruimentDetail({this.id});
+  RecruimentDetail({this.id, this.title});
 
   @override
   _RecruimentDetailState createState() => _RecruimentDetailState();
 }
 
 class _RecruimentDetailState extends State<RecruimentDetail> {
-  String? content;
-
+  RecruiDetail? data;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    content = "Thực tập sinh Backend Engineer (PHP/Nodejs/C#/Java/Ruby/Go)";
+    getData();
   }
 
+  getData() async{
+    try {
+      loadingLoad(status: "Loading...");
+      RecDetail detail = RecDetail();
+      data = await detail.getDetail(widget.id);
+      EasyLoading.dismiss();
+      setState(() {});
+    }catch(e){
+      loadingFail(status: "Failed to load data !!!");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +81,7 @@ class _RecruimentDetailState extends State<RecruimentDetail> {
                     width: size.width,
                     child: Center(
                         child: Text(
-                      "${content ?? "-----"}",
+                      "${widget.title ?? "-----"}",
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     )),
                   ),
@@ -77,26 +90,23 @@ class _RecruimentDetailState extends State<RecruimentDetail> {
                   ),
                   containerRecruiment(size,
                       title: "Company:",
-                      content: "Công Ty Thương Mại Điện Tử Magezon"),
+                      content: "${data?.companyName ?? ""}"),
                   containerRecruiment(size,
                       title: "Address:",
-                      content: "312 Lạc Long Quân, P5, Q11, HCM"),
+                      content: "${data?.address ?? ""}"),
                   containerRecruiment(size,
-                      title: "REQUIREMENTS FOR MAJORS:", content: "SE"),
+                      title: "REQUIREMENTS FOR MAJORS:", content: "${data?.majorName ?? ""}"),
                   containerRecruiment(size,
                       title: "Website of Company:",
-                      content: "www.newwaymedia.vn"),
+                      content: "${data?.companyWebsite ?? ""}"),
                   containerJobDescription(size,
                       title: "JOB DESCRIPTION:",
-                      content: "- Project implementation skills"
-                          "\n- Good communication"
-                          "\n- Ability to effectively handle and solve problems"
-                          "\n- Capable of teamwork"),
+                      content: "${data?.content ?? ""}"),
                   containerRecruiment(size,
-                      title: "Salary:", content: "Thỏa thuận"),
+                      title: "Salary:", content: "${data?.salary ?? ""}"),
                   containerRecruiment(size,
                       title: "EXPIRATION DATE:",
-                      content: "20/09/2021",
+                      content: "${data?.deadline?.day ?? ""}-${data?.deadline?.month ?? ""}-${data?.deadline?.year ?? ""}",
                       showBottom: true),
                   btnApply(),
                 ],

@@ -71,7 +71,7 @@ class _OJTInforState extends State<OJTInfors> {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => RecruimentDetail(id: '$id')));
+              builder: (context) => RecruimentDetail(id: '$id', title: "$content",)));
         },
         child: Row(
           children: [
