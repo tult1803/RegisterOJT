@@ -1,11 +1,9 @@
-import 'dart:convert';
-import 'dart:html';
+
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/model/get/get_cv.dart';
-import 'package:register_ojt/utils/helpers.dart';
 
 import '../view_cv.dart';
 
@@ -66,7 +64,7 @@ class _ApplicationDetailCompanyState extends State<ApplicationDetailCompany> {
           GestureDetector(
             onTap: () async{
               GetCV getCV = GetCV();
-              Uint8List file = await getCV.getData();
+              final file = await getCV.getData();
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => ViewCV(cv: file),
               ));
