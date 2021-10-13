@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:register_ojt/utils/helpers.dart';
+import 'package:register_ojt/view/fpt_admin/ojt_student_details.dart';
 
 class AllStudent extends StatefulWidget {
   const AllStudent({Key? key}) : super(key: key);
@@ -87,7 +88,9 @@ class _AllStudentState extends State<AllStudent> {
                 ],
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => OjtStudentDetails()));
+                },
                 child: Text(
                   "Detail",
                   style: TextStyle(
