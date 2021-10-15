@@ -63,11 +63,7 @@ class _ApplicationDetailCompanyState extends State<ApplicationDetailCompany> {
           ),
           GestureDetector(
             onTap: () async{
-              GetCV getCV = GetCV();
-              final file = await getCV.getData();
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ViewCV(cv: file),
-              ));
+
             },
             child: Text(
               "Click to show",

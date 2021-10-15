@@ -13,7 +13,7 @@ class PostSendApplication {
         "Access-Control-Allow-Origin": "*",
       },
       body: jsonEncode(<String, dynamic>{
-        "cv": cv,
+        "cv": "$cv",
         "recruimentInformationId": recruiId,
         "studentCode": "$stuId",
         "studentName": "$stuName",

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:register_ojt/model/get/recruiment_company.dart';
 import 'package:register_ojt/model/model_ojt_information.dart';
 import 'package:register_ojt/utils/helpers.dart';
+import 'package:register_ojt/view/company/recruiment_detail_company.dart';
 import 'package:register_ojt/view/student/recruitment_detail.dart';
 
 class RecruimentCompany extends StatefulWidget {
@@ -71,7 +72,7 @@ class _RecruimentCompanyState extends State<RecruimentCompany> {
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => RecruimentDetail(id: '$id', title: "$content",)));
+              builder: (context) => RecruimentDetailCompany(id: '$id', content: "$content",)));
         },
         child: Row(
           children: [

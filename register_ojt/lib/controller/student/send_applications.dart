@@ -5,6 +5,7 @@ import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/model/post/post_cv.dart';
 import 'package:register_ojt/model/post/post_send_application.dart';
 import 'package:register_ojt/utils/check_data.dart';
+import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/view/home_page.dart';
 import 'package:register_ojt/view/view_cv.dart';
 
@@ -36,21 +37,28 @@ class _SendApplicationsState extends State<SendApplications> {
     setState(() {});
   }
 
-  doSendApplication() async{
+  doSendApplication() async {
     try {
-      // PostSendApplication sendApplication = PostSendApplication();
       loadingLoad(status: "Processing...");
       PostSendCV sendCV = PostSendCV();
-      int status = await sendCV.doSend(cv: file!.bytes);
-      // int status = await sendApplication.doSend(
-      //     recruimentId:widget.idCompany, stuId:studentId, stuName:fullName, coverLetter:letter, cv:file!.bytes);
-      if (status == 200) {
-        loadingSuccess(status: "Send Success !!!");
-        return true;
+      String cvLink = await sendCV.doSend(
+          studentCode: await getDataSession(key: "code"), cv: file!);
+      if (cvLink.isNotEmpty) {
+        PostSendApplication sendApplication = PostSendApplication();
+        int status = await sendApplication.doSend(
+            recruimentId: widget.idCompany,
+            stuId: studentId,
+            stuName: fullName,
+            coverLetter: letter,
+            cv: cvLink);
+        if(status == 200) {
+          loadingSuccess(status: "Send Success !!!");
+          return true;
+        }else loadingFail(status: "Send Application Failed !!!");
       } else {
-        loadingFail(status: "Send Failed - $status!!!");
+        loadingFail(status: "Send CV Failed !!!");
       }
-    }catch(e){
+    } catch (e) {
       loadingFail(status: "$e");
     }
 
@@ -237,10 +245,11 @@ class _SendApplicationsState extends State<SendApplications> {
             });
             if (isEmptyCV && errId == null && errName == null) {
               bool checkSend = await doSendApplication();
-              print(checkSend);
-              // Navigator.of(context).push(MaterialPageRoute(
-              //   builder: (context) => ViewCV(cv: file!.bytes),
-              // ));
+              if(checkSend) {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => HomePage(role: 0)
+                ));
+              }
             }
           },
           child: Text("Submit")),

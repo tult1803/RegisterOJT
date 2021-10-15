@@ -9,7 +9,7 @@ class RecDetail{
   getDetail(id) async{
     try{
       var response = await http.get(
-          Uri.https("$urlMain", "$urlOjtInfor/$id"),
+          Uri.https("$urlMain", "$urlOjtInfor/detail/$id"),
           headers: {
             "Accept": "application/json",
             "Access-Control-Allow-Origin": "*",
