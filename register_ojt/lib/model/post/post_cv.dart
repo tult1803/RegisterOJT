@@ -14,7 +14,7 @@ class PostSendCV {
           "Access-Control-Allow-Origin": "*",
         },
         body: jsonEncode(<String, dynamic>{
-          "CvFile": "${cv.bytes}"
+          "CvFile": cv.bytes
         }),
       );
 

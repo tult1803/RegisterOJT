@@ -1,13 +1,11 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/model/post/post_cv.dart';
 import 'package:register_ojt/model/post/post_send_application.dart';
 import 'package:register_ojt/utils/check_data.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/view/home_page.dart';
-import 'package:register_ojt/view/view_cv.dart';
 
 class SendApplications extends StatefulWidget {
   String? idCompany;
@@ -169,7 +167,6 @@ class _SendApplicationsState extends State<SendApplications> {
 
                   if (result != null) {
                     file = result.files.first;
-
                     print(file?.name);
                     print(file?.size);
                     setState(() {
