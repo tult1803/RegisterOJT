@@ -4,8 +4,10 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:register_ojt/components/component.dart';
+import 'package:register_ojt/model/delete/delete_recruiment.dart';
 import 'package:register_ojt/model/get/recruiments_detail.dart';
 import 'package:register_ojt/model/model_recruiment_detail.dart';
+import 'package:register_ojt/view/home_page.dart';
 
 class RecruimentDetailCompany extends StatefulWidget {
   String? id, content;
@@ -106,7 +108,7 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
                       title: "EXPIRATION DATE:",
                       content: "${data?.deadline ?? "-----"}",
                       showBottom: true),
-                  btnApply(),
+                  btnDelete(context, id: widget.id),
                 ],
               ),
             ),
@@ -116,14 +118,27 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
     );
   }
 
-  Widget btnApply() {
+  Widget btnDelete(context, {id}) {
     return Container(
       height: 40,
       width: 160,
       color: Colors.orangeAccent,
       child: TextButton(
-          onPressed: () {
-            print('Click Delete');
+          onPressed: () async{
+            try {
+              DeleteRecruiments deleteRecruiments = DeleteRecruiments();
+              int status = await deleteRecruiments.detele(
+                  id: id,
+                  companyCode: stuCode);
+              if (status == 200) {
+                loadingSuccess(status: "Done");
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => HomePage(role: 2)));
+              } else
+                loadingFail(status: "Delete Failed !!!");
+            }catch(e){
+              loadingFail(status: "Something Wrong !!!");
+            }
           },
           child: Text(
             "Delete",

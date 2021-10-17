@@ -6,7 +6,6 @@ import 'package:register_ojt/model/post/post_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/google_login.dart';
 import 'package:register_ojt/view/home_page.dart';
-import 'package:register_ojt/view/student/send_application.dart';
 
 import 'components/component.dart';
 
