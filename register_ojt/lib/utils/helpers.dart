@@ -24,8 +24,8 @@ colorHexa(String hexColor) {
 getStatusType(int status) {
   switch (status) {
     case 0: return "Processing";
-    case 1: return "Accepted";
-    case 2: return "Reject";
+    case 1: return "Approved";
+    case 2: return "Rejected";
     default: return "---";
   }
 }
@@ -34,7 +34,7 @@ getStatusColor(status) {
   Color color = Colors.black54;
   switch (status) {
     case "Processing": color = Colors.orangeAccent; break;
-    case "Accepted": color = Colors.green; break;
+    case "Approved": color = Colors.green; break;
     case "Rejected": color = Colors.redAccent; break;
   }
   return color;

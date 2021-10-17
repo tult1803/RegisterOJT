@@ -14,12 +14,14 @@ class ApplicationStudent {
     this.studentName,
     this.companyName,
     this.status,
+    this.topic,
     this.updateDate,
   });
 
   String? studentCode;
   String? studentName;
   String? companyName;
+  String? topic;
   String? status;
   DateTime? updateDate;
 
@@ -28,6 +30,7 @@ class ApplicationStudent {
     studentName: json["studentName"],
     companyName: json["companyName"],
     status: json["status"],
+    topic: json["topic"],
     updateDate: DateTime.parse(json["updateDate"]),
   );
 
@@ -36,6 +39,7 @@ class ApplicationStudent {
     "studentName": studentName,
     "companyName": companyName,
     "status": status,
+    "topic": topic,
     "updateDate": updateDate?.toIso8601String(),
   };
 }

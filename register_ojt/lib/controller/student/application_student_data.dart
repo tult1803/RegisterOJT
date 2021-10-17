@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:register_ojt/model/get/get_application_student.dart';
 import 'package:register_ojt/model/model_application_student.dart';
 import 'package:register_ojt/utils/helpers.dart';
@@ -31,12 +32,14 @@ class _AppStudentDataState extends State<AppStudentData> {
           return ListView.builder(
             itemCount: data!.length,
             itemBuilder: (context, index) {
+              String formattedDate = DateFormat('MM:HH dd/MM/yyyy').format(data![index].updateDate as DateTime);
               return containerInfo(
                 id: data![index].studentCode,
                 name: data![index].studentName,
                 applyTo: data![index].companyName,
-                applyDate: data![index].updateDate,
+                applyDate: formattedDate,
                 status: data![index].status,
+                topic: data![index].topic,
               );
             },
           );
@@ -49,7 +52,7 @@ class _AppStudentDataState extends State<AppStudentData> {
     );
   }
 
-  Widget containerInfo({id, name, applyDate, applyTo, status}) {
+  Widget containerInfo({id, name, applyDate, applyTo, status, topic}) {
     return Container(
       margin: EdgeInsets.only(left: 10, right: 10, bottom: 20),
       decoration: BoxDecoration(
@@ -96,6 +99,26 @@ class _AppStudentDataState extends State<AppStudentData> {
                         ))
                   ],
                 ),
+                Row(
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Topic: ",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "${topic ?? "---"}",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 10,),
                 Row(
                   children: [
                     Container(
