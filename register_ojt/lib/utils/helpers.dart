@@ -30,12 +30,12 @@ getStatusType(int status) {
   }
 }
 
-getStatusColor(int status) {
+getStatusColor(status) {
   Color color = Colors.black54;
   switch (status) {
-    case 0: color = Colors.orangeAccent; break;
-    case 1: color = Colors.green; break;
-    case 2: color = Colors.redAccent; break;
+    case "Processing": color = Colors.orangeAccent; break;
+    case "Accepted": color = Colors.green; break;
+    case "Rejected": color = Colors.redAccent; break;
   }
   return color;
 }
