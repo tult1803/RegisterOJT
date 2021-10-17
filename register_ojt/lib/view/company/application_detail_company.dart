@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/model/get/get_cv.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../view_cv.dart';
 
@@ -42,6 +43,8 @@ class _ApplicationDetailCompanyState extends State<ApplicationDetailCompany> {
       ),
     );
   }
+  void launchURL(url) async =>
+      await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
 
   Widget showCV({cv}) {
     return Container(
@@ -63,10 +66,10 @@ class _ApplicationDetailCompanyState extends State<ApplicationDetailCompany> {
           ),
           GestureDetector(
             onTap: () async{
-
+              launchURL(cv);
             },
             child: Text(
-              "Click to show",
+              "Click to download",
               style: TextStyle(fontSize: 22, color: Colors.blueAccent),
             ),
           ),

@@ -1,4 +1,6 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/model/post/post_cv.dart';
@@ -38,10 +40,13 @@ class _SendApplicationsState extends State<SendApplications> {
   doSendApplication() async {
     try {
       loadingLoad(status: "Processing...");
-      PostSendCV sendCV = PostSendCV();
-      String cvLink = await sendCV.doSend(
-          studentCode: await getDataSession(key: "code"), cv: file!);
-      if (cvLink.isNotEmpty) {
+      String? cvLink;
+      var fileBytes = file!.bytes;
+      var fileName = file!.name;
+      await FirebaseStorage.instance.ref('uploads/$fileName').putData(fileBytes!);
+      await FirebaseStorage.instance.ref('uploads/$fileName').getDownloadURL().then((value) =>
+      cvLink = value);
+      if (cvLink != null || cvLink != "") {
         PostSendApplication sendApplication = PostSendApplication();
         int status = await sendApplication.doSend(
             recruimentId: widget.idCompany,
@@ -59,7 +64,6 @@ class _SendApplicationsState extends State<SendApplications> {
     } catch (e) {
       loadingFail(status: "$e");
     }
-
     return false;
   }
 
@@ -159,7 +163,7 @@ class _SendApplicationsState extends State<SendApplications> {
             ),
             child: TextButton(
                 onPressed: () async {
-                  FilePickerResult? result =
+                  final result =
                       await FilePicker.platform.pickFiles(
                     type: FileType.custom,
                     allowedExtensions: ['pdf'],
