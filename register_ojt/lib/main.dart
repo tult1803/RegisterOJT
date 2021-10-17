@@ -5,11 +5,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:register_ojt/model/post/post_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/google_login.dart';
-import 'package:register_ojt/view/company/application_detail_company.dart';
-import 'package:register_ojt/view/company/view__all_application.dart';
 import 'package:register_ojt/view/home_page.dart';
-// import 'package:register_ojt/view/student/profile.dart';
-// import 'package:register_ojt/view/company/view__all_application.dart';
+import 'package:register_ojt/view/student/send_application.dart';
 
 import 'components/component.dart';
 
@@ -42,8 +39,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
-      home: AllApplications(),
-      // home: HomePage(role: 2,),
+      home: LoginPage(),
+      // home: HomePage(role: 0,),
+      // home: SendApplication(),
     );
   }
 }
@@ -324,3 +322,4 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+

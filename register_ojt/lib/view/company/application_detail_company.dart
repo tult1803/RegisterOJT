@@ -1,4 +1,12 @@
+
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:register_ojt/components/component.dart';
+import 'package:register_ojt/model/get/get_cv.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../view_cv.dart';
 
 class ApplicationDetailCompany extends StatefulWidget {
   const ApplicationDetailCompany({Key? key}) : super(key: key);
@@ -35,26 +43,81 @@ class _ApplicationDetailCompanyState extends State<ApplicationDetailCompany> {
       ),
     );
   }
+  void launchURL(url) async =>
+      await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
+
+  Widget showCV({cv}) {
+    return Container(
+      margin: EdgeInsets.all(15),
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(width: 1, color: Colors.black12),
+          )),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            "CV:          ",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+          ),
+          SizedBox(
+            width: 50,
+          ),
+          GestureDetector(
+            onTap: () async{
+              launchURL(cv);
+            },
+            child: Text(
+              "Click to download",
+              style: TextStyle(fontSize: 22, color: Colors.blueAccent),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Center(
-      child: Container(
-        margin: EdgeInsets.only(top: 15),
-        width: size.width * 0.5,
-        height: size.height * 0.9,
-        padding: EdgeInsets.all(30),
-        decoration: BoxDecoration(
-          color: Colors.orange[200],
-          borderRadius: BorderRadius.circular(15),
+    return SingleChildScrollView(
+        child: Center(
+            child: Container(
+      margin: EdgeInsets.only(top: 15),
+      width: size.width * 0.5,
+      height: size.height * 0.9,
+      decoration: BoxDecoration(
+        color: Colors.orange[200],
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black54,
+            blurRadius: 4,
+            offset: Offset(0, 0), // Shadow position
+          ),
+        ],
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.orange[200],
+        appBar: AppBar(
+          leading: leadingAppbar(context, colorIcon: Colors.black87),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          title: Text(
+            "Application Details",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.black87),
+          ),
         ),
-        child: SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("Application Details",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36)),
               SizedBox(
                 height: 20,
               ),
@@ -63,7 +126,7 @@ class _ApplicationDetailCompanyState extends State<ApplicationDetailCompany> {
               details("Email:      ", "thangnguyen123@gmail.com"),
               details("Position: ", "Web Developer"),
               details("GPA:        ", "8.0"),
-              details("CV:          ", "Click to show"),
+              showCV(),
               SizedBox(
                 height: 30,
               ),
@@ -111,6 +174,6 @@ class _ApplicationDetailCompanyState extends State<ApplicationDetailCompany> {
           ),
         ),
       ),
-    );
+    )));
   }
 }

@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
+Widget headerCenter(BuildContext context) {
+  var size = MediaQuery.of(context).size;
+  return Container(
+    alignment: Alignment.center,
+    width: size.width,
+    height: 90,
+    color: Colors.orangeAccent,
+    child: Image.asset("images/fpt_logo.png"),
+  );
+}
 
 Widget footer(BuildContext context, {String? content}) {
   var size = MediaQuery.of(context).size;

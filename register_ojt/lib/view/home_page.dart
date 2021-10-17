@@ -25,15 +25,16 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
+String? stuCode, stuName;
 class _HomePageState extends State<HomePage> {
   late Widget _widget;
-  String? currentNamePage, code, name;
+  String? currentNamePage;
   var token;
 
   _getData() async {
     token = await getDataSession(key: "token");
-    code = await getDataSession(key: "code");
-    name = await getDataSession(key: "name");
+    stuCode = await getDataSession(key: "code");
+    stuName = await getDataSession(key: "name");
     setState(() {});
 
   }
@@ -118,7 +119,7 @@ class _HomePageState extends State<HomePage> {
               margin: EdgeInsets.only(left: 20),
               // width: size.width * 0.3,
               child: Text(
-                "${code ?? "---"} - ${name ?? "---"} | $currentNamePage",
+                "${stuCode ?? "---"} - ${stuName ?? "---"} | $currentNamePage",
                 style: TextStyle(
                     color: Colors.black87,
                     fontWeight: FontWeight.bold,

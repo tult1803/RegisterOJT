@@ -8,7 +8,7 @@ getDataSession({required String key}) async {
   return prefs.get(key);
 }
 
-setDataSession({required String key, required String value}) async {
+setDataSession({required String key, required  value}) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString(key, value);
 }
@@ -24,18 +24,18 @@ colorHexa(String hexColor) {
 getStatusType(int status) {
   switch (status) {
     case 0: return "Processing";
-    case 1: return "Accepted";
-    case 2: return "Reject";
+    case 1: return "Approved";
+    case 2: return "Rejected";
     default: return "---";
   }
 }
 
-getStatusColor(int status) {
+getStatusColor(status) {
   Color color = Colors.black54;
   switch (status) {
-    case 0: color = Colors.orangeAccent; break;
-    case 1: color = Colors.green; break;
-    case 2: color = Colors.redAccent; break;
+    case "Processing": color = Colors.orangeAccent; break;
+    case "Approved": color = Colors.green; break;
+    case "Rejected": color = Colors.redAccent; break;
   }
   return color;
 }
