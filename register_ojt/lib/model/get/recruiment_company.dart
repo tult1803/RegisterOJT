@@ -20,7 +20,10 @@ class GetRecruiCompany {
       if (response.statusCode == 200) {
         return ojtInfomationFromJson(response.body);
       } else {
-        throw Exception('Failed to load data');
+        if (response.statusCode == 404) {
+          return List.empty();
+        }
+        return null;
       }
     } catch (e) {
 

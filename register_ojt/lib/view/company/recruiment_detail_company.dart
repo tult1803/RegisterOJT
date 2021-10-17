@@ -4,8 +4,10 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:register_ojt/components/component.dart';
+import 'package:register_ojt/model/delete/delete_recruiment.dart';
 import 'package:register_ojt/model/get/recruiments_detail.dart';
 import 'package:register_ojt/model/model_recruiment_detail.dart';
+import 'package:register_ojt/view/home_page.dart';
 
 class RecruimentDetailCompany extends StatefulWidget {
   String? id, content;
@@ -13,7 +15,8 @@ class RecruimentDetailCompany extends StatefulWidget {
   RecruimentDetailCompany({this.id, this.content});
 
   @override
-  _RecruimentDetailCompanyState createState() => _RecruimentDetailCompanyState();
+  _RecruimentDetailCompanyState createState() =>
+      _RecruimentDetailCompanyState();
 }
 
 class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
@@ -25,17 +28,18 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
     getData();
   }
 
-  getData() async{
+  getData() async {
     try {
       loadingLoad(status: "Loading...");
       RecDetail detail = RecDetail();
       data = await detail.getDetail(widget.id);
       EasyLoading.dismiss();
       setState(() {});
-    }catch(e){
+    } catch (e) {
       loadingFail(status: "Failed to load data !!!");
     }
   }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -62,7 +66,7 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
               centerTitle: true,
               backgroundColor: Colors.white,
               title: Text(
-                "Registration Application",
+                "Recruitment Details",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -79,9 +83,10 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
                     width: size.width,
                     child: Center(
                         child: Text(
-                          "${widget.content ?? "-----"}",
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                        )),
+                      "${widget.content ?? "-----"}",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    )),
                   ),
                   SizedBox(
                     height: 30,
@@ -93,7 +98,8 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
                       title: "Address:",
                       content: "${data?.address ?? "-----"}"),
                   containerRecruiment(size,
-                      title: "REQUIREMENTS FOR MAJORS:", content: "${data?.majorName ?? "-----"}"),
+                      title: "REQUIREMENTS FOR MAJORS:",
+                      content: "${data?.majorName ?? "-----"}"),
                   containerRecruiment(size,
                       title: "Website of Company:",
                       content: "${data?.companyWebsite ?? "-----"}"),
@@ -106,7 +112,7 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
                       title: "EXPIRATION DATE:",
                       content: "${data?.deadline ?? "-----"}",
                       showBottom: true),
-                  btnApply(),
+                  btnDelete(context, id: widget.id),
                 ],
               ),
             ),
@@ -116,19 +122,33 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
     );
   }
 
-  Widget btnApply() {
+  Widget btnDelete(context, {id}) {
     return Container(
       height: 40,
       width: 160,
       color: Colors.orangeAccent,
       child: TextButton(
-          onPressed: () {
-            print('Click Delete');
+          onPressed: () async {
+            try {
+              DeleteRecruiments deleteRecruiments = DeleteRecruiments();
+              int status =
+                  await deleteRecruiments.detele(id: id, companyCode: stuCode);
+              if (status == 200) {
+                loadingSuccess(status: "Done");
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => HomePage(role: 2)));
+              } else
+                loadingFail(status: "Delete Failed !!!");
+            } catch (e) {
+              loadingFail(status: "Something Wrong !!!");
+            }
           },
           child: Text(
             "Delete",
             style: TextStyle(
-                color: Colors.black87, fontSize: 18, fontWeight: FontWeight.bold),
+                color: Colors.black87,
+                fontSize: 18,
+                fontWeight: FontWeight.bold),
           )),
     );
   }

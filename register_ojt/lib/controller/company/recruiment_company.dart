@@ -3,7 +3,6 @@ import 'package:register_ojt/model/get/recruiment_company.dart';
 import 'package:register_ojt/model/model_ojt_information.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/view/company/recruiment_detail_company.dart';
-import 'package:register_ojt/view/student/recruitment_detail.dart';
 
 class RecruimentCompany extends StatefulWidget {
   const RecruimentCompany({Key? key}) : super(key: key);
@@ -13,7 +12,7 @@ class RecruimentCompany extends StatefulWidget {
 }
 
 class _RecruimentCompanyState extends State<RecruimentCompany> {
-  List<OjtInfomation>? list;
+  List<OjtInfomation> list = List.empty();
 
   getData() async{
     GetRecruiCompany getInfo = GetRecruiCompany();
@@ -26,21 +25,25 @@ class _RecruimentCompanyState extends State<RecruimentCompany> {
     return FutureBuilder(
       future: getData(),
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
+        if (snapshot.hasData && list.isNotEmpty) {
           return ListView.builder(
-            itemCount: list!.length,
+            itemCount: list.length,
             itemBuilder: (context, index) {
               return containerInfo(
                 marginTop: index == 0 ? true : null,
-                id: list![index].id,
-                company: list![index].companyName,
-                content: list![index].topic,
-                deadline: "${list![index].deadline!.substring(0, 10)}",
-                location: list![index].area,
-                major: list![index].majorName,
-                salary: list![index].salary,
+                id: list[index].id,
+                company: list[index].companyName,
+                content: list[index].topic,
+                deadline: "${list[index].deadline?.substring(0, 10)}",
+                location: list[index].area,
+                major: list[index].majorName,
+                salary: list[index].salary,
               );
             },
+          );
+        } else if (list.isEmpty){
+          return Center(
+            child: Text("Data is empty !!!")
           );
         }
 
