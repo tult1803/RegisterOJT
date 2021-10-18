@@ -1,4 +1,3 @@
-
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -17,7 +16,7 @@ class ApplicationDetailCompany extends StatefulWidget {
 }
 
 class _ApplicationDetailCompanyState extends State<ApplicationDetailCompany> {
-  Widget details(String label, String info) {
+  Widget _appDetails(String label, String info) {
     return Container(
       margin: EdgeInsets.all(15),
       padding: EdgeInsets.all(10),
@@ -43,6 +42,7 @@ class _ApplicationDetailCompanyState extends State<ApplicationDetailCompany> {
       ),
     );
   }
+
   void launchURL(url) async =>
       await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
 
@@ -52,8 +52,8 @@ class _ApplicationDetailCompanyState extends State<ApplicationDetailCompany> {
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
           border: Border(
-            bottom: BorderSide(width: 1, color: Colors.black12),
-          )),
+        bottom: BorderSide(width: 1, color: Colors.black12),
+      )),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -65,7 +65,7 @@ class _ApplicationDetailCompanyState extends State<ApplicationDetailCompany> {
             width: 50,
           ),
           GestureDetector(
-            onTap: () async{
+            onTap: () async {
               launchURL(cv);
             },
             child: Text(
@@ -121,11 +121,11 @@ class _ApplicationDetailCompanyState extends State<ApplicationDetailCompany> {
               SizedBox(
                 height: 20,
               ),
-              details("Name:     ", "Nguyễn Đức Thắng"),
-              details("MSSV:     ", "SE130157"),
-              details("Email:      ", "thangnguyen123@gmail.com"),
-              details("Position: ", "Web Developer"),
-              details("GPA:        ", "8.0"),
+              _appDetails("Name:     ", "Nguyễn Đức Thắng"),
+              _appDetails("MSSV:     ", "SE130157"),
+              _appDetails("Email:      ", "thangnguyen123@gmail.com"),
+              _appDetails("Position: ", "Web Developer"),
+              _appDetails("GPA:        ", "8.0"),
               showCV(),
               SizedBox(
                 height: 30,
