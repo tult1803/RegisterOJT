@@ -13,48 +13,47 @@ class AllRecruitment extends StatefulWidget {
 class _AllRecruitmentState extends State<AllRecruitment> {
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery
-        .of(context)
-        .size;
-    return Stack(
-      children: [
-        Positioned(
-          right: 0,
-          width: 150,
-          child: Container(
-            margin: EdgeInsets.only(top: 10),
-            height: 50,
-            color: Colors.orangeAccent,
-            child: TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => CreateRecruiment()));
-                },
-                child: Text(
-                  "New Recruitment",
-                  style: TextStyle(
-                      color: Colors.black87, fontWeight: FontWeight.bold),
-                )),
-          ),
-        ),
-        Container(
-            margin: EdgeInsets.only(top: 70),
-            height: size.height * 0.8,
-            width: size.width * 0.6,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(5),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black54,
-                  blurRadius: 4,
-                  offset: Offset(0, 0), // Shadow position
-                ),
-              ],
+    var size = MediaQuery.of(context).size;
+    return Center(
+      child: Stack(
+        children: [
+          Positioned(
+            right: 0,
+            width: 150,
+            child: Container(
+              margin: EdgeInsets.only(top: 10),
+              height: 50,
+              color: Colors.orangeAccent,
+              child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => CreateRecruiment()));
+                  },
+                  child: Text(
+                    "New Recruitment",
+                    style: TextStyle(
+                        color: Colors.black87, fontWeight: FontWeight.bold),
+                  )),
             ),
-            child: RecruimentCompany()
-        ),
-      ],
+          ),
+          Container(
+              margin: EdgeInsets.only(top: 70),
+              height: size.height * 0.8,
+              width: size.width * 0.6,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black54,
+                    blurRadius: 4,
+                    offset: Offset(0, 0), // Shadow position
+                  ),
+                ],
+              ),
+              child: RecruimentCompany()),
+        ],
+      ),
     );
   }
 }

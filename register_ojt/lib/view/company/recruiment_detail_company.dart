@@ -15,7 +15,8 @@ class RecruimentDetailCompany extends StatefulWidget {
   RecruimentDetailCompany({this.id, this.content});
 
   @override
-  _RecruimentDetailCompanyState createState() => _RecruimentDetailCompanyState();
+  _RecruimentDetailCompanyState createState() =>
+      _RecruimentDetailCompanyState();
 }
 
 class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
@@ -27,17 +28,18 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
     getData();
   }
 
-  getData() async{
+  getData() async {
     try {
       loadingLoad(status: "Loading...");
       RecDetail detail = RecDetail();
       data = await detail.getDetail(widget.id);
       EasyLoading.dismiss();
       setState(() {});
-    }catch(e){
+    } catch (e) {
       loadingFail(status: "Failed to load data !!!");
     }
   }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -64,7 +66,7 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
               centerTitle: true,
               backgroundColor: Colors.white,
               title: Text(
-                "Registration Application",
+                "Recruitment Details",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -81,9 +83,10 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
                     width: size.width,
                     child: Center(
                         child: Text(
-                          "${widget.content ?? "-----"}",
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                        )),
+                      "${widget.content ?? "-----"}",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    )),
                   ),
                   SizedBox(
                     height: 30,
@@ -95,7 +98,8 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
                       title: "Address:",
                       content: "${data?.address ?? "-----"}"),
                   containerRecruiment(size,
-                      title: "REQUIREMENTS FOR MAJORS:", content: "${data?.majorName ?? "-----"}"),
+                      title: "REQUIREMENTS FOR MAJORS:",
+                      content: "${data?.majorName ?? "-----"}"),
                   containerRecruiment(size,
                       title: "Website of Company:",
                       content: "${data?.companyWebsite ?? "-----"}"),
@@ -143,7 +147,9 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
           child: Text(
             "Delete",
             style: TextStyle(
-                color: Colors.black87, fontSize: 18, fontWeight: FontWeight.bold),
+                color: Colors.black87,
+                fontSize: 18,
+                fontWeight: FontWeight.bold),
           )),
     );
   }
