@@ -28,10 +28,8 @@ class _EvaluateStudentState extends State<EvaluateStudent> {
     switch (data) {
       case "Working":
         return Colors.green;
-        break;
       case "Finished":
         return Colors.red;
-        break;
       default:
         return Colors.black;
     }

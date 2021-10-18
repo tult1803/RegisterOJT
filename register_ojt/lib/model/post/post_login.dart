@@ -25,7 +25,7 @@ class PostLogin {
     if(response.statusCode == 200){
       print('Code: ${data.code} - Role: ${data.role}');
       setDataSession(key: "token", value: "${data.token}");
-      setDataSession(key: "code", value: "${data.code}");
+      setDataSession(key: "stuCode", value: "${data.code}");
       setDataSession(key: "name", value: "${data.name}");
     }
 

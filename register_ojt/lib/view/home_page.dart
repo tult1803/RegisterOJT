@@ -8,7 +8,6 @@ import 'package:register_ojt/view/company/view_all_recruitment.dart';
 import 'package:register_ojt/view/fpt_admin/company_feedback.dart';
 import 'package:register_ojt/view/student/ojt_information.dart';
 import 'package:register_ojt/view/student/profile.dart';
-import 'package:register_ojt/view/student/send_application.dart';
 import 'package:register_ojt/view/student/view_application.dart';
 
 import 'fpt_admin/view_all_student.dart';
@@ -25,7 +24,8 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-String? stuCode, stuName;
+String? stuCode;
+String? stuName;
 class _HomePageState extends State<HomePage> {
   late Widget _widget;
   String? currentNamePage;
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
 
   _getData() async {
     token = await getDataSession(key: "token");
-    stuCode = await getDataSession(key: "code");
+    stuCode = await getDataSession(key: "stuCode");
     stuName = await getDataSession(key: "name");
     setState(() {
       stuCode = stuCode;
