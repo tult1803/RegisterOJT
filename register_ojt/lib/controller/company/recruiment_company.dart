@@ -12,11 +12,12 @@ class RecruimentCompany extends StatefulWidget {
 }
 
 class _RecruimentCompanyState extends State<RecruimentCompany> {
-  List<OjtInfomation> list = List.empty();
+  List<OjtInfomation>? list;
 
   getData() async{
     GetRecruiCompany getInfo = GetRecruiCompany();
     list = await getInfo.getData(token: await getDataSession(key: "token"), name: await getDataSession(key: "code"));
+    if(list == null) return List.empty();
     return list;
   }
 
@@ -25,26 +26,28 @@ class _RecruimentCompanyState extends State<RecruimentCompany> {
     return FutureBuilder(
       future: getData(),
       builder: (context, snapshot) {
-        if (snapshot.hasData && list.isNotEmpty) {
+        if (snapshot.hasData) {
+          if(list?.length != null) {
           return ListView.builder(
-            itemCount: list.length,
+            itemCount: list!.length,
             itemBuilder: (context, index) {
               return containerInfo(
                 marginTop: index == 0 ? true : null,
-                id: list[index].id,
-                company: list[index].companyName,
-                content: list[index].topic,
-                deadline: "${list[index].deadline?.substring(0, 10)}",
-                location: list[index].area,
-                major: list[index].majorName,
-                salary: list[index].salary,
+                id: list![index].id,
+                company: list![index].companyName,
+                content: list![index].topic,
+                deadline: "${list![index].deadline?.substring(0, 10)}",
+                location: list![index].area,
+                major: list![index].majorName,
+                salary: list![index].salary,
               );
             },
           );
-        } else if (list.isEmpty){
-          return Center(
-            child: Text("Data is empty !!!")
-          );
+          }else {
+            return Center(
+                child: Text("Data is empty !!!")
+            );
+          }
         }
 
         return Center(

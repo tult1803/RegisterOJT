@@ -80,8 +80,7 @@ class _LoginPageState extends State<LoginPage> {
           header(context),
           Expanded(child: body(context)),
           footer(context,
-              content:
-                  "Sinh viên cần hỗ trợ vui lòng liên hệ điện thoại : 028.73005585 , email: sschcm@fe.edu.vn"),
+              content: "Sinh viên cần hỗ trợ vui lòng liên hệ điện thoại : 028.73005585 , email: sschcm@fe.edu.vn"),
         ],
       ),
     );

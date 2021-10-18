@@ -21,6 +21,7 @@ class _AppStudentDataState extends State<AppStudentData> {
   getData() async{
     ApplicationStudents applicationStudents = ApplicationStudents();
     data = await applicationStudents.getApplication(studentCode: stuCode);
+    if(data == null) return List.empty();
     return data;
   }
   @override
@@ -29,6 +30,7 @@ class _AppStudentDataState extends State<AppStudentData> {
       future: getData(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          if(data?.length != null) {
           return ListView.builder(
             itemCount: data!.length,
             itemBuilder: (context, index) {
@@ -42,7 +44,11 @@ class _AppStudentDataState extends State<AppStudentData> {
                 topic: data![index].topic,
               );
             },
-          );
+          );}else{
+            return Center(
+                child: Text("Data is empty !!!")
+            );
+          }
         }
 
         return Center(
