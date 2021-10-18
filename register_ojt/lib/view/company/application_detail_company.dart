@@ -82,29 +82,31 @@ class _ApplicationDetailCompanyState extends State<ApplicationDetailCompany> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-        child: Center(
-            child: Container(
+        child: Column(
+          children: [
+            headerCenter(context),
+            Container(
       margin: EdgeInsets.only(top: 15),
       width: size.width * 0.5,
       height: size.height * 0.9,
       decoration: BoxDecoration(
-        color: Colors.orange[200],
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
+            color: Colors.orange[200],
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
             color: Colors.black54,
             blurRadius: 4,
             offset: Offset(0, 0), // Shadow position
-          ),
-        ],
+              ),
+            ],
       ),
       child: Scaffold(
-        backgroundColor: Colors.orange[200],
-        appBar: AppBar(
-          leading: leadingAppbar(context, colorIcon: Colors.black87),
-          centerTitle: true,
-          backgroundColor: Colors.white,
-          title: Text(
+            backgroundColor: Colors.orange[200],
+            appBar: AppBar(
+              leading: leadingAppbar(context, colorIcon: Colors.black87),
+              centerTitle: true,
+              backgroundColor: Colors.white,
+              title: Text(
             "Application Details",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -112,10 +114,10 @@ class _ApplicationDetailCompanyState extends State<ApplicationDetailCompany> {
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
                 color: Colors.black87),
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
+              ),
+            ),
+            body: SingleChildScrollView(
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
@@ -171,9 +173,15 @@ class _ApplicationDetailCompanyState extends State<ApplicationDetailCompany> {
                 ],
               )
             ],
-          ),
-        ),
+              ),
+            ),
       ),
-    )));
+    ),
+            footer(context,
+                content:
+                "Sinh viên cần hỗ trợ vui lòng liên hệ Trung tâm Dịch vụ Sinh viên tại Phòng 202, điện thoại : 028.73005585 , email: sschcm@fe.edu.vn"),
+
+          ],
+        ));
   }
 }

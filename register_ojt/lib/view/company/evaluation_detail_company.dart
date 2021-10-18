@@ -57,63 +57,70 @@ class _EvalutionDetailState extends State<EvalutionDetail> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-        child: Center(
-            child: Container(
-      margin: EdgeInsets.only(top: 15),
-      width: size.width * 0.5,
-      height: size.height * 0.9,
-      decoration: BoxDecoration(
-        color: Colors.orange[200],
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black54,
-            blurRadius: 4,
-            offset: Offset(0, 0), // Shadow position
-          ),
-        ],
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.orange[200],
-        appBar: AppBar(
-          leading: leadingAppbar(context, colorIcon: Colors.black87),
-          centerTitle: true,
-          backgroundColor: Colors.white,
-          title: Text(
-            "Application Details",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.black87),
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 20,
+        child: Column(
+      children: [
+        headerCenter(context),
+        Container(
+          margin: EdgeInsets.only(top: 15),
+          width: size.width * 0.5,
+          height: size.height * 0.9,
+          decoration: BoxDecoration(
+            color: Colors.orange[200],
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black54,
+                blurRadius: 4,
+                offset: Offset(0, 0), // Shadow position
               ),
-              _evaDetails("Name:             ", "Nguyễn Đức Thắng"),
-              _evaDetails("Position:         ", "Web Developer"),
-              _evaDetails("Grade Evaluation: ", "8.0"),
-              _evaDetails("Description:      ", "Passion, work hard"),
-              _evaDetails("Start Date:       ", "17/10/2021"),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  btnEdit(),
-                ],
-              )
             ],
           ),
+          child: Scaffold(
+            backgroundColor: Colors.orange[200],
+            appBar: AppBar(
+              leading: leadingAppbar(context, colorIcon: Colors.black87),
+              centerTitle: true,
+              backgroundColor: Colors.white,
+              title: Text(
+                "Application Details",
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.black87),
+              ),
+            ),
+            body: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _evaDetails("Name:             ", "Nguyễn Đức Thắng"),
+                  _evaDetails("Position:         ", "Web Developer"),
+                  _evaDetails("Grade Evaluation: ", "8.0"),
+                  _evaDetails("Description:      ", "Passion, work hard"),
+                  _evaDetails("Start Date:       ", "17/10/2021"),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      btnEdit(),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
         ),
-      ),
-    )));
+        footer(context,
+            content:
+                "Sinh viên cần hỗ trợ vui lòng liên hệ Trung tâm Dịch vụ Sinh viên tại Phòng 202, điện thoại : 028.73005585 , email: sschcm@fe.edu.vn"),
+      ],
+    ));
   }
 }

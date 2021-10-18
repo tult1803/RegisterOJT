@@ -16,7 +16,7 @@ class _RecruimentCompanyState extends State<RecruimentCompany> {
 
   getData() async{
     GetRecruiCompany getInfo = GetRecruiCompany();
-    list = await getInfo.getData(token: await getDataSession(key: "token"), name: await getDataSession(key: "code"));
+    list = await getInfo.getData(token: await getDataSession(key: "token"), name: await getDataSession(key: "stuCode"));
     if(list == null) return List.empty();
     return list;
   }
