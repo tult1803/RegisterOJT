@@ -28,14 +28,6 @@ class _CreateRecruimentState extends State<CreateRecruiment> {
               border: UnderlineInputBorder(),
             ),
           ),
-          SizedBox(
-              child: showBottom == null
-                  ? Container(
-                      margin: EdgeInsets.only(top: 12),
-                      color: Colors.black45,
-                      height: 0.5,
-                    )
-                  : null),
         ],
       ),
     );
@@ -58,15 +50,8 @@ class _CreateRecruimentState extends State<CreateRecruiment> {
           TextField(
             keyboardType: TextInputType.multiline,
             textInputAction: TextInputAction.newline,
-            minLines: 1,
-            maxLines: 5,
+            maxLines: 7,
           ),
-          SizedBox(
-              child: Container(
-            margin: EdgeInsets.only(top: 12),
-            color: Colors.black45,
-            height: 0.5,
-          )),
         ],
       ),
     );
@@ -109,78 +94,75 @@ class _CreateRecruimentState extends State<CreateRecruiment> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-        child: Center(
-      child: Container(
-        margin: EdgeInsets.only(top: 50),
-        width: size.width * 0.5,
-        height: size.height * 0.9,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black54,
-              blurRadius: 4,
-              offset: Offset(0, 0), // Shadow position
-            ),
-          ],
+        child: Column(
+      children: [
+        headerCenter(context),
+        Container(
+          margin: EdgeInsets.only(top: 20),
+          width: size.width * 0.5,
+          height: size.height * 0.9,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black54,
+                blurRadius: 4,
+                offset: Offset(0, 0), // Shadow position
+              ),
+            ],
+          ),
+          child: Scaffold(
+              appBar: AppBar(
+                leading: leadingAppbar(context, colorIcon: Colors.black87),
+                centerTitle: true,
+                backgroundColor: Colors.white,
+                title: Text(
+                  "New Recruitment",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.black87),
+                ),
+              ),
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    txtFieldRecruiment(size, title: "Company:"),
+                    txtFieldRecruiment(size, title: "Address:"),
+                    txtFieldRecruiment(size,
+                        title: "REQUIREMENTS FOR MAJORS:"),
+                    txtFieldRecruiment(size, title: "Website of Company:"),
+                    txtFieldJobDescription(size, title: "JOB DESCRIPTION:"),
+                    txtFieldRecruiment(size, title: "Salary:"),
+                    txtFieldRecruiment(size,
+                        title: "EXPIRATION DATE:", showBottom: true),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        btnSave(),
+                        SizedBox(
+                          width: 200,
+                        ),
+                        btnCancel()
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
+              )),
         ),
-        child: Scaffold(
-            appBar: AppBar(
-              leading: leadingAppbar(context, colorIcon: Colors.black87),
-              centerTitle: true,
-              backgroundColor: Colors.white,
-              title: Text(
-                "Create New Recruitment",
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.black87),
-              ),
-            ),
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 30),
-                    width: size.width,
-                    child: Center(
-                        child: Text(
-                      "New Recruitment",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    )),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  txtFieldRecruiment(size, title: "Company:"),
-                  txtFieldRecruiment(size, title: "Address:"),
-                  txtFieldRecruiment(size, title: "REQUIREMENTS FOR MAJORS:"),
-                  txtFieldRecruiment(size, title: "Website of Company:"),
-                  txtFieldJobDescription(size, title: "JOB DESCRIPTION:"),
-                  txtFieldRecruiment(size, title: "Salary:"),
-                  txtFieldRecruiment(size,
-                      title: "EXPIRATION DATE:", showBottom: true),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      btnSave(),
-                      SizedBox(
-                        width: 200,
-                      ),
-                      btnCancel()
-                    ],
-                  ),
-                  SizedBox(
-                    height: 50,
-                  )
-                ],
-              ),
-            )),
-      ),
+        footer(context,
+            content:
+                "Sinh viên cần hỗ trợ vui lòng liên hệ Trung tâm Dịch vụ Sinh viên tại Phòng 202, điện thoại : 028.73005585 , email: sschcm@fe.edu.vn"),
+      ],
     ));
   }
 }

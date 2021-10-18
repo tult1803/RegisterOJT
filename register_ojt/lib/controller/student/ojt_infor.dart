@@ -17,6 +17,7 @@ class _OJTInforState extends State<OJTInfors> {
   getData() async{
     GetOJTInfo getOJTInfo = GetOJTInfo();
     list = await getOJTInfo.getData(token: await getDataSession(key: "token"));
+    if(list == null) return List.empty();
     return list;
   }
 
@@ -26,23 +27,28 @@ class _OJTInforState extends State<OJTInfors> {
       future: getData(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return ListView.builder(
-            itemCount: list!.length,
-            itemBuilder: (context, index) {
-              return containerInfo(
-                marginTop: index == 0 ? true : null,
-                id: list![index].id,
-                company: list![index].companyName,
-                content: list![index].topic,
-                deadline: "${list![index].deadline!.substring(0, 10)}",
-                location: list![index].area,
-                major: list![index].majorName,
-                salary: list![index].salary,
-              );
-            },
-          );
+          if(list?.length != null) {
+            return ListView.builder(
+              itemCount: list!.length,
+              itemBuilder: (context, index) {
+                return containerInfo(
+                  marginTop: index == 0 ? true : null,
+                  id: list![index].id,
+                  company: list![index].companyName,
+                  content: list![index].topic,
+                  deadline: "${list![index].deadline!.substring(0, 10)}",
+                  location: list![index].area,
+                  major: list![index].majorName,
+                  salary: list![index].salary,
+                );
+              },
+            );
+          }else{
+            return Center(
+              child: Text("Data is empty !!!")
+            );
+          }
         }
-
         return Center(
           child: CircularProgressIndicator(),
         );

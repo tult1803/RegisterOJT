@@ -20,9 +20,6 @@ class GetRecruiCompany {
       if (response.statusCode == 200) {
         return ojtInfomationFromJson(response.body);
       } else {
-        if (response.statusCode == 404) {
-          return List.empty();
-        }
         return null;
       }
     } catch (e) {

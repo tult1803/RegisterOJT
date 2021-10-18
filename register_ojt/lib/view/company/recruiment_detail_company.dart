@@ -128,18 +128,19 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
       width: 160,
       color: Colors.orangeAccent,
       child: TextButton(
-          onPressed: () async {
+          onPressed: () async{
             try {
               DeleteRecruiments deleteRecruiments = DeleteRecruiments();
-              int status =
-                  await deleteRecruiments.detele(id: id, companyCode: stuCode);
+              int status = await deleteRecruiments.detele(
+                  id: id,
+                  companyCode: stuCode);
               if (status == 200) {
                 loadingSuccess(status: "Done");
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => HomePage(role: 2)));
               } else
                 loadingFail(status: "Delete Failed !!!");
-            } catch (e) {
+            }catch(e){
               loadingFail(status: "Something Wrong !!!");
             }
           },
