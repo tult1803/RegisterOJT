@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:register_ojt/model/post/post_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/google_login.dart';
+import 'package:register_ojt/view/company/evaluate_student_progress.dart';
 import 'package:register_ojt/view/home_page.dart';
 
 import 'components/component.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
-      home: LoginPage(),
+      home: EvaluateStudent(),
       // home: HomePage(role: 0,),
       // home: SendApplication(),
     );
@@ -80,7 +81,8 @@ class _LoginPageState extends State<LoginPage> {
           header(context),
           Expanded(child: body(context)),
           footer(context,
-              content: "Sinh viên cần hỗ trợ vui lòng liên hệ điện thoại : 028.73005585 , email: sschcm@fe.edu.vn"),
+              content:
+                  "Sinh viên cần hỗ trợ vui lòng liên hệ điện thoại : 028.73005585 , email: sschcm@fe.edu.vn"),
         ],
       ),
     );
