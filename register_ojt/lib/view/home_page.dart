@@ -33,12 +33,9 @@ class _HomePageState extends State<HomePage> {
 
   _getData() async {
     token = await getDataSession(key: "token");
-    stuCode = await getDataSession(key: "stuCode");
     stuName = await getDataSession(key: "name");
-    setState(() {
-      stuCode = stuCode;
-    });
-
+    stuCode = await getDataSession(key: "stuCode");
+    setState(() {});
   }
 
   @override

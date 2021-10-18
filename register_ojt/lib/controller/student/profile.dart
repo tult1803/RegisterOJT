@@ -25,7 +25,7 @@ class _ProfileState extends State<Profile> {
     loadingLoad(status: "Loading...");
     StudentProfile data = StudentProfile();
     _student = await data.getProfile(
-        idStudent: await getDataSession(key: "code"),
+        idStudent: await getDataSession(key: "stuCode"),
         token: await getDataSession(key: "token"));
     setState(() {});
     if (_student?.stuCode == null) {
