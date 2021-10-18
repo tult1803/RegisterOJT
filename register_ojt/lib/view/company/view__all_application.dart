@@ -70,7 +70,7 @@ class _AllApplicationsState extends State<AllApplications> {
                         TextSpan(
                             text: 'Status: ',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16)),
+                                fontWeight: FontWeight.bold, fontSize: 18)),
                         TextSpan(
                             text: "Approved",
                             style: TextStyle(
