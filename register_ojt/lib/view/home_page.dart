@@ -35,7 +35,9 @@ class _HomePageState extends State<HomePage> {
     token = await getDataSession(key: "token");
     stuCode = await getDataSession(key: "code");
     stuName = await getDataSession(key: "name");
-    setState(() {});
+    setState(() {
+      stuCode = stuCode;
+    });
 
   }
 
@@ -119,7 +121,7 @@ class _HomePageState extends State<HomePage> {
               margin: EdgeInsets.only(left: 20),
               // width: size.width * 0.3,
               child: Text(
-                "${stuCode ?? "---"} - ${stuName ?? "---"} | $currentNamePage",
+                "${stuCode == null ? "" : "$stuCode - "} ${stuName ?? "---"} | $currentNamePage",
                 style: TextStyle(
                     color: Colors.black87,
                     fontWeight: FontWeight.bold,
