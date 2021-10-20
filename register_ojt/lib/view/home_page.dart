@@ -3,7 +3,7 @@ import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/utils/google_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/view/company/evaluate_student_progress.dart';
-import 'package:register_ojt/view/company/view__all_application.dart';
+import 'package:register_ojt/view/company/view_all_application.dart';
 import 'package:register_ojt/view/company/view_all_recruitment.dart';
 import 'package:register_ojt/view/fpt_admin/company_feedback.dart';
 import 'package:register_ojt/view/student/ojt_information.dart';
@@ -26,6 +26,7 @@ class HomePage extends StatefulWidget {
 
 String? stuCode;
 String? stuName;
+
 class _HomePageState extends State<HomePage> {
   late Widget _widget;
   String? currentNamePage;
@@ -38,7 +39,6 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       stuCode = stuCode;
     });
-
   }
 
   @override
@@ -77,7 +77,9 @@ class _HomePageState extends State<HomePage> {
           Container(
             child: _widget,
           ),
-          footer(context, content: "Sinh viên cần hỗ trợ vui lòng liên hệ Trung tâm Dịch vụ Sinh viên tại Phòng 202, điện thoại : 028.73005585 , email: sschcm@fe.edu.vn"),
+          footer(context,
+              content:
+                  "Sinh viên cần hỗ trợ vui lòng liên hệ Trung tâm Dịch vụ Sinh viên tại Phòng 202, điện thoại : 028.73005585 , email: sschcm@fe.edu.vn"),
         ],
       ),
     );
@@ -106,6 +108,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
   Widget topBar(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(

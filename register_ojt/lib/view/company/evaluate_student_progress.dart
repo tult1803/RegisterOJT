@@ -24,17 +24,6 @@ class _EvaluateStudentState extends State<EvaluateStudent> {
     setState(() {});
   }
 
-  Color getColor(String data) {
-    switch (data) {
-      case "Working":
-        return Colors.green;
-      case "Finished":
-        return Colors.red;
-      default:
-        return Colors.black;
-    }
-  }
-
   Widget _info(String label, String data) {
     return RichText(
       text: TextSpan(
@@ -48,13 +37,13 @@ class _EvaluateStudentState extends State<EvaluateStudent> {
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
-                  color: getColor(data))),
+                  color: getStatusColor(data))),
         ],
       ),
     );
   }
 
-  Widget _student(String name, String mssv, String position, String status,
+  Widget _student(String name, String id, String position, String status,
       String startDate) {
     return Container(
       padding: EdgeInsets.all(20),
@@ -66,7 +55,7 @@ class _EvaluateStudentState extends State<EvaluateStudent> {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [_info("Name: ", name), _info("MSSV: ", mssv)],
+            children: [_info("Name: ", name), _info("MSSV: ", id)],
           ),
           SizedBox(
             height: 15,

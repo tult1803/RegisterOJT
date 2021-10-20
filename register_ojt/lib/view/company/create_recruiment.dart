@@ -133,15 +133,14 @@ class _CreateRecruimentState extends State<CreateRecruiment> {
                     SizedBox(
                       height: 10,
                     ),
-                    txtFieldRecruiment(size, title: "Company:"),
-                    txtFieldRecruiment(size, title: "Address:"),
+                    txtFieldRecruiment(size, title: "Company: "),
+                    txtFieldRecruiment(size, title: "Address: "),
+                    txtFieldRecruiment(size, title: "Requirments for major: "),
+                    txtFieldRecruiment(size, title: "Company's website: "),
+                    txtFieldJobDescription(size, title: "Job Description: "),
+                    txtFieldRecruiment(size, title: "Salary: "),
                     txtFieldRecruiment(size,
-                        title: "REQUIREMENTS FOR MAJORS:"),
-                    txtFieldRecruiment(size, title: "Website of Company:"),
-                    txtFieldJobDescription(size, title: "JOB DESCRIPTION:"),
-                    txtFieldRecruiment(size, title: "Salary:"),
-                    txtFieldRecruiment(size,
-                        title: "EXPIRATION DATE:", showBottom: true),
+                        title: "EXPIRATION DATE: ", showBottom: true),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
