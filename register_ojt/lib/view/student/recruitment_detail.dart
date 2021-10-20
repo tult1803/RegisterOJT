@@ -112,7 +112,7 @@ class _RecruimentDetailState extends State<RecruimentDetail> {
                         title: "EXPIRATION DATE:",
                         content: "${data?.deadline?.day ?? ""}-${data?.deadline?.month ?? ""}-${data?.deadline?.year ?? ""}",
                         showBottom: true),
-                    SizedBox(child: isPassCriteria == "true"?btnApply():Container()),
+                    SizedBox(child: isPassCriteria! ?btnApply():Container()),
                   ],
                 ),
               ),
