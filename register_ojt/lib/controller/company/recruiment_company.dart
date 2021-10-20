@@ -27,26 +27,24 @@ class _RecruimentCompanyState extends State<RecruimentCompany> {
       future: getData(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          if(list?.length != null) {
-          return ListView.builder(
-            itemCount: list!.length,
-            itemBuilder: (context, index) {
-              return containerInfo(
-                marginTop: index == 0 ? true : null,
-                id: list![index].id,
-                company: list![index].companyName,
-                content: list![index].topic,
-                deadline: "${list![index].deadline?.substring(0, 10)}",
-                location: list![index].area,
-                major: list![index].majorName,
-                salary: list![index].salary,
-              );
-            },
-          );
-          }else {
-            return Center(
-                child: Text("Data is empty !!!")
+          if (list?.length != null) {
+            return ListView.builder(
+              itemCount: list!.length,
+              itemBuilder: (context, index) {
+                return containerInfo(
+                  marginTop: index == 0 ? true : null,
+                  id: list![index].id,
+                  company: list![index].companyName,
+                  content: list![index].topic,
+                  deadline: "${list![index].deadline?.substring(0, 10)}",
+                  location: list![index].area,
+                  major: list![index].majorName,
+                  salary: list![index].salary,
+                );
+              },
             );
+          } else {
+            return Center(child: Text("Data is empty !!!"));
           }
         }
 
@@ -58,9 +56,17 @@ class _RecruimentCompanyState extends State<RecruimentCompany> {
   }
 
   Widget containerInfo(
-      {id, String? major, content, company, salary, location, deadline, bool? marginTop}) {
+      {id,
+      String? major,
+      content,
+      company,
+      salary,
+      location,
+      deadline,
+      bool? marginTop}) {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10, bottom: 20, top: marginTop == true ? 20 : 0),
+      margin: EdgeInsets.only(
+          left: 10, right: 10, bottom: 20, top: marginTop == true ? 20 : 0),
       height: 100,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -75,10 +81,13 @@ class _RecruimentCompanyState extends State<RecruimentCompany> {
       ),
       child: FlatButton(
         shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => RecruimentDetailCompany(id: '$id', content: "$content",)));
+              builder: (context) => RecruimentDetailCompany(
+                    id: '$id',
+                    content: "$content",
+                  )));
         },
         child: Row(
           children: [
@@ -86,9 +95,9 @@ class _RecruimentCompanyState extends State<RecruimentCompany> {
               width: 100,
               child: Center(
                   child: Text(
-                    "$major",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                  )),
+                "$major",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              )),
             ),
             Expanded(
               child: Container(
@@ -101,7 +110,7 @@ class _RecruimentCompanyState extends State<RecruimentCompany> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                     SizedBox(
                       height: 10,
@@ -127,7 +136,7 @@ class _RecruimentCompanyState extends State<RecruimentCompany> {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style:
-                            TextStyle(color: Colors.black54, fontSize: 18),
+                                TextStyle(color: Colors.black54, fontSize: 18),
                           ),
                         ),
                         Flexible(
@@ -136,7 +145,7 @@ class _RecruimentCompanyState extends State<RecruimentCompany> {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style:
-                            TextStyle(color: Colors.black54, fontSize: 18),
+                                TextStyle(color: Colors.black54, fontSize: 18),
                           ),
                         ),
                       ],

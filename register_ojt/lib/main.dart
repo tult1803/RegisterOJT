@@ -6,9 +6,12 @@ import 'package:register_ojt/model/post/post_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/google_login.dart';
 import 'package:register_ojt/view/company/create_recruiment.dart';
+import 'package:register_ojt/view/company/edit_evaluation.dart';
 import 'package:register_ojt/view/company/evaluate_student_progress.dart';
 import 'package:register_ojt/view/company/evaluation_detail_company.dart';
+import 'package:register_ojt/view/company/view_all_application.dart';
 import 'package:register_ojt/view/home_page.dart';
+import 'package:register_ojt/view/student/view_application.dart';
 
 import 'components/component.dart';
 

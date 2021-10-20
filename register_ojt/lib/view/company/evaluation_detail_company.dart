@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:register_ojt/components/component.dart';
+import 'package:register_ojt/view/company/edit_evaluation.dart';
 
 class EvalutionDetail extends StatefulWidget {
   const EvalutionDetail({Key? key}) : super(key: key);
@@ -38,7 +39,12 @@ class _EvalutionDetailState extends State<EvalutionDetail> {
 
   Widget btnEdit() {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => EditEvaluation()),
+        );
+      },
       child: Text(
         "Edit",
         style: TextStyle(
