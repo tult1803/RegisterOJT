@@ -10,18 +10,21 @@ class ModelLogin {
     this.code,
     this.token,
     this.role,
+    this.isPassCriteria,
   });
 
   String? name;
   String? code;
   String? token;
   int? role;
+  bool? isPassCriteria;
 
   factory ModelLogin.fromJson(Map<String, dynamic> json) => ModelLogin(
     name: json["name"],
     code: json["code"],
     token: json["token"],
     role: json["role"],
+      isPassCriteria: json["isPassCriteria"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -29,5 +32,6 @@ class ModelLogin {
     "code": code,
     "token": token,
     "role": role,
+    "isPassCriteria": isPassCriteria,
   };
 }

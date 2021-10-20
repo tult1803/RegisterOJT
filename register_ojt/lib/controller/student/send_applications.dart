@@ -8,6 +8,7 @@ import 'package:register_ojt/model/post/post_send_application.dart';
 import 'package:register_ojt/utils/check_data.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/view/home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SendApplications extends StatefulWidget {
   String? idCompany;
@@ -39,6 +40,7 @@ class _SendApplicationsState extends State<SendApplications> {
 
   doSendApplication() async {
     try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
       loadingLoad(status: "Processing...");
       String? cvLink;
       var fileBytes = file!.bytes;
@@ -56,6 +58,9 @@ class _SendApplicationsState extends State<SendApplications> {
             cv: cvLink);
         if(status == 200) {
           loadingSuccess(status: "Send Success !!!");
+          isPassCriteria = false;
+          prefs.setBool("isPassCriteria",  false);
+          setState(() {});
           return true;
         }else loadingFail(status: "Send Application Failed !!!");
       } else {

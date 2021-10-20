@@ -5,7 +5,6 @@ import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class PostLogin {
   login({String? firebaseToken, int? role}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -24,11 +23,13 @@ class PostLogin {
     print("Status postApi Login:${response.statusCode}");
     ModelLogin data = ModelLogin();
     data = ModelLogin.fromJson(json.decode(response.body));
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       prefs.setString("token", "${data.token}");
       prefs.setString("name", "${data.name}");
       prefs.setString("stuCode", "${data.code}");
-      print('Code: ${data.code} - Role: ${data.role}');
+      prefs.setBool("isPassCriteria", data.isPassCriteria ?? false);
+      print(
+          'Code: ${data.code} - Role: ${data.role} - isPassCriteria: ${data.isPassCriteria}');
     }
 
     return response.statusCode;

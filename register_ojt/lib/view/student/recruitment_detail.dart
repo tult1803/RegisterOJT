@@ -8,6 +8,8 @@ import 'package:register_ojt/model/get/recruiments_detail.dart';
 import 'package:register_ojt/model/model_recruiment_detail.dart';
 import 'package:register_ojt/view/student/send_application.dart';
 
+import '../home_page.dart';
+
 class RecruimentDetail extends StatefulWidget {
   String? id, title;
 
@@ -110,7 +112,7 @@ class _RecruimentDetailState extends State<RecruimentDetail> {
                         title: "EXPIRATION DATE:",
                         content: "${data?.deadline?.day ?? ""}-${data?.deadline?.month ?? ""}-${data?.deadline?.year ?? ""}",
                         showBottom: true),
-                    btnApply(),
+                    SizedBox(child: isPassCriteria == "true"?btnApply():Container()),
                   ],
                 ),
               ),

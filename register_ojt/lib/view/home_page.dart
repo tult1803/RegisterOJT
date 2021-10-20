@@ -26,6 +26,7 @@ class HomePage extends StatefulWidget {
 
 String? stuCode;
 String? stuName;
+bool? isPassCriteria;
 class _HomePageState extends State<HomePage> {
   late Widget _widget;
   String? currentNamePage;
@@ -35,6 +36,7 @@ class _HomePageState extends State<HomePage> {
     token = await getDataSession(key: "token");
     stuName = await getDataSession(key: "name");
     stuCode = await getDataSession(key: "stuCode");
+    isPassCriteria = await getDataSession(key: "isPassCriteria");
     setState(() {});
   }
 
