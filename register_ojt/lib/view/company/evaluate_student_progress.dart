@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/utils/helpers.dart';
+import 'package:register_ojt/view/company/evaluation_detail_company.dart';
 
 class EvaluateStudent extends StatefulWidget {
   const EvaluateStudent({Key? key}) : super(key: key);
@@ -84,53 +85,57 @@ class _EvaluateStudentState extends State<EvaluateStudent> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Center(
-        child: Container(
-            margin: EdgeInsets.only(top: 15),
-            width: size.width * 0.5,
-            height: size.height * 0.9,
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => EvalutionDetail(),));
+      },
+      child: Container(
+          margin: EdgeInsets.only(top: 15),
+          width: size.width * 0.5,
+          height: size.height * 0.9,
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                _student("Nguyễn Đức Thắng", "SE130157", "Web Developer",
+                    "Working", "17/10/2021"),
+                SizedBox(
+                  height: 30,
+                ),
+                _student("Nguyễn Đức Thắng", "SE130157", "Web Developer",
+                    "Finished", "17/10/2021"),
+                SizedBox(
+                  height: 30,
+                ),
+                _student("Lê Thanh Tú", "SE130157", "Web Developer",
+                    "Working", "17/10/2021"),
+                SizedBox(
+                  height: 30,
+                ),
+                _student("Nguyễn Đức Thắng", "SE130157", "Web Developer",
+                    "Working", "17/10/2021"),
+                SizedBox(
+                  height: 30,
+                ),
+                _student("Lê Thanh Tú", "SE130157", "Web Developer",
+                    "Finished", "17/10/2021"),
+                SizedBox(
+                  height: 30,
+                ),
+                _student("Đoàn Quang Huy", "SE130157", "Web Developer",
+                    "Working", "17/10/2021"),
+                SizedBox(
+                  height: 30,
+                ),
+                _student("Đoàn Quang Huy", "SE130157", "Web Developer",
+                    "Working", "17/10/2021"),
+              ],
             ),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  _student("Nguyễn Đức Thắng", "SE130157", "Web Developer",
-                      "Working", "17/10/2021"),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  _student("Nguyễn Đức Thắng", "SE130157", "Web Developer",
-                      "Finished", "17/10/2021"),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  _student("Lê Thanh Tú", "SE130157", "Web Developer",
-                      "Working", "17/10/2021"),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  _student("Nguyễn Đức Thắng", "SE130157", "Web Developer",
-                      "Working", "17/10/2021"),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  _student("Lê Thanh Tú", "SE130157", "Web Developer",
-                      "Finished", "17/10/2021"),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  _student("Đoàn Quang Huy", "SE130157", "Web Developer",
-                      "Working", "17/10/2021"),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  _student("Đoàn Quang Huy", "SE130157", "Web Developer",
-                      "Working", "17/10/2021"),
-                ],
-              ),
-            )));
+          )),
+    );
   }
 }

@@ -14,12 +14,10 @@ class RecruimentCompany extends StatefulWidget {
 class _RecruimentCompanyState extends State<RecruimentCompany> {
   List<OjtInfomation>? list;
 
-  getData() async {
+  getData() async{
     GetRecruitCompany getInfo = GetRecruitCompany();
-    list = await getInfo.getData(
-        token: await getDataSession(key: "token"),
-        name: await getDataSession(key: "code"));
-    if (list == null) return List.empty();
+    list = await getInfo.getData(token: await getDataSession(key: "token"), name: await getDataSession(key: "stuCode"));
+    if(list == null) return List.empty();
     return list;
   }
 

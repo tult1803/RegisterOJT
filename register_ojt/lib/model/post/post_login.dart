@@ -3,10 +3,11 @@ import 'package:http/http.dart' as http;
 import 'package:register_ojt/model/model_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/url.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PostLogin {
   login({String? firebaseToken, int? role}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     final response = await http.post(
       Uri.https('$urlMain', '$urlLogin'),
       headers: <String, String>{
@@ -22,11 +23,13 @@ class PostLogin {
     print("Status postApi Login:${response.statusCode}");
     ModelLogin data = ModelLogin();
     data = ModelLogin.fromJson(json.decode(response.body));
-    if(response.statusCode == 200){
-      print('Code: ${data.code} - Role: ${data.role}');
-      setDataSession(key: "token", value: "${data.token}");
-      setDataSession(key: "stuCode", value: "${data.code}");
-      setDataSession(key: "name", value: "${data.name}");
+    if (response.statusCode == 200) {
+      prefs.setString("token", "${data.token}");
+      prefs.setString("name", "${data.name}");
+      prefs.setString("stuCode", "${data.code}");
+      prefs.setBool("isPassCriteria", data.isPassCriteria ?? false);
+      print(
+          'Code: ${data.code} - Role: ${data.role} - isPassCriteria: ${data.isPassCriteria}');
     }
 
     return response.statusCode;

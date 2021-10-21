@@ -48,8 +48,9 @@ void signOut(BuildContext context) async{
   prefs.remove("token");
    prefs.remove("code");
    prefs.remove("name");
+   prefs.remove("isPassCriteria");
   // prefs.clear();
-   print('All data cleared - token, code, name !!!');
+   print('All data cleared - token, code, name, isPassCriteria !!!');
   Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => LoginPage()),
           (route) => false);

@@ -31,7 +31,7 @@ class _AllApplicationDataState extends State<AllApplicationData> {
       future: getData(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          if (data?.length != null) {
+          if (data?.length != null && data?.length != 0) {
             return ListView.builder(
               itemCount: data!.length,
               itemBuilder: (context, index) {
