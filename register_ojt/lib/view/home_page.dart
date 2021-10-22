@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/utils/google_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
-import 'package:register_ojt/view/company/evaluate_student_progress.dart';
+import 'package:register_ojt/view/company/view_all_student.dart';
 import 'package:register_ojt/view/company/view_all_application.dart';
 import 'package:register_ojt/view/company/view_all_recruitment.dart';
 import 'package:register_ojt/view/fpt_admin/company_feedback.dart';
@@ -27,6 +27,7 @@ class HomePage extends StatefulWidget {
 String? stuCode;
 String? stuName;
 bool? isPassCriteria;
+
 class _HomePageState extends State<HomePage> {
   late Widget _widget;
   String? currentNamePage;

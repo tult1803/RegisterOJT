@@ -1,7 +1,5 @@
-
-String urlMain =
-    "release-ojt-registration.herokuapp.com";
-    // "ojt-registration.herokuapp.com";
+String urlMain = "release-ojt-registration.herokuapp.com";
+// "ojt-registration.herokuapp.com";
 String urlStudent = "students/details";
 String urlLogin = "unauthorizes/login";
 String urlSendApplication = "applications";
@@ -9,3 +7,4 @@ String urlOjtInfor = "recruitment_informations";
 String urlGetCV = "applications/CV";
 String urlAppStudent = "applications/students";
 String urlDeleteRecruiment = "recruitment_informations";
+String urlViewStudents = "students/company";
