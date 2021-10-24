@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
-      home: FeedBackCompany(),
+      home: AllStudent(),
       // home: HomePage(role: 0,),
       // home: SendApplication(),
     );

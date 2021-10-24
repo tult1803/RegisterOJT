@@ -3,6 +3,8 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:register_ojt/components/component.dart';
+import 'package:register_ojt/controller/fpt_admin/ojt_student_for_staff.dart';
+import 'package:register_ojt/utils/helpers.dart';
 
 class OjtStudentDetails extends StatefulWidget {
   String? id;
@@ -14,12 +16,18 @@ class OjtStudentDetails extends StatefulWidget {
 }
 
 class _OjtStudentDetailsState extends State<OjtStudentDetails> {
-  String? content;
+  String? token;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    getData();
+  }
+
+  getData() async {
+    token = await getDataSession(key: "token");
+    setState(() {});
   }
 
   @override
@@ -57,45 +65,47 @@ class _OjtStudentDetailsState extends State<OjtStudentDetails> {
                     color: Colors.black87),
               ),
             ),
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 30),
-                    width: size.width,
-                    child: Center(
-                        child: Text(
-                          "",
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                        )),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  containerRecruiment(size,
-                      title: "MSSV:",
-                      content: "SE130633"),
-                  containerRecruiment(size,
-                      title: "Họ và Tên:",
-                      content: "Đoàn Quang Huy"),
-                  containerRecruiment(size,
-                      title: "Chuyên Ngành:", content: "SE"),
-                  containerRecruiment(size,
-                      title: "Email:",
-                      content: "huydqse130633@fpt.edu.vn"),
-                  containerRecruiment(size,
-                      title: "GPA:",
-                      content: "7.0/10.0"),
-                  containerRecruiment(size,
-                      title: "Company Request:",
-                      content: "FPT Software"),
-                  containerRecruiment(size,
-                      title: "CV:",
-                      content: "https://drive.google.com/drive/u/0/my-drive",
-                      showBottom: true), 
-                ],
-              ),
-            ),
+            body: OjtStudentForStaffData(),
+
+            // SingleChildScrollView(
+            //   child: Column(
+            //     children: [
+            //       Container(
+            //         margin: EdgeInsets.only(top: 30),
+            //         width: size.width,
+            //         child: Center(
+            //             child: Text(
+            //               "",
+            //               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            //             )),
+            //       ),
+            //       SizedBox(
+            //         height: 30,
+            //       ),
+            //       containerRecruiment(size,
+            //           title: "MSSV:",
+            //           content: "SE130633"),
+            //       containerRecruiment(size,
+            //           title: "Họ và Tên:",
+            //           content: "Đoàn Quang Huy"),
+            //       containerRecruiment(size,
+            //           title: "Chuyên Ngành:", content: "SE"),
+            //       containerRecruiment(size,
+            //           title: "Email:",
+            //           content: "huydqse130633@fpt.edu.vn"),
+            //       containerRecruiment(size,
+            //           title: "GPA:",
+            //           content: "7.0/10.0"),
+            //       containerRecruiment(size,
+            //           title: "Company Request:",
+            //           content: "FPT Software"),
+            //       containerRecruiment(size,
+            //           title: "CV:",
+            //           content: "https://drive.google.com/drive/u/0/my-drive",
+            //           showBottom: true),
+            //     ],
+            //   ),
+            // ),
           ),
         ),
       ),
