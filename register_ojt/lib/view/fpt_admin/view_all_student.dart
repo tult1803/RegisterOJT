@@ -11,106 +11,19 @@ class AllStudent extends StatefulWidget {
 }
 
 class _AllStudentState extends State<AllStudent> {
-  // String? token;
-  //
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   getData();
-  // }
-  //
-  // getData() async {
-  //   token = await getDataSession(key: "token");
-  //   setState(() {});
-  // }
+  String? token;
 
-  // Widget _student() {
-  //   return Container(
-  //     padding: EdgeInsets.all(20),
-  //     decoration: BoxDecoration(
-  //         color: Colors.white,
-  //         borderRadius: BorderRadius.circular(15),
-  //         border: Border.all(width: 1, color: Colors.grey)),
-  //     child: Column(
-  //       children: [
-  //         Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //           children: [
-  //             Text(
-  //               "SE130633 - Đoàn Quang Huy",
-  //               style: TextStyle(
-  //                 fontWeight: FontWeight.bold,
-  //               ),
-  //             ),
-  //             // Icon(
-  //             //   Icons.where_to_vote_rounded,
-  //             //   color: Colors.green,
-  //             //   size: 15,
-  //             // ),
-  //             Text('Acceptance', style: TextStyle(
-  //                 fontSize: 11.5, fontWeight: FontWeight.bold, color: Colors.green
-  //             ),)
-  //           ],
-  //         ),
-  //         SizedBox(
-  //           height: 10,
-  //         ),
-  //         Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //           children: [
-  //             Column(
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               children: [
-  //                 Text(
-  //                   "GPA: 7.2",
-  //                   style: TextStyle(
-  //                     fontWeight: FontWeight.bold,
-  //                   ),
-  //                 ),
-  //                 SizedBox(
-  //                   height: 10,
-  //                 ),
-  //                 RichText(
-  //                   text: TextSpan(
-  //                     style: DefaultTextStyle.of(context).style,
-  //                     children: const <TextSpan>[
-  //                       TextSpan(
-  //                           text: 'Company request: ',
-  //                           style: TextStyle(fontWeight: FontWeight.bold)),
-  //                       TextSpan(
-  //                           text: "FPT Software",
-  //                           style: TextStyle(
-  //                             //color: Colors.green,
-  //                               fontWeight: FontWeight.bold)),
-  //                     ],
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //             ElevatedButton(
-  //               onPressed: () {
-  //                 Navigator.push(context, MaterialPageRoute(builder: (context) => OjtStudentDetails()));
-  //               },
-  //               child: Text(
-  //                 "Detail",
-  //                 style: TextStyle(
-  //                     fontWeight: FontWeight.bold, color: Colors.black),
-  //               ),
-  //               style: ButtonStyle(
-  //                 padding: MaterialStateProperty.all(EdgeInsets.only(
-  //                     left: 25, right: 25, top: 15, bottom: 15)),
-  //                 backgroundColor:
-  //                 MaterialStateProperty.all<Color>(Colors.lightBlue.shade300),
-  //                 //MaterialStateProperty.all<Color>(Colors.orange.shade600)
-  //               ),
-  //             )
-  //           ],
-  //         )
-  //       ],
-  //     ),
-  //   );
-  // }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
+  }
+
+  getData() async {
+    token = await getDataSession(key: "token");
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -140,9 +53,7 @@ class _AllStudentState extends State<AllStudent> {
               color: Colors.white,
               borderRadius: BorderRadius.circular(15),
             ),
-              child: SingleChildScrollView(
-                child: ListStudentForStaffData()
-              )
+                child: ListStudentForStaffData(token: token,),
           ),
         ),
     );

@@ -1,9 +1,12 @@
 import 'dart:convert';
 
-List<ListStudentForStaff> listStudentFromJson(str) => List<ListStudentForStaff>.from(json.decode(str).map((x) => ListStudentForStaff.fromJson(x)));
+List<ListStudentForStaff> listStudentForStaffFromJson(str) => List<ListStudentForStaff>.from(json.decode(str).map((x) => ListStudentForStaff.fromJson(x)));
 
-String listStudentToJson(List<ListStudentForStaff> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String listStudentForStaffToJson(List<ListStudentForStaff> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+ListStudentForStaff ojtStudentForStaffFromJson(str) => ListStudentForStaff.fromJson(json.decode(str));
+
+String OjtStudentForStaffToJson(ListStudentForStaff data) => json.encode(data.toJson());
 
 class ListStudentForStaff {
   ListStudentForStaff({
@@ -19,7 +22,7 @@ class ListStudentForStaff {
   int? id;
   String? studentCode;
   String? fullname;
-  int? gpa;
+  double? gpa;
   String? companyName;
   String? status;
   DateTime? updateDate;
@@ -28,7 +31,7 @@ class ListStudentForStaff {
   factory ListStudentForStaff.fromJson(Map<String, dynamic> json) => ListStudentForStaff(
     id: json["id"],
     studentCode: json["studentCode"],
-    fullname: json["fullName"],
+    fullname: json["fullname"],
     gpa: json["gpa"],
     companyName: json["companyName"],
     status: json["status"],
@@ -38,7 +41,7 @@ class ListStudentForStaff {
   Map<String, dynamic> toJson() => {
     "id": id,
     "studentCode": studentCode,
-    "fullName": fullname,
+    "fullname": fullname,
     "gpa": gpa,
     "companyName": companyName,
     "status": status,

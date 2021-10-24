@@ -21,8 +21,10 @@ class _ListStudentForStaffDataState extends State<ListStudentForStaffData> {
 
   getData() async {
     ListStudentsForStaff listStudentsForStaff = ListStudentsForStaff();
-    data = await listStudentsForStaff.getListStudentForStaff(
-        token: await getDataSession(key: "token"));
+    data = await listStudentsForStaff.getListStudentForStaff();
+    //   (
+    //     token: await getDataSession(key: "token")
+    // );
     if (data == null) return List.empty();
     return data;
   }
@@ -40,6 +42,7 @@ class _ListStudentForStaffDataState extends State<ListStudentForStaffData> {
                 String formattedDate = DateFormat('MM:HH dd/MM/yyyy').format(
                     data![index].updateDate as DateTime);
                 return containerInfo(
+                  appId: data![index].id,
                   studentCode: data![index].studentCode,
                   fullname: data![index].fullname,
                   gpa: data![index].gpa,
@@ -64,8 +67,9 @@ class _ListStudentForStaffDataState extends State<ListStudentForStaffData> {
   }
 
   Widget containerInfo(
-      {studentCode, fullname, gpa, updateDate, status, companyName}) {
+      {appId, studentCode, fullname, gpa, updateDate, status, companyName}) {
     return Container(
+      margin: EdgeInsets.only(bottom: 20),
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
           color: Colors.white,
@@ -82,11 +86,7 @@ class _ListStudentForStaffDataState extends State<ListStudentForStaffData> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              // Icon(
-              //   Icons.where_to_vote_rounded,
-              //   color: Colors.green,
-              //   size: 15,
-              // ),
+              SizedBox(height: 5,),
               Text('$status', style: TextStyle(
                   fontSize: 11.5,
                   fontWeight: FontWeight.bold,
@@ -103,6 +103,7 @@ class _ListStudentForStaffDataState extends State<ListStudentForStaffData> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: 5,),
                   Text(
                     "GPA: $gpa",
                     style: TextStyle(
@@ -123,7 +124,7 @@ class _ListStudentForStaffDataState extends State<ListStudentForStaffData> {
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => OjtStudentDetails()));
+                      builder: (context) => OjtStudentDetails(id: appId,)));
                 },
                 child: Text(
                   "Detail",
