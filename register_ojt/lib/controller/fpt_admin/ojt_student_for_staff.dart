@@ -5,7 +5,7 @@ import 'package:register_ojt/model/model_ojt_student_for_staff.dart';
 import 'package:register_ojt/utils/helpers.dart';
 
 class OjtStudentForStaffData extends StatefulWidget {
-  String? id;
+  int? id;
 
 
   OjtStudentForStaffData({this.id});
@@ -20,8 +20,19 @@ class _OjtStudentForStaffDataState extends State<OjtStudentForStaffData> {
   getData() async{
     DetailStudentForStaff applicationStudents = DetailStudentForStaff();
     data = await applicationStudents.getDetailStudentsForStaff(id: widget.id);
+    print(widget.id);
+    setState(() {
+
+    });
     if(data == null) return List.empty();
     return data;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
   }
 
   @override
