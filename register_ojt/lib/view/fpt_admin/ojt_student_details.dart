@@ -54,27 +54,26 @@ class _OjtStudentDetailsState extends State<OjtStudentDetails> {
                   ),
                 ],
               ),
-            ],
-          ),
-          child: Scaffold(
-            appBar: AppBar(
-              leading: leadingAppbar(context, colorIcon: Colors.black87),
-              centerTitle: true,
-              backgroundColor: Colors.white,
-              title: Text(
-                "Thông tin sinh viên thực tập",
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.black87),
+              child: Scaffold(
+                appBar: AppBar(
+                  leading: leadingAppbar(context, colorIcon: Colors.black87),
+                  centerTitle: true,
+                  backgroundColor: Colors.white,
+                  title: Text(
+                    "Thông tin sinh viên thực tập",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.black87),
+                  ),
+                ),
+                body: SingleChildScrollView(
+                    child: OjtStudentForStaffData(id: widget.id,)
+                ),
               ),
-            ),
-            body: SingleChildScrollView(
-                child: OjtStudentForStaffData(id: widget.id,)
-            ),
-          ),
+          )),
           footer(context, content: "Sinh viên cần hỗ trợ vui lòng liên hệ Trung tâm Dịch vụ Sinh viên tại Phòng 202, điện thoại : 028.73005585 , email: sschcm@fe.edu.vn"),
         ],
       ),

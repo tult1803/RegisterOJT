@@ -53,7 +53,7 @@ class _AllStudentState extends State<AllStudent> {
               color: Colors.white,
               borderRadius: BorderRadius.circular(15),
             ),
-                child: ListStudentForStaffData(token: token,),
+                child: ListStudentForStaffData(),
           ),
         ),
     );
