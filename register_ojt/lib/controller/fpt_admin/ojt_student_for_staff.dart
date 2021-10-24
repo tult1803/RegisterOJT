@@ -3,6 +3,7 @@ import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/model/get/get_ojt_student_for_staff.dart';
 import 'package:register_ojt/model/model_ojt_student_for_staff.dart';
 import 'package:register_ojt/utils/helpers.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OjtStudentForStaffData extends StatefulWidget {
   int? id;
@@ -69,11 +70,41 @@ class _OjtStudentForStaffDataState extends State<OjtStudentForStaffData> {
         containerRecruiment(size,
             title: "Company Request:",
             content: "${data?.companyName}"),
-        containerRecruiment(size,
-            title: "CV:",
-            content: "${data?.cv}",
-            showBottom: true),
+        showCV(cv: "${data?.cv}", size: size),
       ],
+    );
+  }
+
+  void launchURL(url) async =>
+      await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
+
+  Widget showCV({cv, size}) {
+    return Container(
+      width: size.width * 0.4,
+      margin: EdgeInsets.all(15),
+      padding: EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(width: 1, color: Colors.black12),
+          )),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            "CV: ",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+          ),
+          GestureDetector(
+            onTap: () async {
+              launchURL(cv);
+            },
+            child: Text(
+              "Click to download",
+              style: TextStyle(fontSize: 22, color: Colors.blueAccent),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
