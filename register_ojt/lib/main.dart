@@ -6,6 +6,7 @@ import 'package:register_ojt/model/post/post_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/google_login.dart';
 import 'package:register_ojt/view/company/evaluate_student_progress.dart';
+import 'package:register_ojt/view/fpt_admin/company_feedback.dart';
 import 'package:register_ojt/view/fpt_admin/view_all_student.dart';
 import 'package:register_ojt/view/home_page.dart';
 
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
-      home: AllStudent(),
+      home: FeedBackCompany(),
       // home: HomePage(role: 0,),
       // home: SendApplication(),
     );

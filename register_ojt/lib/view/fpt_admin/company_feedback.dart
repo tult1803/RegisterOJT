@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:register_ojt/controller/fpt_admin/company_report_for_staff.dart';
 import 'package:register_ojt/utils/helpers.dart';
 
 class FeedBackCompany extends StatefulWidget {
@@ -21,76 +22,6 @@ class _FeedBackCompanyState extends State<FeedBackCompany> {
   getData() async {
     token = await getDataSession(key: "token");
     setState(() {});
-  }
-
-  Widget _feedback() {
-    return Container(
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(width: 1, color: Colors.grey)),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "SE130633 - ",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              RichText(
-                text: TextSpan(
-                  style: DefaultTextStyle.of(context).style,
-                  children: const <TextSpan>[
-                    TextSpan(
-                        text: 'Grade: ',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    TextSpan(
-                        text: "8.0",
-                        style: TextStyle(
-                          //color: Colors.green,
-                            fontWeight: FontWeight.bold)),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-                  Text(
-                    "Đoàn Quang Huy",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 10,),
-                  RichText(
-                    text: TextSpan(
-                      style: DefaultTextStyle.of(context).style,
-                      children: const <TextSpan>[
-                        TextSpan(
-                            text: 'Note: ',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        TextSpan(
-                            text: "Have a good communicate with team. Skill work average",
-                            style: TextStyle(
-                              //color: Colors.green,
-                                fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                  ),
-            ],
-          ),
-        ],
-      ),
-    );
   }
 
   @override
@@ -131,37 +62,7 @@ class _FeedBackCompanyState extends State<FeedBackCompany> {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    _feedback(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    _feedback(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    _feedback(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    _feedback(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    _feedback(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    _feedback(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    _feedback(),
-                  ],
-                ),
-              )
+              child: ListCompanyReportForStaffData(),
           ),
         ),
       ),

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/model/get/get_ojt_student_for_staff.dart';
 import 'package:register_ojt/model/model_ojt_student_for_staff.dart';
 import 'package:register_ojt/utils/helpers.dart';
-import 'package:register_ojt/view/home_page.dart';
 
 class OjtStudentForStaffData extends StatefulWidget {
   String? id;
