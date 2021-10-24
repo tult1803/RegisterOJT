@@ -1,13 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:register_ojt/model/post/post_login.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/google_login.dart';
-import 'package:register_ojt/view/fpt_admin/company_feedback.dart';
-import 'package:register_ojt/view/fpt_admin/view_all_student.dart';
+import 'package:register_ojt/view/company/evaluate_student_progress.dart';
 import 'package:register_ojt/view/home_page.dart';
-import 'package:register_ojt/view/student/profile.dart';
-import 'package:register_ojt/view/company/view__all_application.dart';
 
 import 'components/component.dart';
 
@@ -40,8 +39,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
-      home: AllStudent(),
+      home: LoginPage(),
       // home: HomePage(role: 0,),
+      // home: SendApplication(),
     );
   }
 }
@@ -108,37 +108,120 @@ class _LoginPageState extends State<LoginPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          width: 400,
-          height: 300,
+          width: 1000,
+          height: 500,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(5),
             boxShadow: [
               BoxShadow(
                 color: Colors.black54,
-                blurRadius: 4,
+                blurRadius: 1,
                 offset: Offset(0, 0), // Shadow position
               ),
             ],
           ),
-          child: Column(
+          child: Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: Text("Login",
-                    style: TextStyle(
-                        color: Colors.black,
-                        decoration: TextDecoration.none,
-                        fontSize: 30)),
+              Container(
+                width: 480,
+                child: Container(
+                  margin: EdgeInsets.only(left: 30, right: 30, top: 70),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text("Sign In",
+                          style: TextStyle(
+                              color: Colors.black,
+                              decoration: TextDecoration.none,
+                              fontSize: 30)),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      formLogin("Username"),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      formLogin("Password"),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        width: 480,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.orangeAccent,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: FlatButton(
+                            onPressed: () {},
+                            child: Center(
+                                child: Text(
+                              "Sign in",
+                              style: TextStyle(fontSize: 16),
+                            ))),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 40.0, bottom: 30),
-                child: _dropDownButton(),
+              Container(
+                width: 40,
+                child: Text("--OR--"),
               ),
-              _googleSignIn(),
+              Container(
+                width: 480,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 0.0, bottom: 30),
+                      child: _dropDownButton(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 30),
+                      child: _googleSignIn(),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
+      ],
+    );
+  }
+
+  Widget formLogin(hintText) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "$hintText",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          color: Colors.white,
+          child: TextField(
+            onChanged: (value) {},
+            maxLines: 1,
+            keyboardType: TextInputType.text,
+            style: TextStyle(fontSize: 15),
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: '$hintText',
+                //Sau khi click vào "Nhập tiêu đề" thì màu viền sẽ đổi
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black45),
+                ),
+                contentPadding: EdgeInsets.all(10)),
+          ),
+        )
       ],
     );
   }
@@ -209,7 +292,7 @@ class _LoginPageState extends State<LoginPage> {
       },
       child: Container(
         height: 50,
-        width: 150,
+        width: 250,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
