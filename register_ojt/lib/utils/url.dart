@@ -8,3 +8,7 @@ String urlGetCV = "applications/CV";
 String urlAppStudent = "applications/students";
 String urlDeleteRecruiment = "recruitment_informations";
 String urlViewStudents = "students/company";
+
+String urlListStuForStaff = "applications/fptstaff";
+String urlOJTStuForStaff = "applications/fptstaff/detail";
+String urlComReportForStaff = "reports/fptstaff";
