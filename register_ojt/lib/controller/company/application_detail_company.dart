@@ -108,6 +108,7 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
       await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
 
   Widget showCV({cv}) {
+    var size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.all(15),
       padding: EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 10),
@@ -118,12 +119,12 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(
-            "Link CV:         ",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-          ),
           SizedBox(
-            width: 100,
+            width: size.width * 0.15,
+            child: Text(
+              "Link CV:         ",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+            ),
           ),
           GestureDetector(
             onTap: () async {
@@ -215,7 +216,7 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
             _appDetails(size, "Email:", "${data?.email ?? ""}"),
             _appDetails(size, "Position:", "${data?.position ?? ""}"),
             _appDetails(size, "GPA:", "${data?.gpa ?? ""}"),
-            showCV(),
+            showCV(cv: "${data?.cv}"),
             widget.status == "Processing"
                 ? Container(
                     child: Column(
