@@ -17,6 +17,7 @@ class AllApplicationData extends StatefulWidget {
 
 class _AllApplicationDataState extends State<AllApplicationData> {
   List<ApplicationCompany>? data;
+  int? appID;
 
   getData() async {
     ApplicationCompanys applications = ApplicationCompanys();
@@ -38,6 +39,7 @@ class _AllApplicationDataState extends State<AllApplicationData> {
                 String formattedDate = DateFormat('MM:HH dd/MM/yyyy')
                     .format(data![index].registrationDate as DateTime);
                 return _application(
+                  appID: data![index].id,
                   id: data![index].studentCode,
                   name: data![index].studentName,
                   position: data![index].position,
@@ -58,12 +60,16 @@ class _AllApplicationDataState extends State<AllApplicationData> {
     );
   }
 
-  Widget btnDetail() {
+  Widget btnDetail(int? appID, String? status) {
     return ElevatedButton(
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ApplicationDetailCompany()),
+          MaterialPageRoute(
+              builder: (context) => ApplicationDetailCompany(
+                    id: appID,
+                    status: status,
+                  )),
         );
       },
       child: Text(
@@ -80,7 +86,7 @@ class _AllApplicationDataState extends State<AllApplicationData> {
     );
   }
 
-  Widget _application({id, name, position, status, time}) {
+  Widget _application({appID, id, name, position, status, time}) {
     return Container(
       padding: EdgeInsets.all(20),
       margin: EdgeInsets.only(bottom: 20),
@@ -138,7 +144,7 @@ class _AllApplicationDataState extends State<AllApplicationData> {
                   ),
                 ],
               ),
-              btnDetail()
+              btnDetail(appID, status),
             ],
           ),
         ],

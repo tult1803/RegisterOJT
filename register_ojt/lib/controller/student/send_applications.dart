@@ -45,9 +45,13 @@ class _SendApplicationsState extends State<SendApplications> {
       String? cvLink;
       var fileBytes = file!.bytes;
       var fileName = file!.name;
-      await FirebaseStorage.instance.ref('uploads/$fileName').putData(fileBytes!);
-      await FirebaseStorage.instance.ref('uploads/$fileName').getDownloadURL().then((value) =>
-      cvLink = value);
+      await FirebaseStorage.instance
+          .ref('uploads/$fileName')
+          .putData(fileBytes!);
+      await FirebaseStorage.instance
+          .ref('uploads/$fileName')
+          .getDownloadURL()
+          .then((value) => cvLink = value);
       if (cvLink != null || cvLink != "") {
         PostSendApplication sendApplication = PostSendApplication();
         int status = await sendApplication.doSend(
@@ -56,13 +60,14 @@ class _SendApplicationsState extends State<SendApplications> {
             stuName: fullName,
             coverLetter: letter,
             cv: cvLink);
-        if(status == 200) {
+        if (status == 200) {
           loadingSuccess(status: "Send Success !!!");
           isPassCriteria = false;
-          prefs.setBool("isPassCriteria",  false);
+          prefs.setBool("isPassCriteria", false);
           setState(() {});
           return true;
-        }else loadingFail(status: "Send Application Failed !!!");
+        } else
+          loadingFail(status: "Send Application Failed !!!");
       } else {
         loadingFail(status: "Send CV Failed !!!");
       }
@@ -168,8 +173,7 @@ class _SendApplicationsState extends State<SendApplications> {
             ),
             child: TextButton(
                 onPressed: () async {
-                  final result =
-                      await FilePicker.platform.pickFiles(
+                  final result = await FilePicker.platform.pickFiles(
                     type: FileType.custom,
                     allowedExtensions: ['pdf'],
                   );
@@ -251,10 +255,9 @@ class _SendApplicationsState extends State<SendApplications> {
             });
             if (isEmptyCV && errId == null && errName == null) {
               bool checkSend = await doSendApplication();
-              if(checkSend) {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => HomePage(role: 0)
-                ));
+              if (checkSend) {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => HomePage(role: 0)));
               }
             }
           },

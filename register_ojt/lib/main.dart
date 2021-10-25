@@ -7,6 +7,7 @@ import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/utils/google_login.dart';
 import 'package:register_ojt/view/company/create_recruiment.dart';
 import 'package:register_ojt/view/company/edit_evaluation.dart';
+import 'package:register_ojt/view/company/view_all_recruitment.dart';
 import 'package:register_ojt/view/company/view_all_student.dart';
 import 'package:register_ojt/view/company/evaluation_detail_company.dart';
 import 'package:register_ojt/view/company/view_all_application.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
-      home: EvaluateStudent(),
+      home: AllApplications(),
       // home: HomePage(role: 2,),
       // home: SendApplication(),
     );

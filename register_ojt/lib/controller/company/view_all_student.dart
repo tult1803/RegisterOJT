@@ -70,7 +70,10 @@ class _AllStudentDataState extends State<AllStudentData> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
           TextSpan(
               text: data,
-              style: TextStyle(fontSize: 18, color: getStatusColor(data))),
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: getStatusColor(data))),
         ],
       ),
     );
@@ -80,7 +83,10 @@ class _AllStudentDataState extends State<AllStudentData> {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => EvalutionDetail(),
+          builder: (context) => EvalutionDetail(
+            studentID: id,
+            studentName: name,
+          ),
         ));
       },
       child: Container(
