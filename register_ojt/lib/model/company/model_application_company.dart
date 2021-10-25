@@ -9,6 +9,7 @@ String applicationCompanyToJson(List<ApplicationCompany> data) =>
 
 class ApplicationCompany {
   ApplicationCompany({
+    this.id,
     this.studentCode,
     this.studentName,
     this.registrationDate,
@@ -16,6 +17,7 @@ class ApplicationCompany {
     this.status,
   });
 
+  int? id;
   String? studentCode;
   String? studentName;
   DateTime? registrationDate;
@@ -24,6 +26,7 @@ class ApplicationCompany {
 
   factory ApplicationCompany.fromJson(Map<String, dynamic> json) =>
       ApplicationCompany(
+        id: json["id"],
         studentCode: json["studentCode"],
         studentName: json["fullname"],
         position: json["position"],
@@ -32,6 +35,7 @@ class ApplicationCompany {
       );
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "studentCode": studentCode,
         "fullname": studentName,
         "position": position,

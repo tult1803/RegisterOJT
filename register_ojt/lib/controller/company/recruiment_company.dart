@@ -3,6 +3,7 @@ import 'package:register_ojt/model/get/recruiment_company.dart';
 import 'package:register_ojt/model/model_ojt_information.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/view/company/recruiment_detail_company.dart';
+import 'package:register_ojt/view/home_page.dart';
 
 class RecruimentCompany extends StatefulWidget {
   const RecruimentCompany({Key? key}) : super(key: key);
@@ -14,10 +15,12 @@ class RecruimentCompany extends StatefulWidget {
 class _RecruimentCompanyState extends State<RecruimentCompany> {
   List<OjtInfomation>? list;
 
-  getData() async{
+  getData() async {
     GetRecruitCompany getInfo = GetRecruitCompany();
-    list = await getInfo.getData(token: await getDataSession(key: "token"), name: await getDataSession(key: "stuCode"));
-    if(list == null) return List.empty();
+    list = await getInfo.getData(
+        token: await getDataSession(key: "token"),
+        name: await getDataSession(key: "stuCode"));
+    if (list == null) return List.empty();
     return list;
   }
 
@@ -44,7 +47,7 @@ class _RecruimentCompanyState extends State<RecruimentCompany> {
               },
             );
           } else {
-            return Center(child: Text("Data is empty !!!"));
+            return Center(child: Text("You haven't post any recruitment !!!"));
           }
         }
 

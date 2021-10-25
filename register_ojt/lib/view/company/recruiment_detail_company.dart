@@ -98,18 +98,18 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
                       title: "Address:",
                       content: "${data?.address ?? "-----"}"),
                   containerRecruiment(size,
-                      title: "REQUIREMENTS FOR MAJORS:",
+                      title: "Requirements for majors:",
                       content: "${data?.majorName ?? "-----"}"),
                   containerRecruiment(size,
-                      title: "Website of Company:",
+                      title: "Company's website:",
                       content: "${data?.companyWebsite ?? "-----"}"),
                   containerJobDescription(size,
-                      title: "JOB DESCRIPTION:",
+                      title: "Job Description:",
                       content: "${data?.content ?? "-----"}"),
                   containerRecruiment(size,
                       title: "Salary:", content: "${data?.salary ?? "-----"}"),
                   containerRecruiment(size,
-                      title: "EXPIRATION DATE:",
+                      title: "Expired Date:",
                       content: "${data?.deadline ?? "-----"}",
                       showBottom: true),
                   btnDelete(context, id: widget.id),
@@ -128,19 +128,18 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
       width: 160,
       color: Colors.orangeAccent,
       child: TextButton(
-          onPressed: () async{
+          onPressed: () async {
             try {
               DeleteRecruiments deleteRecruiments = DeleteRecruiments();
-              int status = await deleteRecruiments.detele(
-                  id: id,
-                  companyCode: stuCode);
+              int status =
+                  await deleteRecruiments.detele(id: id, companyCode: stuCode);
               if (status == 200) {
                 loadingSuccess(status: "Done");
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => HomePage(role: 2)));
               } else
                 loadingFail(status: "Delete Failed !!!");
-            }catch(e){
+            } catch (e) {
               loadingFail(status: "Something Wrong !!!");
             }
           },

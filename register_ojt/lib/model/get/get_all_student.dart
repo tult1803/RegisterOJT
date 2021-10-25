@@ -11,7 +11,7 @@ class StudentsCompany {
       // 'Authorization': 'Bearer $token',
     });
 
-    print("Status getApi Application Company:${response.statusCode}");
+    print("Status getApi Student Company:${response.statusCode}");
     if (response.statusCode == 200) {
       return studentCompanyFromJson(response.body);
     } else {
