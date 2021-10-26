@@ -1,10 +1,8 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/model/company/model_application_detail.dart';
 import 'package:register_ojt/model/get/get_application_detail.dart';
-import 'package:register_ojt/model/get/get_cv.dart';
-import 'package:register_ojt/model/model_application_student.dart';
+
 import 'package:register_ojt/model/put/put_approve_application.dart';
 import 'package:register_ojt/model/put/put_deny_application.dart';
 import 'package:register_ojt/view/company/view_all_application.dart';
@@ -13,9 +11,12 @@ import 'package:register_ojt/view/home_page.dart';
 
 import 'package:register_ojt/view/view_cv.dart';
 
+import '../send_email.dart';
+
 class ApplicationDetailData extends StatefulWidget {
   int? id;
   String? status;
+
   ApplicationDetailData({this.id, this.status});
 
   @override
@@ -24,6 +25,8 @@ class ApplicationDetailData extends StatefulWidget {
 
 class _ApplicationDetailDataState extends State<ApplicationDetailData> {
   ApplicationDetail? data;
+  String subject = "Thông báo trạng thái phỏng vấn";
+
   @override
   void initState() {
     // TODO: implement initState
@@ -44,7 +47,18 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
       int status = await approveApp.approveApplicationStudent(
           companyCode: stuCode, appID: widget.id);
       if (status == 200) {
-        loadingSuccess(status: "Approve Success !!!");
+        String message = 'Ngày đến thực tập sẽ được thông báo đến bạn sau';
+        int statusEmail = await sendEmail(
+            email: "${data?.email}",
+            name: "${data?.studentName}",
+            subject: "$subject",
+            status: "Đồng ý",
+            message: message);
+        if (statusEmail == 200) {
+          loadingSuccess(status: "Approve Success !!!");
+        } else {
+          loadingFail(status: "Approve Failed Email!!!");
+        }
         setState(() {});
         return true;
       } else
@@ -61,7 +75,18 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
       int status = await denyApp.denyApplicationStudent(
           companyCode: stuCode, appID: widget.id);
       if (status == 200) {
-        loadingSuccess(status: "Deny Success !!!");
+        String message = 'Cảm ơn bạn đã đến phỏng vấn';
+        int statusEmail = await sendEmail(
+            email: "${data?.email}",
+            name: "${data?.studentName}",
+            subject: "$subject",
+            status: "Từ chối",
+            message: message);
+        if (statusEmail == 200) {
+          loadingSuccess(status: "Deny Success !!!");
+        } else {
+          loadingFail(status: "Deny Failed Email!!!");
+        }
         setState(() {});
         return true;
       } else
