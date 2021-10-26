@@ -3,10 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:register_ojt/components/component.dart';
-import 'package:register_ojt/model/post/post_cv.dart';
 import 'package:register_ojt/model/post/post_send_application.dart';
 import 'package:register_ojt/utils/check_data.dart';
-import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/view/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -254,11 +252,13 @@ class _SendApplicationsState extends State<SendApplications> {
               errName = validateFullName(fullName);
             });
             if (isEmptyCV && errId == null && errName == null) {
-              bool checkSend = await doSendApplication();
-              if (checkSend) {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => HomePage(role: 0)));
-              }
+              if(file!.name.contains(".pdf")){
+                bool checkSend = await doSendApplication();
+                if (checkSend) {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => HomePage(role: 0)));
+                }
+              }else loadingFail(status: "Check format File Attach");
             }
           },
           child: Text("Submit")),
