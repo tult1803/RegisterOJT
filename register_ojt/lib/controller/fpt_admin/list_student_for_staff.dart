@@ -36,6 +36,7 @@ class _ListStudentForStaffDataState extends State<ListStudentForStaffData> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (data?.length != null) {
+            print(data);
             return ListView.builder(
               itemCount: data!.length,
               itemBuilder: (context, index) {

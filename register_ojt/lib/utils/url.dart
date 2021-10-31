@@ -19,3 +19,4 @@ String urlDenyApplication = "applications/reject";
 String urlListStuForStaff = "applications/fptstaff";
 String urlOJTStuForStaff = "applications/fptstaff/detail";
 String urlComReportForStaff = "reports/fptstaff";
+String urlImportStuForStaff = "students/import";
