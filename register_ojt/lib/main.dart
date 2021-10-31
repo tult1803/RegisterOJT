@@ -11,6 +11,7 @@ import 'package:register_ojt/view/company/view_all_recruitment.dart';
 import 'package:register_ojt/view/company/view_all_student.dart';
 import 'package:register_ojt/view/company/evaluation_detail_company.dart';
 import 'package:register_ojt/view/company/view_all_application.dart';
+import 'package:register_ojt/view/fpt_admin/view_all_company.dart';
 import 'package:register_ojt/view/home_page.dart';
 import 'package:register_ojt/view/student/send_application.dart';
 import 'package:register_ojt/view/student/view_application.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
-      home: LoginPage(),
+      home: AllCompany(),
       // home: HomePage(role: 2,),
       // home: SendApplication(),
     );
@@ -162,21 +163,22 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: FlatButton(
-                            onPressed: ()  async{
+                            onPressed: () async {
                               try {
                                 loadingLoad(status: "Processing...");
-                                if (await checkLoginUsername(username: username, password: password) == 200) {
+                                if (await checkLoginUsername(
+                                        username: username,
+                                        password: password) ==
+                                    200) {
                                   EasyLoading.dismiss();
                                   Navigator.of(context).pushAndRemoveUntil(
                                       MaterialPageRoute(
                                           builder: (context) => HomePage(
-                                            role: 2,
-                                          )),
-                                          (route) => false);
+                                                role: 2,
+                                              )),
+                                      (route) => false);
                                 } else {
-                                  loadingFail(
-                                      status:
-                                      "Login Failed");
+                                  loadingFail(status: "Login Failed");
                                 }
                               } catch (e) {
                                 loadingFail(status: "Login Failed !!! \n $e");
@@ -219,7 +221,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget formLogin(hintText,int? type) {
+  Widget formLogin(hintText, int? type) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,9 +237,10 @@ class _LoginPageState extends State<LoginPage> {
           color: Colors.white,
           child: TextField(
             onChanged: (value) {
-              if(type == 0){
+              if (type == 0) {
                 username = value.trim();
-              }else password = value.trim();
+              } else
+                password = value.trim();
               setState(() {});
             },
             maxLines: 1,
@@ -299,8 +302,7 @@ class _LoginPageState extends State<LoginPage> {
 
   checkLoginUsername({username, password}) async {
     PostLoginUsername postLogin = PostLoginUsername();
-    var status =
-    await postLogin.login(username: username, password: password);
+    var status = await postLogin.login(username: username, password: password);
     return status;
   }
 
