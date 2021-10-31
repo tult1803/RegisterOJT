@@ -1,17 +1,18 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/model/company/model_application_detail.dart';
 import 'package:register_ojt/model/get/get_application_detail.dart';
-import 'package:register_ojt/model/get/get_cv.dart';
-import 'package:register_ojt/model/model_application_student.dart';
+
 import 'package:register_ojt/model/put/put_approve_application.dart';
 import 'package:register_ojt/model/put/put_deny_application.dart';
 import 'package:register_ojt/view/company/view_all_application.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:register_ojt/view/home_page.dart';
 
 import 'package:register_ojt/view/view_cv.dart';
+
+import '../send_email.dart';
 
 class ApplicationDetailData extends StatefulWidget {
   int? id;
@@ -24,6 +25,8 @@ class ApplicationDetailData extends StatefulWidget {
 
 class _ApplicationDetailDataState extends State<ApplicationDetailData> {
   ApplicationDetail? data;
+  String subject = "Thông báo trạng thái phỏng vấn";
+  String? companyName;
   @override
   void initState() {
     // TODO: implement initState
@@ -33,7 +36,9 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
 
   getData() async {
     ApplicationDetails details = ApplicationDetails();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     data = await details.getApplicationDetail(appCode: widget.id);
+    companyName = prefs.getString("companyName");
     setState(() {});
     return data;
   }
@@ -44,7 +49,19 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
       int status = await approveApp.approveApplicationStudent(
           companyCode: stuCode, appID: widget.id);
       if (status == 200) {
-        loadingSuccess(status: "Approve Success !!!");
+        String message = 'Ngày đến thực tập sẽ được thông báo đến bạn sau';
+        int statusEmail = await sendEmail(
+            email: "${data?.email}",
+            nameCompany: companyName ?? "",
+            name: "${data?.studentName}",
+            subject: "$subject",
+            status: "Đồng ý",
+            message: message);
+        if (statusEmail == 200) {
+          loadingSuccess(status: "Approve Success !!!");
+        } else {
+          loadingFail(status: "Approve Failed Email!!!");
+        }
         setState(() {});
         return true;
       } else
@@ -61,7 +78,19 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
       int status = await denyApp.denyApplicationStudent(
           companyCode: stuCode, appID: widget.id);
       if (status == 200) {
-        loadingSuccess(status: "Deny Success !!!");
+        String message = 'Cảm ơn bạn đã đến phỏng vấn';
+        int statusEmail = await sendEmail(
+            email: "${data?.email}",
+            nameCompany: companyName ?? "",
+            name: "${data?.studentName}",
+            subject: "$subject",
+            status: "Từ chối",
+            message: message);
+        if (statusEmail == 200) {
+          loadingSuccess(status: "Deny Success !!!");
+        } else {
+          loadingFail(status: "Deny Failed Email!!!");
+        }
         setState(() {});
         return true;
       } else
@@ -108,6 +137,7 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
       await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
 
   Widget showCV({cv}) {
+    var size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.all(15),
       padding: EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 10),
@@ -118,12 +148,12 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(
-            "Link CV:         ",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-          ),
           SizedBox(
-            width: 100,
+            width: size.width * 0.15,
+            child: Text(
+              "Link CV:         ",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+            ),
           ),
           GestureDetector(
             onTap: () async {
@@ -215,7 +245,7 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
             _appDetails(size, "Email:", "${data?.email ?? ""}"),
             _appDetails(size, "Position:", "${data?.position ?? ""}"),
             _appDetails(size, "GPA:", "${data?.gpa ?? ""}"),
-            showCV(),
+            showCV(cv: "${data?.cv}"),
             widget.status == "Processing"
                 ? Container(
                     child: Column(
