@@ -40,3 +40,34 @@ class PostLogin {
     // }
   }
 }
+
+class PostLoginUsername {
+  login({String? username, String? password}) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final response = await http.post(
+      Uri.https('$urlMain', '$urlLoginUsername'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        "Accept": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: jsonEncode(<String, dynamic>{
+        "username": "$username",
+        "password": "$password"
+      }),
+    );
+    print("Status postApi Login User/Pass:${response.statusCode}");
+    ModelLogin data = ModelLogin();
+    data = ModelLogin.fromJson(json.decode(response.body));
+    if (response.statusCode == 200) {
+      prefs.setString("token", "${data.token}");
+      prefs.setString("name", "${data.name}");
+      prefs.setString("stuCode", "${data.code}");
+      prefs.setString("companyName", "${data.companyName}");
+      print(
+          'Code: ${data.code} - Role: ${data.role} - isPassCriteria: ${data.companyName}');
+    }
+
+    return response.statusCode;
+  }
+}

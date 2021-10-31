@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 Future sendEmail(
     {required String email,
       required String name,
+      required String nameCompany,
       required String subject,
       required String status,
       required String message}) async {
@@ -23,6 +24,7 @@ Future sendEmail(
         'user_id': userId,
         'template_params': {
           'user_name': name,
+          'user_company': nameCompany,
           'user_email': email,
           'user_subject': subject,
           'user_status': status,

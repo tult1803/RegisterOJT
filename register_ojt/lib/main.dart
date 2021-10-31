@@ -64,11 +64,11 @@ class _LoginPageState extends State<LoginPage> {
   var listCampus = [
     "Sinh viên",
     "FU-Staff",
-    "Doanh Nghiệp",
+    // "Doanh Nghiệp",
   ];
   String? dropDownValue;
   int? roleValue;
-
+  String? username, password;
   @override
   void initState() {
     // TODO: implement initState
@@ -146,11 +146,11 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         height: 40,
                       ),
-                      formLogin("Username"),
+                      formLogin("Username", 0),
                       SizedBox(
                         height: 30,
                       ),
-                      formLogin("Password"),
+                      formLogin("Password", 1),
                       SizedBox(
                         height: 30,
                       ),
@@ -162,7 +162,26 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: FlatButton(
-                            onPressed: () {},
+                            onPressed: ()  async{
+                              try {
+                                loadingLoad(status: "Processing...");
+                                if (await checkLoginUsername(username: username, password: password) == 200) {
+                                  EasyLoading.dismiss();
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                      MaterialPageRoute(
+                                          builder: (context) => HomePage(
+                                            role: 2,
+                                          )),
+                                          (route) => false);
+                                } else {
+                                  loadingFail(
+                                      status:
+                                      "Login Failed");
+                                }
+                              } catch (e) {
+                                loadingFail(status: "Login Failed !!! \n $e");
+                              }
+                            },
                             child: Center(
                                 child: Text(
                               "Sign in",
@@ -200,7 +219,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget formLogin(hintText) {
+  Widget formLogin(hintText,int? type) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,7 +234,12 @@ class _LoginPageState extends State<LoginPage> {
         Container(
           color: Colors.white,
           child: TextField(
-            onChanged: (value) {},
+            onChanged: (value) {
+              if(type == 0){
+                username = value.trim();
+              }else password = value.trim();
+              setState(() {});
+            },
             maxLines: 1,
             keyboardType: TextInputType.text,
             style: TextStyle(fontSize: 15),
@@ -253,9 +277,9 @@ class _LoginPageState extends State<LoginPage> {
               case "FU-Staff":
                 roleValue = 1;
                 break;
-              case "Doanh Nghiệp":
-                roleValue = 2;
-                break;
+              // case "Doanh Nghiệp":
+              //   roleValue = 2;
+              //   break;
               default:
                 roleValue = -1;
                 break;
@@ -270,6 +294,13 @@ class _LoginPageState extends State<LoginPage> {
     PostLogin postLogin = PostLogin();
     var status =
         await postLogin.login(firebaseToken: firebaseToken, role: role);
+    return status;
+  }
+
+  checkLoginUsername({username, password}) async {
+    PostLoginUsername postLogin = PostLoginUsername();
+    var status =
+    await postLogin.login(username: username, password: password);
     return status;
   }
 

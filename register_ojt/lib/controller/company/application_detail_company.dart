@@ -6,6 +6,7 @@ import 'package:register_ojt/model/get/get_application_detail.dart';
 import 'package:register_ojt/model/put/put_approve_application.dart';
 import 'package:register_ojt/model/put/put_deny_application.dart';
 import 'package:register_ojt/view/company/view_all_application.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:register_ojt/view/home_page.dart';
 
@@ -16,7 +17,6 @@ import '../send_email.dart';
 class ApplicationDetailData extends StatefulWidget {
   int? id;
   String? status;
-
   ApplicationDetailData({this.id, this.status});
 
   @override
@@ -26,7 +26,7 @@ class ApplicationDetailData extends StatefulWidget {
 class _ApplicationDetailDataState extends State<ApplicationDetailData> {
   ApplicationDetail? data;
   String subject = "Thông báo trạng thái phỏng vấn";
-
+  String? companyName;
   @override
   void initState() {
     // TODO: implement initState
@@ -36,7 +36,9 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
 
   getData() async {
     ApplicationDetails details = ApplicationDetails();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     data = await details.getApplicationDetail(appCode: widget.id);
+    companyName = prefs.getString("companyName");
     setState(() {});
     return data;
   }
@@ -50,6 +52,7 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
         String message = 'Ngày đến thực tập sẽ được thông báo đến bạn sau';
         int statusEmail = await sendEmail(
             email: "${data?.email}",
+            nameCompany: companyName ?? "",
             name: "${data?.studentName}",
             subject: "$subject",
             status: "Đồng ý",
@@ -78,6 +81,7 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
         String message = 'Cảm ơn bạn đã đến phỏng vấn';
         int statusEmail = await sendEmail(
             email: "${data?.email}",
+            nameCompany: companyName ?? "",
             name: "${data?.studentName}",
             subject: "$subject",
             status: "Từ chối",
