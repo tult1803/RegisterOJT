@@ -4,7 +4,8 @@ import 'package:register_ojt/controller/fpt_admin/create_account_company.dart';
 
 class CreateAccountCompany extends StatefulWidget {
   int? id;
-  CreateAccountCompany({this.id});
+  String? companyName;
+  CreateAccountCompany({this.id, this.companyName});
 
   @override
   _CreateAccountCompanyState createState() => _CreateAccountCompanyState();
@@ -35,6 +36,7 @@ class _CreateAccountCompanyState extends State<CreateAccountCompany> {
           ),
           child: CreateAccountData(
             id: widget.id,
+            companyName: widget.companyName,
           ),
         ),
         footer(context,

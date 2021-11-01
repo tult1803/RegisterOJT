@@ -6,8 +6,9 @@ import 'package:register_ojt/view/fpt_admin/create_account_company.dart';
 
 class AllAccount extends StatefulWidget {
   int? id;
+  String? companyName;
 
-  AllAccount({this.id});
+  AllAccount({this.id, this.companyName});
 
   @override
   _AllAccountState createState() => _AllAccountState();
@@ -38,6 +39,7 @@ class _AllAccountState extends State<AllAccount> {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => CreateAccountCompany(
                                 id: widget.id,
+                                companyName: widget.companyName,
                               )));
                     },
                     child: Text(
