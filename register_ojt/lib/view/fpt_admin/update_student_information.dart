@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/controller/fpt_admin/import_list_student_for_staff.dart';
 import 'package:register_ojt/utils/helpers.dart';
-import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
-import 'dart:async';
-import 'dart:io';
-import 'dart:typed_data';
 
 class UpdateStudentInFo extends StatefulWidget {
   //const UpdateStudentInFo({Key? key}) : super(key: key);
@@ -88,13 +85,15 @@ class _UpdateStudentInFoState extends State<UpdateStudentInFo> {
                         //       buffer.asUint8List(bytesToRead.offsetInBytes, bytesToRead.lengthInBytes));
                         // }
                         var NameVar = picked.files.first.bytes;
-                        // print(picked.files.first.name);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ImportListStudent(
-                                      nameTest: NameVar,
-                                    )));
+                        if (picked.files.first.name.contains(".xlsx")) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ImportListStudent(
+                                        nameTest: NameVar,
+                                      )));
+                        } else
+                          loadingFail(status: "Please choose Excel File (.xlsx)");
                       }
                     },
                     child: Text(
