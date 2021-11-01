@@ -21,3 +21,5 @@ String urlOJTStuForStaff = "applications/fptstaff/detail";
 String urlComReportForStaff = "reports/fptstaff";
 
 String urlCompany = "companies";
+
+String urlImportStuForStaff = "students/import";

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:register_ojt/components/component.dart';
+import 'package:register_ojt/controller/send_email.dart';
 import 'package:register_ojt/model/post/post_create_account.dart';
 import 'package:register_ojt/view/home_page.dart';
 
 class CreateAccountData extends StatefulWidget {
   int? id;
-  CreateAccountData({this.id});
+  String? companyName;
+  CreateAccountData({this.id, this.companyName});
 
   @override
   _CreateAccountDataState createState() => _CreateAccountDataState();
@@ -30,13 +32,13 @@ class _CreateAccountDataState extends State<CreateAccountData> {
   inputData() {
     switch (position) {
       case 1:
-        code = data;
-        break;
-      case 2:
         username = data;
         break;
-      case 3:
+      case 2:
         password = data;
+        break;
+      case 3:
+        code = data;
         break;
       case 4:
         fullname = data;
@@ -49,6 +51,7 @@ class _CreateAccountDataState extends State<CreateAccountData> {
 
   createAccount() async {
     try {
+      loadingLoad(status: "Processing...");
       PostCreateAccount createAccount = PostCreateAccount();
       int status = await createAccount.createAccount(
           companyID: widget.id,
@@ -58,9 +61,18 @@ class _CreateAccountDataState extends State<CreateAccountData> {
           name: fullname,
           email: email);
       if (status == 200) {
-        loadingSuccess(status: "Create Success !!!");
+        String subject = "Thông tin đăng nhập hệ thống FPT University";
+        int statusSendEmail = await sendEmailCreateAccount(
+            email: "$email",
+            nameCompany: "${widget.companyName}",
+            subject: subject,
+            username: "$username",
+            password: "$password");
+        if (statusSendEmail == 200) {
+          loadingSuccess(status: "Create Success !!!");
+          return true;
+        }
         setState(() {});
-        return true;
       } else
         loadingFail(status: "Create Account Failed !!!");
     } catch (e) {

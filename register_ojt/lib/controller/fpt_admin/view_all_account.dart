@@ -24,31 +24,46 @@ class _AllAccountDataState extends State<AllAccountData> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: getData(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          if (data?.length != null && data?.length != 0) {
-            return ListView.builder(
-              itemCount: data!.length,
-              itemBuilder: (context, index) {
-                return _account(
-                  companyCode: data![index].companyCode,
-                  name: data![index].fullname,
-                  email: data![index].email,
-                  username: data![index].username,
-                );
-              },
-            );
-          } else {
-            return Center(child: Text("Data is empty !!!"));
+    return Scaffold(
+      backgroundColor: Colors.orange[200],
+      appBar: AppBar(
+        leading: leadingAppbar(context, colorIcon: Colors.black87),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        title: Text(
+          "All Accounts",
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black87),
+        ),
+      ),
+      body: FutureBuilder(
+        future: getData(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            if (data?.length != null && data?.length != 0) {
+              return ListView.builder(
+                itemCount: data!.length,
+                itemBuilder: (context, index) {
+                  return _account(
+                    companyCode: data![index].companyCode,
+                    name: data![index].fullname,
+                    email: data![index].email,
+                    username: data![index].username,
+                  );
+                },
+              );
+            } else {
+              return Center(child: Text("Data is empty !!!"));
+            }
           }
-        }
 
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      },
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
     );
   }
 

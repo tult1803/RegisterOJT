@@ -19,7 +19,7 @@ class _AllCompanyDataState extends State<AllCompanyData> {
 
   getData() async {
     Companies companies = Companies();
-    data = await companies.getCompanies(staffCode: "FT123");
+    data = await companies.getCompanies(staffCode: stuCode);
     if (data == null) return List.empty();
     return data;
   }
@@ -55,7 +55,7 @@ class _AllCompanyDataState extends State<AllCompanyData> {
     );
   }
 
-  Widget btnDetail(int? companyID) {
+  Widget btnDetail(int? companyID, String? companyName) {
     return ElevatedButton(
       onPressed: () {
         Navigator.push(
@@ -63,6 +63,7 @@ class _AllCompanyDataState extends State<AllCompanyData> {
           MaterialPageRoute(
               builder: (context) => AllAccount(
                     id: companyID,
+                    companyName: companyName,
                   )),
         );
       },
@@ -128,7 +129,7 @@ class _AllCompanyDataState extends State<AllCompanyData> {
                     ),
                   ],
                 ),
-                btnDetail(companyID),
+                btnDetail(companyID, name),
               ],
             ),
           ],
