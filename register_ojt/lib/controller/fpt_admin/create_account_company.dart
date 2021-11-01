@@ -14,7 +14,7 @@ class CreateAccountData extends StatefulWidget {
 }
 
 class _CreateAccountDataState extends State<CreateAccountData> {
-  String? code, username, password, fullname, email;
+  String? username, password, fullname, email;
   String? data;
   int? position;
 
@@ -38,12 +38,9 @@ class _CreateAccountDataState extends State<CreateAccountData> {
         password = data;
         break;
       case 3:
-        code = data;
-        break;
-      case 4:
         fullname = data;
         break;
-      case 5:
+      case 4:
         email = data;
         break;
     }
@@ -55,7 +52,6 @@ class _CreateAccountDataState extends State<CreateAccountData> {
       PostCreateAccount createAccount = PostCreateAccount();
       int status = await createAccount.createAccount(
           companyID: widget.id,
-          code: code,
           username: username,
           password: password,
           name: fullname,
@@ -73,6 +69,8 @@ class _CreateAccountDataState extends State<CreateAccountData> {
           return true;
         }
         setState(() {});
+      } else if (status == 400) {
+        loadingFail(status: "Username has existed !!!");
       } else
         loadingFail(status: "Create Account Failed !!!");
     } catch (e) {
@@ -114,17 +112,13 @@ class _CreateAccountDataState extends State<CreateAccountData> {
                   hintText: "Input account's password",
                   pos: 2),
               txtAccountInfo(size,
-                  title: "Company staff's Code: ",
-                  hintText: "Input code of company's staff",
-                  pos: 3),
-              txtAccountInfo(size,
                   title: "Company staff's Full name: ",
                   hintText: "Input name of company's staff",
-                  pos: 4),
+                  pos: 3),
               txtAccountInfo(size,
                   title: "Company staff's Email: ",
                   hintText: "Input email of company's staff",
-                  pos: 5),
+                  pos: 4),
               SizedBox(
                 height: 30,
               ),
@@ -185,8 +179,7 @@ class _CreateAccountDataState extends State<CreateAccountData> {
   Widget btnSave() {
     return ElevatedButton(
       onPressed: () async {
-        if (code != null &&
-            username != null &&
+        if (username != null &&
             password != null &&
             fullname != null &&
             email != null) {
