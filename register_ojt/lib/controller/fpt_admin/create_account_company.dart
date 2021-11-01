@@ -32,13 +32,13 @@ class _CreateAccountDataState extends State<CreateAccountData> {
   inputData() {
     switch (position) {
       case 1:
-        code = data;
-        break;
-      case 2:
         username = data;
         break;
-      case 3:
+      case 2:
         password = data;
+        break;
+      case 3:
+        code = data;
         break;
       case 4:
         fullname = data;
@@ -68,7 +68,7 @@ class _CreateAccountDataState extends State<CreateAccountData> {
             subject: subject,
             username: "$username",
             password: "$password");
-        if(statusSendEmail == 200){
+        if (statusSendEmail == 200) {
           loadingSuccess(status: "Create Success !!!");
           return true;
         }
