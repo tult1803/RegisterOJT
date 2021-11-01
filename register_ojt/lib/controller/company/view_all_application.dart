@@ -17,7 +17,6 @@ class AllApplicationData extends StatefulWidget {
 
 class _AllApplicationDataState extends State<AllApplicationData> {
   List<ApplicationCompany>? data;
-  int? appID;
 
   getData() async {
     ApplicationCompanys applications = ApplicationCompanys();

@@ -175,7 +175,7 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
         bool checkApprove = await approveApplicationStudent();
         if (checkApprove) {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => AllApplications()));
+              .push(MaterialPageRoute(builder: (context) => HomePage(role: 2)));
         } else
           print("Failed");
       },
@@ -199,7 +199,7 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
         bool checkDeny = await denyApplicationStudent();
         if (checkDeny) {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => AllApplications()));
+              .push(MaterialPageRoute(builder: (context) => HomePage(role: 2)));
         } else
           print("Failed");
       },

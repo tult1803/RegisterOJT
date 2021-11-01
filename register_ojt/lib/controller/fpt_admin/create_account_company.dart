@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:register_ojt/model/post/post_create_recruitment.dart';
 import 'package:register_ojt/components/component.dart';
+import 'package:register_ojt/model/post/post_create_account.dart';
 import 'package:register_ojt/view/home_page.dart';
 
-class CreateRecruitmentData extends StatefulWidget {
+class CreateAccountData extends StatefulWidget {
+  int? id;
+  CreateAccountData({this.id});
+
   @override
-  _CreateRecruitmentDataState createState() => _CreateRecruitmentDataState();
+  _CreateAccountDataState createState() => _CreateAccountDataState();
 }
 
-class _CreateRecruitmentDataState extends State<CreateRecruitmentData> {
-  String? content, deadline, salary, majorName, area, topic;
-  String? data, position;
+class _CreateAccountDataState extends State<CreateAccountData> {
+  String? code, username, password, fullname, email;
+  String? data;
+  int? position;
 
   @override
   void initState() {
@@ -25,46 +29,40 @@ class _CreateRecruitmentDataState extends State<CreateRecruitmentData> {
 
   inputData() {
     switch (position) {
-      case "txtTitle":
-        topic = data;
+      case 1:
+        code = data;
         break;
-      case "txtAddress":
-        area = data;
+      case 2:
+        username = data;
         break;
-      case "txtRequired":
-        majorName = data;
+      case 3:
+        password = data;
         break;
-      case "txtDescription":
-        content = data;
+      case 4:
+        fullname = data;
         break;
-      case "txtSalary":
-        salary = data;
+      case 5:
+        email = data;
         break;
-      case "txtDeadline":
-        deadline = data;
-        break;
-      default:
-        topic = data;
     }
   }
 
-  create() async {
+  createAccount() async {
     try {
-      PostCreateRecruitment createRecruitment = PostCreateRecruitment();
-      int status = await createRecruitment.create(
-          companyCode: stuCode,
-          content: content,
-          deadline: deadline,
-          salary: salary,
-          majorName: majorName,
-          topic: topic,
-          area: area);
+      PostCreateAccount createAccount = PostCreateAccount();
+      int status = await createAccount.createAccount(
+          companyID: widget.id,
+          code: code,
+          username: username,
+          password: password,
+          name: fullname,
+          email: email);
       if (status == 200) {
         loadingSuccess(status: "Create Success !!!");
         setState(() {});
         return true;
       } else
-        loadingFail(status: "Create Recruitment Failed !!!");
+        loadingFail(status: "Create Account Failed !!!");
     } catch (e) {
       loadingFail(status: "$e");
     }
@@ -80,7 +78,7 @@ class _CreateRecruitmentDataState extends State<CreateRecruitmentData> {
           centerTitle: true,
           backgroundColor: Colors.white,
           title: Text(
-            "New Recruitment",
+            "New Account",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
@@ -93,34 +91,30 @@ class _CreateRecruitmentDataState extends State<CreateRecruitmentData> {
           child: Column(
             children: [
               SizedBox(
-                height: 10,
+                height: 30,
               ),
-              txtFieldRecruiment(size,
-                  title: "Title: ",
-                  hintText: "Input Recruitment's Title",
-                  pos: "txtTitle"),
-              txtFieldRecruiment(size,
-                  title: "Address: ",
-                  hintText: "Input Working Address",
-                  pos: "txtAddress"),
-              txtFieldRecruiment(size,
-                  title: "Requirments for major: ",
-                  hintText: "Input Recruitment's requirments",
-                  pos: "txtRequired"),
-              txtFieldJobDescription(size,
-                  title: "Job Description: ",
-                  hintText: "More details about this recruitment",
-                  pos: "txtDescription"),
-              txtFieldRecruiment(size,
-                  title: "Salary: ",
-                  hintText: "Input Recruitment's Salary",
-                  pos: "txtSalary"),
-              txtFieldRecruiment(size,
-                  title: "Expired Date: ",
-                  hintText: "Input deadline(YYYY/MM/DD)",
-                  pos: "txtDeadline"),
+              txtAccountInfo(size,
+                  title: "Username: ",
+                  hintText: "Input account's username",
+                  pos: 1),
+              txtAccountInfo(size,
+                  title: "Password: ",
+                  hintText: "Input account's password",
+                  pos: 2),
+              txtAccountInfo(size,
+                  title: "Company staff's Code: ",
+                  hintText: "Input code of company's staff",
+                  pos: 3),
+              txtAccountInfo(size,
+                  title: "Company staff's Full name: ",
+                  hintText: "Input name of company's staff",
+                  pos: 4),
+              txtAccountInfo(size,
+                  title: "Company staff's Email: ",
+                  hintText: "Input email of company's staff",
+                  pos: 5),
               SizedBox(
-                height: 20,
+                height: 30,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -140,8 +134,7 @@ class _CreateRecruitmentDataState extends State<CreateRecruitmentData> {
         ));
   }
 
-  Widget txtFieldRecruiment(size,
-      {String? title, String? hintText, String? pos}) {
+  Widget txtAccountInfo(size, {String? title, String? hintText, int? pos}) {
     return Container(
       margin: EdgeInsets.only(bottom: 10),
       width: size.width * 0.4,
@@ -169,42 +162,9 @@ class _CreateRecruitmentDataState extends State<CreateRecruitmentData> {
               });
             },
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget txtFieldJobDescription(size,
-      {String? title, String? hintText, String? pos}) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 10),
-      width: size.width * 0.4,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "${title ?? "-----"}",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
           SizedBox(
-            height: 8,
-          ),
-          TextField(
-            keyboardType: TextInputType.multiline,
-            textInputAction: TextInputAction.newline,
-            maxLines: 7,
-            decoration: InputDecoration(
-              hintText: "${hintText ?? "-----"}",
-              border: UnderlineInputBorder(),
-            ),
-            onChanged: (value) {
-              setState(() {
-                data = value;
-                position = pos;
-                inputData();
-              });
-            },
-          ),
+            height: 10,
+          )
         ],
       ),
     );
@@ -213,16 +173,15 @@ class _CreateRecruitmentDataState extends State<CreateRecruitmentData> {
   Widget btnSave() {
     return ElevatedButton(
       onPressed: () async {
-        if (content != null &&
-            deadline != null &&
-            salary != null &&
-            majorName != null &&
-            area != null &&
-            topic != null) {
-          bool checkCreate = await create();
+        if (code != null &&
+            username != null &&
+            password != null &&
+            fullname != null &&
+            email != null) {
+          bool checkCreate = await createAccount();
           if (checkCreate) {
             Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => HomePage(role: 2)));
+                MaterialPageRoute(builder: (context) => HomePage(role: 1)));
           } else
             print("Failed");
         }

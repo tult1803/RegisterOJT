@@ -6,6 +6,7 @@ import 'package:register_ojt/view/company/view_all_student.dart';
 import 'package:register_ojt/view/company/view_all_application.dart';
 import 'package:register_ojt/view/company/view_all_recruitment.dart';
 import 'package:register_ojt/view/fpt_admin/company_feedback.dart';
+import 'package:register_ojt/view/fpt_admin/view_all_company.dart';
 import 'package:register_ojt/view/student/ojt_information.dart';
 import 'package:register_ojt/view/student/profile.dart';
 import 'package:register_ojt/view/student/view_application.dart';
@@ -194,6 +195,9 @@ class _HomePageState extends State<HomePage> {
         case 1:
           _widget = FeedBackCompany();
           break;
+        case 2:
+          _widget = AllCompany();
+          break;
         case 3:
           signOut(context);
           break;
@@ -233,6 +237,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           miniContainer("OJT Request", isHiddenColor: false, index: 0),
           miniContainer("Company Report", isHiddenColor: false, index: 1),
+          miniContainer("List Companies", isHiddenColor: false, index: 2),
           // miniContainer("Logout", isHiddenColor: true, index: 2),
         ],
       );
