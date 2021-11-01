@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:register_ojt/utils/url.dart';
 
 class PostCreateCompany {
-  createCompany({name, address, webSite, hostManagerEmail}) async {
+  createCompany({name, address, webSite}) async {
     final response = await http.post(
       Uri.https('$urlMain', '$urlCompany/newcompany'),
       headers: <String, String>{
@@ -15,7 +15,6 @@ class PostCreateCompany {
         "companyName": "$name",
         "address": "$address",
         "webSite": "$webSite",
-        "hostManagerEmail": "$hostManagerEmail",
       }),
     );
 

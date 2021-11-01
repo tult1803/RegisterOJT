@@ -39,7 +39,6 @@ class _AllCompanyDataState extends State<AllCompanyData> {
                   name: data![index].companyName,
                   address: data![index].address,
                   webSite: data![index].webSite,
-                  hostManagerEmail: data![index].hostManagerEmail,
                 );
               },
             );
@@ -81,7 +80,7 @@ class _AllCompanyDataState extends State<AllCompanyData> {
     );
   }
 
-  Widget _company({companyID, name, address, webSite, hostManagerEmail}) {
+  Widget _company({companyID, name, address, webSite}) {
     return Container(
       padding: EdgeInsets.all(20),
       margin: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
@@ -116,14 +115,6 @@ class _AllCompanyDataState extends State<AllCompanyData> {
                     ),
                     Text(
                       "Website: " + "${webSite ?? "---"}",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "Host Manager's email: " + "${hostManagerEmail ?? "---"}",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
