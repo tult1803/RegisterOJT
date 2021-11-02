@@ -11,6 +11,7 @@ import 'package:register_ojt/view/company/view_all_recruitment.dart';
 import 'package:register_ojt/view/company/view_all_student.dart';
 import 'package:register_ojt/view/company/evaluation_detail_company.dart';
 import 'package:register_ojt/view/company/view_all_application.dart';
+import 'package:register_ojt/view/fpt_admin/check_update_student_information.dart';
 import 'package:register_ojt/view/fpt_admin/update_student_information.dart';
 import 'package:register_ojt/view/fpt_admin/view_all_student.dart';
 import 'package:register_ojt/view/home_page.dart';
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
-      home: LoginPage(),
+      home: UpdateStudentInFo(),
       // home: HomePage(role: 2,),
       // home: SendApplication(),
     );

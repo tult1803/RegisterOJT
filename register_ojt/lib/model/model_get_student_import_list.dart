@@ -2,59 +2,63 @@ import 'dart:convert';
 
 import 'dart:html';
 
-List<ImportStudentForStaff> listImportForStaffFromJson(str) => List<ImportStudentForStaff>.from(json.decode(str).map((x) => ImportStudentForStaff.fromJson(x)));
+List<ModelGetStudentImportList> getStudentImportListFromJson(str) => List<ModelGetStudentImportList>.from(json.decode(str).map((x) => ModelGetStudentImportList.fromJson(x)));
 
-String listImportForStaffToJson(List<ImportStudentForStaff> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String getStudentImportListToJson(List<ModelGetStudentImportList> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 
-class ImportStudentForStaff {
-  ImportStudentForStaff({
+class ModelGetStudentImportList {
+  ModelGetStudentImportList({
+    this.id,
     this.phone,
     this.birthday,
     this.term,
     this.credit,
     this.gpa,
-    this.majorName,
     this.studentCode,
     this.email,
     this.fullname,
-    this.gender
+    this.gender,
+    this.workingStatus
   });
 
+  int? id;
   String? phone;
   DateTime? birthday;
   int? term;
   int? credit;
   double? gpa;
-  String? majorName;
   String? studentCode;
   String? email;
   String? fullname;
   String? gender;
+  String? workingStatus;
 
-  factory ImportStudentForStaff.fromJson(Map<String, dynamic> json) => ImportStudentForStaff(
+  factory ModelGetStudentImportList.fromJson(Map<String, dynamic> json) => ModelGetStudentImportList(
+    id: json["id"],
     phone: json["phone"],
     birthday: DateTime.parse(json["birthday"]),
     term: json["term"],
     credit: json["credit"],
     gpa: json["gpa"],
-    majorName: json["majorName"],
     studentCode: json["studentCode"],
     email: json["email"],
     fullname: json["fullname"],
     gender: json["gender"],
+    workingStatus: json["workingStatus"]
   );
 
   Map<String, dynamic> toJson() => {
+    "id": id,
     "phone": phone,
     "birthday": birthday?.toIso8601String(),
     "term": term,
     "credit": credit,
     "gpa": gpa,
-    "majorName": majorName,
     "studentCode": studentCode,
     "email": email,
     "fullname": fullname,
     "gender": gender,
+    "workingStatus": workingStatus
   };
 }
