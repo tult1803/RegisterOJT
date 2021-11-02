@@ -38,9 +38,6 @@ class _CreateCompanyDataState extends State<CreateCompanyData> {
       case 3:
         webSite = data;
         break;
-      case 4:
-        hostManagerEmail = data;
-        break;
     }
   }
 
@@ -48,10 +45,7 @@ class _CreateCompanyDataState extends State<CreateCompanyData> {
     try {
       PostCreateCompany createCompany = PostCreateCompany();
       int status = await createCompany.createCompany(
-          name: companyName,
-          address: address,
-          webSite: webSite,
-          hostManagerEmail: hostManagerEmail);
+          name: companyName, address: address, webSite: webSite);
       if (status == 200) {
         loadingSuccess(status: "Create Success !!!");
         setState(() {});
@@ -100,10 +94,6 @@ class _CreateCompanyDataState extends State<CreateCompanyData> {
                   title: "Website: ",
                   hintText: "Input company's website",
                   pos: 3),
-              txtCompanyInfo(size,
-                  title: "Host Manager's email: ",
-                  hintText: "Input host manager's email",
-                  pos: 4),
               SizedBox(
                 height: 30,
               ),
@@ -164,10 +154,7 @@ class _CreateCompanyDataState extends State<CreateCompanyData> {
   Widget btnSave() {
     return ElevatedButton(
       onPressed: () async {
-        if (companyName != null &&
-            address != null &&
-            webSite != null &&
-            hostManagerEmail != null) {
+        if (companyName != null && address != null && webSite != null) {
           bool checkCreate = await createCompany();
           if (checkCreate) {
             Navigator.of(context).push(

@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/controller/fpt_admin/import_list_student_for_staff.dart';
 import 'package:register_ojt/utils/helpers.dart';
-import 'package:http/http.dart' as http;
 import 'package:file_picker/file_picker.dart';
-import 'dart:async';
-import 'dart:io';
-import 'dart:typed_data';
-
 
 class UpdateStudentInFo extends StatefulWidget {
   //const UpdateStudentInFo({Key? key}) : super(key: key);
@@ -36,10 +32,13 @@ class _UpdateStudentInFoState extends State<UpdateStudentInFo> {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-            color: Colors.black,
-            onPressed: (){}
+          color: Colors.black,
+          onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text('Update Student Info', style: TextStyle(color: Colors.black, fontSize: 25),),
+        title: Text(
+          'Update Student Info',
+          style: TextStyle(color: Colors.black, fontSize: 25),
+        ),
         centerTitle: true,
         backgroundColor: Colors.white,
       ),
@@ -56,8 +55,7 @@ class _UpdateStudentInFoState extends State<UpdateStudentInFo> {
                 color: Colors.transparent.withOpacity(0.1),
                 //offset: Offset(0, 10)
               )
-            ]
-        ),
+            ]),
         child: Center(
           child: Container(
             margin: EdgeInsets.fromLTRB(30, 15, 30, 50),
@@ -73,11 +71,11 @@ class _UpdateStudentInFoState extends State<UpdateStudentInFo> {
                 children: [
                   TextButton(
                     style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.blue),
                     ),
                     onPressed: () async {
                       var picked = await FilePicker.platform.pickFiles();
-
 
                       if (picked != null) {
                         // var bytesToRead = picked.files.first.bytes;
@@ -87,20 +85,35 @@ class _UpdateStudentInFoState extends State<UpdateStudentInFo> {
                         //       buffer.asUint8List(bytesToRead.offsetInBytes, bytesToRead.lengthInBytes));
                         // }
                         var NameVar = picked.files.first.bytes;
-                        // print(picked.files.first.name);
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => ImportListStudent(nameTest: NameVar,)));
+                        if (picked.files.first.name.contains(".xlsx")) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ImportListStudent(
+                                        nameTest: NameVar,
+                                      )));
+                        } else
+                          loadingFail(status: "Please choose Excel File (.xlsx)");
                       }
                     },
-                    child: Text('Import Student', style: TextStyle(fontSize: 35),),
+                    child: Text(
+                      'Import Student',
+                      style: TextStyle(fontSize: 35),
+                    ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   TextButton(
                     style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.blue),
                     ),
-                    onPressed: () { },
-                    child: Text('Export data', style: TextStyle(fontSize: 35),),
+                    onPressed: () {},
+                    child: Text(
+                      'Export data',
+                      style: TextStyle(fontSize: 35),
+                    ),
                   ),
                 ],
               ),
