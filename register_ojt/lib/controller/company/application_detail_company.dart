@@ -17,6 +17,7 @@ import '../send_email.dart';
 class ApplicationDetailData extends StatefulWidget {
   int? id;
   String? status;
+
   ApplicationDetailData({this.id, this.status});
 
   @override
@@ -27,6 +28,7 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
   ApplicationDetail? data;
   String subject = "Thông báo trạng thái phỏng vấn";
   String? companyName;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -78,7 +80,8 @@ class _ApplicationDetailDataState extends State<ApplicationDetailData> {
       int status = await denyApp.denyApplicationStudent(
           companyCode: stuCode, appID: widget.id);
       if (status == 200) {
-        String message = 'Cảm ơn bạn đã đến phỏng vấn';
+        String message =
+            'Sau quá trình xem xét và đánh giá. Chúng tôi cảm thấy bạn chưa phù hợp với vị trí hiện tại của công ty. \n\nCảm ơn bạn đã đến phỏng vấn';
         int statusEmail = await sendEmail(
             email: "${data?.email}",
             nameCompany: companyName ?? "",
