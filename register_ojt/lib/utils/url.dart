@@ -23,3 +23,4 @@ String urlComReportForStaff = "reports/fptstaff";
 String urlCompany = "companies";
 
 String urlImportStuForStaff = "students/import";
+String urlGetImportStuList = "students/status";
