@@ -66,6 +66,8 @@ class _ImportListStudentState extends State<ImportListStudent> {
       loadingSuccess(status: "Send Success !!!");
       statusCode = 200;
       setState(() {});
+      Navigator.push(context, MaterialPageRoute(
+          builder: (context) => HomePage(role: 1)));
     } else
       loadingFail(status: "Send Info Failed !!!");
   }
@@ -74,22 +76,22 @@ class _ImportListStudentState extends State<ImportListStudent> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextButton(
-            style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-            ),
-            onPressed: () {
-
-              Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => HomePage(role: 1)));
-            },
-            child: Text(statusCode==200?'Click To Go Back':'', style: TextStyle(fontSize: 35,),),
-          ),
-        ],
-      ),
+      // child: Column(
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //   children: [
+      //     TextButton(
+      //       style: ButtonStyle(
+      //         foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+      //       ),
+      //       onPressed: () {
+      //
+      //         Navigator.push(context, MaterialPageRoute(
+      //             builder: (context) => HomePage(role: 1)));
+      //       },
+      //       child: Text(statusCode==200?'Click To Go Back':'', style: TextStyle(fontSize: 35,),),
+      //     ),
+      //   ],
+      // ),
     );
   }
 }

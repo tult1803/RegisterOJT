@@ -85,13 +85,14 @@ class _ListStudentForStaffDataState extends State<ListStudentForStaffData> {
                 "$studentCode - $fullname",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  fontSize: 18
                 ),
               ),
               SizedBox(height: 5,),
               Text('$status', style: TextStyle(
-                  fontSize: 11.5,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
-                  color: Colors.green
+                  color: getStatusColor(status)
               ),)
             ],
           ),
@@ -109,6 +110,7 @@ class _ListStudentForStaffDataState extends State<ListStudentForStaffData> {
                     "GPA: $gpa",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
+                      fontSize: 18
                     ),
                   ),
                   SizedBox(
@@ -118,6 +120,7 @@ class _ListStudentForStaffDataState extends State<ListStudentForStaffData> {
                     "Company request: $companyName",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
+                      fontSize: 18
                     ),
                   ),
                 ],
@@ -130,13 +133,13 @@ class _ListStudentForStaffDataState extends State<ListStudentForStaffData> {
                 child: Text(
                   "Detail",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
+                      fontWeight: FontWeight.bold, color: Colors.black, fontSize: 18),
                 ),
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(EdgeInsets.only(
                       left: 25, right: 25, top: 15, bottom: 15)),
                   backgroundColor:
-                  MaterialStateProperty.all<Color>(Colors.lightBlue.shade300),
+                  MaterialStateProperty.all<Color>(Colors.orangeAccent),
                   //MaterialStateProperty.all<Color>(Colors.orange.shade600)
                 ),
               )

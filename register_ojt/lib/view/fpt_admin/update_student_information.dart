@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:register_ojt/components/component.dart';
@@ -89,7 +91,7 @@ class _UpdateStudentInFoState extends State<UpdateStudentInFo> {
         backgroundColor: Colors.white,
       ),
       body: Container(
-        margin: EdgeInsets.fromLTRB(40, 15, 40, 10),
+        margin: EdgeInsets.fromLTRB(20, 15, 20, 10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20)),
             color: Colors.transparent,
@@ -105,8 +107,8 @@ class _UpdateStudentInFoState extends State<UpdateStudentInFo> {
         child: Center(
           child: Container(
             margin: EdgeInsets.fromLTRB(15, 20, 15, 20),
-            width: size.width * 0.8,
-            height: size.height * 1.4,
+            width: size.width * 1.5,
+            height: size.height * 2.0,
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -181,35 +183,35 @@ class _UpdateStudentInFoState extends State<UpdateStudentInFo> {
                         SizedBox(height: 20,),
                         Expanded(
                           child: SingleChildScrollView(
-                          child: Table(
+                            child: Table(
+                              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                               columnWidths: {
-                                0: FlexColumnWidth(1),
+                                0: FlexColumnWidth(2),
                                 1: FlexColumnWidth(2),
-                                2: FlexColumnWidth(4),
-                                3: FlexColumnWidth(1),
-                                4: FlexColumnWidth(1),
-                                5: FlexColumnWidth(1),
-                                6: FlexColumnWidth(2),
-                                7: FlexColumnWidth(4),
-                                8: FlexColumnWidth(3),
+                                2: FlexColumnWidth(1),
+                                3: FlexColumnWidth(3),
+                                4: FlexColumnWidth(2),
+                                5: FlexColumnWidth(3),
+                                6: FlexColumnWidth(1),
+                                7: FlexColumnWidth(1),
+                                8: FlexColumnWidth(1),
                                 9: FlexColumnWidth(1),
-                                10: FlexColumnWidth(2),
+                                10: FlexColumnWidth(3),
                               },
                               border: TableBorder.all(color: Colors.black),
                               children:
                                   (data == null ? [] as List : data as List)
                                       .map((item) => TableRow(children: [
-                                            Text(item.id.toString(), style: TextStyle(fontSize: 15),),
-                                            Text(item.phone.toString(), style: TextStyle(fontSize: 15),),
-                                            Text(item.birthday.toString(), style: TextStyle(fontSize: 15),),
-                                            Text(item.term.toString(), style: TextStyle(fontSize: 15),),
-                                            Text(item.credit.toString(), style: TextStyle(fontSize: 15),),
-                                            Text(item.gpa.toString(), style: TextStyle(fontSize: 15),),
-                                            Text(item.studentCode.toString(), style: TextStyle(fontSize: 15),),
-                                            Text(item.email.toString(), style: TextStyle(fontSize: 15),),
-                                            Text(item.fullname.toString(), style: TextStyle(fontSize: 15),),
-                                            Text(item.gender.toString(), style: TextStyle(fontSize: 15),),
-                                            Text(item.workingStatus.toString(), style: TextStyle(fontSize: 15),),
+                                            Text(item.studentCode.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                            Text(item.fullname.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                            Text(item.gender.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                            Text(item.birthday.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                            Text(item.phone.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                            Text(item.email.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                            Text(item.term.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                            Text(item.credit.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                            Text(item.gpa.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                            Text(item.workingStatus.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
                                             // you can have more properties of course
                                           ]))
                                       .toList()),

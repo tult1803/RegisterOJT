@@ -60,62 +60,117 @@ class _CheckUpdateStudentInfoState extends State<CheckUpdateStudentInfo> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return FutureBuilder(
-      future: getData(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          if (listStudent!.length != null) {
-            return ListView.builder(
-              itemCount: listStudent!.length,
-              itemBuilder: (context, index) {
-                print(index);
-                // String dayOfBirth = new DateFormat('yyyy/MM/dd HH:mm:ss').parse(listStudent?[index][1]);
-                return Column(
-                  children: [
-                    containerInfo(
-                      phone: listStudent?[index][0],
-                      birthday: listStudent?[index][1],
-                      term: listStudent?[index][2],
-                      credit: listStudent?[index][3],
-                      gpa: listStudent?[index][4],
-                      majorName: listStudent?[index][5],
-                      studentCode: listStudent?[index][6],
-                      email: listStudent?[index][7],
-                      fullname: listStudent?[index][8],
-                      gender: listStudent?[index][9],
-                    ),
-                    Visibility(
-                        child: TextButton(
-                          style: ButtonStyle(
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.blue),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        ImportListStudent(nameTest: widget.nameTest)));
-                          },
-                          child: Text(
-                            'Click to Send Data',
-                            style: TextStyle(fontSize: 15),
-                          ),
+    return Scaffold(
+      appBar: AppBar(
+        leading: BackButton(
+          color: Colors.black,
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text(
+          'Check Import Student',
+          style: TextStyle(color: Colors.black, fontSize: 25),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+      ),
+      body: Container(
+        margin: EdgeInsets.all(20),
+        child: FutureBuilder(
+          future: getData(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              if (listStudent!.length != null) {
+                return ListView.builder(
+                  itemCount: listStudent!.length,
+                  itemBuilder: (context, index) {
+                    print(index);
+                    // String dayOfBirth = new DateFormat('yyyy/MM/dd HH:mm:ss').parse(listStudent?[index][1]);
+                    return Column(
+                      children: [
+                        containerInfo(
+                          phone: listStudent?[index][0],
+                          birthday: listStudent?[index][1],
+                          term: listStudent?[index][2],
+                          credit: listStudent?[index][3],
+                          gpa: listStudent?[index][4],
+                          majorName: listStudent?[index][5],
+                          studentCode: listStudent?[index][6],
+                          email: listStudent?[index][7],
+                          fullname: listStudent?[index][8],
+                          gender: listStudent?[index][9],
                         ),
-                        visible: index == listStudent!.length - 1)
-                  ],
+                        Visibility(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  child: TextButton(
+                                    autofocus: true,
+                                    style: ButtonStyle(
+                                      padding: MaterialStateProperty.all(EdgeInsets.all(20)),
+                                      foregroundColor:
+                                      MaterialStateProperty.all<Color>(Colors.black),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ImportListStudent(nameTest: widget.nameTest)));
+                                    },
+                                    child: Text(
+                                      'Send Data',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                  width: 200,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.orangeAccent
+                                  ),
+                                ),
+                                SizedBox(width: 100,),
+                                Container(
+                                  child: TextButton(
+                                    autofocus: true,
+                                    style: ButtonStyle(
+                                      padding: MaterialStateProperty.all(EdgeInsets.all(20)),
+                                      foregroundColor:
+                                      MaterialStateProperty.all<Color>(Colors.black),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(
+                                      'Cancel',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                  width: 200,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.red
+                                  ),
+                                ),
+                              ],
+                            ),
+                            visible: index == listStudent!.length - 1),
+                        SizedBox(height: 30,)
+                      ],
+                    );
+                  },
                 );
-              },
-            );
-          } else {
-            return Center(child: Text("Data is empty !!!"));
-          }
-        }
+              } else {
+                return Center(child: Text("Data is empty !!!"));
+              }
+            }
 
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      },
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        ),
+      ),
     );
   }
 
@@ -131,7 +186,7 @@ class _CheckUpdateStudentInfoState extends State<CheckUpdateStudentInfo> {
       fullname,
       gender}) {
     return Container(
-      margin: EdgeInsets.only(bottom: 20),
+      margin: EdgeInsets.only(bottom: 10),
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
           color: Colors.white,
@@ -139,11 +194,31 @@ class _CheckUpdateStudentInfoState extends State<CheckUpdateStudentInfo> {
           border: Border.all(width: 1, color: Colors.grey)),
       child: Column(
         children: [
-          Text("Phone: $phone"),
+          Text("Major: $majorName"),
+          SizedBox(
+            height: 5,
+          ),
+          Text("StudentCode: $studentCode"),
+          SizedBox(
+            height: 5,
+          ),
+          Text("Fullname: $fullname"),
+          SizedBox(
+            height: 5,
+          ),
+          Text("Gender: $gender"),
           SizedBox(
             height: 5,
           ),
           Text("Birthday: $birthday"),
+          SizedBox(
+            height: 5,
+          ),
+          Text("Phone: $phone"),
+          SizedBox(
+            height: 5,
+          ),
+          Text("Email: $email"),
           SizedBox(
             height: 5,
           ),
@@ -159,113 +234,8 @@ class _CheckUpdateStudentInfoState extends State<CheckUpdateStudentInfo> {
           SizedBox(
             height: 5,
           ),
-          Text("Major: $majorName"),
-          SizedBox(
-            height: 5,
-          ),
-          Text("StudentCode: $studentCode"),
-          SizedBox(
-            height: 5,
-          ),
-          Text("Email: $email"),
-          SizedBox(
-            height: 5,
-          ),
-          Text("Fullname: $fullname"),
-          SizedBox(
-            height: 5,
-          ),
-          Text("Gender: $gender"),
-          SizedBox(
-            height: 5,
-          ),
         ],
       ),
     );
   }
 }
-// Scaffold(
-// appBar: AppBar(
-// leading: BackButton(
-// color: Colors.black,
-// onPressed: () => Navigator.of(context).pop(),
-// ),
-// title: Text(
-// 'Check Update Student Info',
-// style: TextStyle(color: Colors.black, fontSize: 25),
-// ),
-// centerTitle: true,
-// backgroundColor: Colors.white,
-// ),
-// body: Container(
-// margin: EdgeInsets.fromLTRB(40, 15, 40, 10),
-// decoration: BoxDecoration(
-// borderRadius: BorderRadius.all(Radius.circular(20)),
-// color: Colors.transparent,
-// border: Border.all(width: 0.5, color: Colors.grey),
-// boxShadow: [
-// BoxShadow(
-// spreadRadius: 0,
-// blurRadius: 0.5,
-// color: Colors.transparent.withOpacity(0.1),
-// //offset: Offset(0, 10)
-// )
-// ]),
-// child: Center(
-// child: Container(
-// margin: EdgeInsets.fromLTRB(30, 15, 30, 50),
-// width: size.width * 0.8,
-// height: size.height * 1.4,
-// padding: EdgeInsets.all(20),
-// decoration: BoxDecoration(
-// color: Colors.white,
-// borderRadius: BorderRadius.circular(15),
-// ),
-// child: Center(
-// child: Column(
-// children: [
-// SingleChildScrollView(
-// child: Container(
-// padding: EdgeInsets.fromLTRB(40, 20, 40, 20),
-// decoration:  BoxDecoration(
-// color: Colors.white,
-// borderRadius: BorderRadius.circular(15),
-// ),
-// child: Row(
-// children: [
-// Column(
-// children: [
-// Text("Phone: ${listStudent?[0][0]}"),
-//
-// SizedBox(height: 5,),
-// Text("Birthday: "),
-// SizedBox(height: 5,),
-// Text("Term: "),
-// SizedBox(height: 5,),
-// Text("Credit: "),
-// SizedBox(height: 5,),
-// Text("GPA: "),
-// SizedBox(height: 5,),
-// Text("Major: "),
-// SizedBox(height: 5,),
-// Text("StudentCode: "),
-// SizedBox(height: 5,),
-// Text("Email: "),
-// SizedBox(height: 5,),
-// Text("Full Name: "),
-// SizedBox(height: 5,),
-// Text("Gender: "),
-// SizedBox(height: 5,),
-// ],
-// ),
-// ],
-// ),
-// ),
-// )
-// ],
-// ),
-// ),
-// ),
-// ),
-// ),
-// );
