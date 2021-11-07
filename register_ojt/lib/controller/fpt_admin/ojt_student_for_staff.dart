@@ -36,6 +36,39 @@ class _OjtStudentForStaffDataState extends State<OjtStudentForStaffData> {
     getData();
   }
 
+  Widget containerRecruimentForMe(size,
+      {String? title, String? content, bool? showBottom}) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      width: size.width * 0.4,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "${title ?? "-----"}",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Text("${content ?? "-----"}",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800)),
+          SizedBox(
+              child: showBottom == null
+                  ? Container(
+                margin: EdgeInsets.only(top: 12),
+                color: Colors.black45,
+                height: 0.5,
+              )
+                  : null),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -53,21 +86,21 @@ class _OjtStudentForStaffDataState extends State<OjtStudentForStaffData> {
         SizedBox(
           height: 30,
         ),
-        containerRecruiment(size,
+        containerRecruimentForMe(size,
             title: "MSSV:",
             content: "${data?.studentCode}"),
-        containerRecruiment(size,
+        containerRecruimentForMe(size,
             title: "Họ và Tên:",
             content: "${data?.fullname}"),
-        containerRecruiment(size,
+        containerRecruimentForMe(size,
             title: "Chuyên Ngành:", content: "${data?.majorName}"),
-        containerRecruiment(size,
+        containerRecruimentForMe(size,
             title: "Email:",
             content: "${data?.email}"),
-        containerRecruiment(size,
+        containerRecruimentForMe(size,
             title: "GPA:",
             content: "${data?.gpa}"),
-        containerRecruiment(size,
+        containerRecruimentForMe(size,
             title: "Company Request:",
             content: "${data?.companyName}"),
         showCV(cv: "${data?.cv}", size: size),

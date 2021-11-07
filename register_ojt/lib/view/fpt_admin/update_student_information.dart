@@ -10,6 +10,7 @@ import 'package:register_ojt/utils/helpers.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:register_ojt/model/get/get_student_list_from_import.dart';
 import 'package:register_ojt/view/fpt_admin/check_update_student_information.dart';
+import 'package:csv/csv.dart';
 
 class UpdateStudentInFo extends StatefulWidget {
   //const UpdateStudentInFo({Key? key}) : super(key: key);
@@ -20,10 +21,13 @@ class UpdateStudentInFo extends StatefulWidget {
 
 class _UpdateStudentInFoState extends State<UpdateStudentInFo> {
   String? token;
-  var data;
+  var data; var export_data;
   var listStatus = ["NotInWork", "Working", "Finished"];
+
   String? dropDownValue;
   int? roleValue;
+  List<List<dynamic>> rows = [];
+  List<dynamic> row = [];
 
 
   @override
@@ -32,13 +36,46 @@ class _UpdateStudentInFoState extends State<UpdateStudentInFo> {
     super.initState();
     dropDownValue = "NotInWork";
     roleValue = 0;
+
     getData(0);
   }
 
   getData(number) async {
     getStudentListFromImport getStuListToImport = getStudentListFromImport();
     data = await getStuListToImport.getStudentsListFromImport(statusCode: number);
+    export_data = [...data];
+    rows = [];
+    row = [];
+    row.add("id");
+    row.add("StudentCode");
+    row.add("Full Name");
+    row.add("Gender");
+    row.add("Birthday");
+    row.add("Email");
+    row.add("Phone");
+    row.add("Term");
+    row.add("Credit");
+    row.add("GPA");
+    row.add("Working Status");
+    rows.add(row);
+    for (int i = 0; i < data.length; i++) {
+      List<dynamic> row = [];
+      row.add(export_data[i].id);
+      row.add(export_data[i].studentCode);
+      row.add(export_data[i].fullname);
+      row.add(export_data[i].gender);
+      row.add(export_data[i].birthday.toString().substring(0,10));
+      row.add(export_data[i].email);
+      row.add("'"+export_data[i].phone);
+      row.add(export_data[i].term);
+      row.add(export_data[i].credit);
+      row.add(export_data[i].gpa);
+      row.add(export_data[i].workingStatus);
+      rows.add(row);
+    }
+
     setState(() {});
+
   }
 
   Widget _dropDownButton() {
@@ -89,7 +126,7 @@ class _UpdateStudentInFoState extends State<UpdateStudentInFo> {
           style: TextStyle(color: Colors.black, fontSize: 25),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.orangeAccent,
       ),
       body: Container(
         margin: EdgeInsets.fromLTRB(20, 15, 20, 10),
@@ -167,7 +204,13 @@ class _UpdateStudentInFoState extends State<UpdateStudentInFo> {
                             foregroundColor:
                                 MaterialStateProperty.all<Color>(Colors.blue),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            // print(rows[0][4].runtimeType);
+                            String csv = const ListToCsvConverter().convert(rows);
+                            new AnchorElement(href: "data:text/plain;charset=utf-16le,$csv")
+                              ..setAttribute("download", "data.csv")
+                              ..click();
+                          },
                           child: Text(
                             'Export data',
                             style: TextStyle(fontSize: 15),
@@ -201,21 +244,36 @@ class _UpdateStudentInFoState extends State<UpdateStudentInFo> {
                               },
                               border: TableBorder.all(color: Colors.black),
                               children:
-                                  (data == null ? [] as List : data as List)
+                                [TableRow(children: [
+                                  Text("StudentCode".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                  Text("Full Name".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                  Text("Gender".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                  Text("Birthday", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                  Text("Phone".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                  Text("Email".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                  Text("Term".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                  Text("Credit".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                  Text("Gpa".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                  Text("WorkingStatus".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                  // you can have more properties of course
+                                ]),
+                                 ...(data == null ? [] as List : data as List)
                                       .map((item) => TableRow(children: [
-                                            Text(item.studentCode.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
-                                            Text(item.fullname.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
-                                            Text(item.gender.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
-                                            Text(DateFormat("dd-MM-yyyy").format(item.birthday), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
-                                            Text(item.phone.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
-                                            Text(item.email.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
-                                            Text(item.term.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
-                                            Text(item.credit.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
-                                            Text(item.gpa.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
-                                            Text(item.workingStatus.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
-                                            // you can have more properties of course
-                                          ]))
-                                      .toList()),
+                                    Text(item.studentCode.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                    Text(item.fullname.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                    Text(item.gender.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                    Text(DateFormat("dd-MM-yyyy").format(item.birthday), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                    Text(item.phone.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                    Text(item.email.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                    Text(item.term.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                    Text(item.credit.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                    Text(item.gpa.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                    Text(item.workingStatus.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                                    // you can have more properties of course
+                                  ]))
+                                      .toList()]
+
+                            ),
                         ))
                       ],
                     ),

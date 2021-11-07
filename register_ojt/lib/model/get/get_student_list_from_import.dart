@@ -15,9 +15,10 @@ class getStudentListFromImport{
 
     print("Status get Ojt Student for Staff:${response.statusCode}");
     if(response.statusCode == 200){
+      print(response.body);
       return getStudentImportListFromJson(response.body);
     }else{
-      return null;
+      return [];
     }
   }
 }
