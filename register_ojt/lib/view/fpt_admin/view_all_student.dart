@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:register_ojt/controller/fpt_admin/list_student_for_staff.dart';
 import 'package:register_ojt/utils/helpers.dart';
 import 'package:register_ojt/view/fpt_admin/ojt_student_details.dart';
+import 'package:register_ojt/view/fpt_admin/statistic_page.dart';
 import 'package:register_ojt/view/fpt_admin/update_student_information.dart';
 
 class AllStudent extends StatefulWidget {
@@ -32,6 +33,28 @@ class _AllStudentState extends State<AllStudent> {
     return Center(
       child: Stack(
         children: [
+          Positioned(
+            right: 200,
+            width: 200,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.orange.shade600,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              margin: EdgeInsets.only(top: 15, right: 30),
+              height: 50,
+              child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Statistic()));
+                  },
+                  child: Text(
+                    "Statistic",
+                    style: TextStyle(
+                        color: Colors.black87, fontWeight: FontWeight.bold),
+                  )),
+            ),
+          ),
           Positioned(
             right: 0,
             width: 200,
