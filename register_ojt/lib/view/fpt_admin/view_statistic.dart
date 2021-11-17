@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/model/get/get_statistic_dropbutton_value.dart';
 import 'package:register_ojt/model/get/get_statistic_recruitment.dart';
+import 'package:register_ojt/model/get/get_statistic_student.dart';
 import 'package:register_ojt/model/model_statistic_recruitment.dart';
+import 'package:register_ojt/model/model_statistic_student.dart';
+import 'package:register_ojt/utils/helpers.dart';
 
 class ViewStatistic extends StatefulWidget {
   // const ViewStatistic({Key? key}) : super(key: key);
@@ -15,14 +18,23 @@ class _ViewStatisticState extends State<ViewStatistic> {
   var listSemester;
   var dropDownVal = [""];
   String? dropDownValue;
-  int? showData;
+  int? showData = 0;
   List<StatisticRecruitment>? listRecruitment;
+  List<StatisticStudent>? listStudent;
 
   getRecruitment() async {
-    GetStatisticRecruitment getInfo = GetStatisticRecruitment();
-    listRecruitment = await getInfo.getData(semesterName: dropDownValue);
+    GetStatisticRecruitment getRecruitmentInfo = GetStatisticRecruitment();
+    listRecruitment =
+        await getRecruitmentInfo.getData(semesterName: dropDownValue);
     if (listRecruitment == null) return List.empty();
     return listRecruitment;
+  }
+
+  getStudent() async {
+    GetStatisticStudent getStudentInfo = GetStatisticStudent();
+    listStudent = await getStudentInfo.getData(semesterName: dropDownValue);
+    if (listStudent == null) return List.empty();
+    return listStudent;
   }
 
   Widget _dropDownButton() {
@@ -71,7 +83,7 @@ class _ViewStatisticState extends State<ViewStatistic> {
   Widget _btnStudent() {
     return ElevatedButton(
       onPressed: () {
-        showData = 0;
+        showData = 1;
         setState(() {});
       },
       child: Text(
@@ -88,10 +100,220 @@ class _ViewStatisticState extends State<ViewStatistic> {
     );
   }
 
+  Widget _showStudentData() {
+    return FutureBuilder(
+      future: getStudent(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          if (listStudent?.length != null) {
+            return ListView.builder(
+              itemCount: listStudent!.length,
+              itemBuilder: (context, index) {
+                return studentInfo(
+                    marginTop: index == 0 ? true : null,
+                    stuCode: listStudent![index].stuCode,
+                    stuName: listStudent![index].stuName,
+                    majorName: listStudent![index].majorName,
+                    gpa: listStudent![index].gpa.toString(),
+                    term: listStudent![index].term.toString(),
+                    phone: listStudent![index].phone,
+                    email: listStudent![index].email,
+                    companyName: listStudent![index].companyName,
+                    workingStatus: listStudent![index].workingStatus,
+                    startDate:
+                        "${listStudent![index].startDate?.substring(0, 10)}",
+                    endDate:
+                        "${listStudent![index].endDate?.substring(0, 10)}");
+              },
+            );
+          } else {
+            return Center(
+                child: Text("There haven't had any student recently !!!"));
+          }
+        }
+
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+  }
+
+  Widget studentInfo(
+      {String? stuCode,
+      stuName,
+      majorName,
+      email,
+      phone,
+      term,
+      gpa,
+      companyName,
+      startDate,
+      endDate,
+      workingStatus,
+      bool? marginTop}) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      margin: EdgeInsets.only(
+          left: 10, right: 10, bottom: 20, top: marginTop == true ? 20 : 0),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black54,
+            blurRadius: 4,
+            offset: Offset(0, 0), // Shadow position
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "$stuCode - $stuName",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              RichText(
+                  text: TextSpan(children: [
+                TextSpan(
+                    text: "Major: ",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                TextSpan(
+                    text: majorName,
+                    style: TextStyle(color: Colors.black, fontSize: 18))
+              ]))
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              RichText(
+                  text: TextSpan(children: [
+                TextSpan(
+                    text: "GPA: ",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                TextSpan(
+                    text: gpa,
+                    style: TextStyle(color: Colors.black, fontSize: 18))
+              ])),
+              RichText(
+                  text: TextSpan(children: [
+                TextSpan(
+                    text: "Term: ",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                TextSpan(
+                    text: term,
+                    style: TextStyle(color: Colors.black, fontSize: 18))
+              ]))
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              RichText(
+                  text: TextSpan(children: [
+                TextSpan(
+                    text: "Phone: ",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                TextSpan(
+                    text: phone,
+                    style: TextStyle(color: Colors.black, fontSize: 18))
+              ])),
+              RichText(
+                  text: TextSpan(children: [
+                TextSpan(
+                    text: "Email: ",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                TextSpan(
+                    text: email,
+                    style: TextStyle(color: Colors.black, fontSize: 18))
+              ]))
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              RichText(
+                  text: TextSpan(children: [
+                TextSpan(
+                    text: "Company's name: ",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                TextSpan(
+                    text: companyName,
+                    style: TextStyle(color: Colors.black, fontSize: 18))
+              ])),
+              RichText(
+                  text: TextSpan(children: [
+                TextSpan(
+                    text: "Working Status: ",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                TextSpan(
+                    text: workingStatus,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: getStatusColor(workingStatus),
+                        fontSize: 18))
+              ]))
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              RichText(
+                  text: TextSpan(children: [
+                TextSpan(
+                    text: "Start Date: ",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                TextSpan(
+                    text: startDate,
+                    style: TextStyle(color: Colors.black, fontSize: 18))
+              ])),
+              RichText(
+                  text: TextSpan(children: [
+                TextSpan(
+                    text: "End Date: ",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                TextSpan(
+                    text: endDate,
+                    style: TextStyle(color: Colors.black, fontSize: 18))
+              ]))
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _btnRecruitInfo() {
     return ElevatedButton(
       onPressed: () {
-        showData = 1;
+        showData = 2;
         setState(() {});
       },
       child: Text(
@@ -223,9 +445,9 @@ class _ViewStatisticState extends State<ViewStatistic> {
   }
 
   getWidget() {
-    if (showData == 0) {
-      return Text("Student here");
-    } else if (showData == 1) {
+    if (showData == 1) {
+      return _showStudentData();
+    } else if (showData == 2) {
       return _showRecruitmentData();
     } else
       Text("There is no data recently");
@@ -315,9 +537,9 @@ class _ViewStatisticState extends State<ViewStatistic> {
                           padding: EdgeInsets.all(20),
                           height: size.height,
                           decoration: BoxDecoration(
-                            border: Border.all(width: 2, color: Colors.grey),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                              border: Border.all(width: 2, color: Colors.grey),
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.orange.shade300),
                           child: Center(child: getWidget()),
                         )
                       ],
