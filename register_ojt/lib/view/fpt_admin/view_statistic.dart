@@ -153,6 +153,7 @@ class _ViewStatisticState extends State<ViewStatistic> {
       deadline,
       bool? marginTop}) {
     return Container(
+      padding: EdgeInsets.all(20),
       margin: EdgeInsets.only(
           left: 10, right: 10, bottom: 20, top: marginTop == true ? 20 : 0),
       decoration: BoxDecoration(
@@ -173,49 +174,61 @@ class _ViewStatisticState extends State<ViewStatistic> {
           Center(
             child: Text(
               "$major - $topic",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.orange.shade600),
             ),
           ),
           SizedBox(
-            height: 5,
+            height: 20,
           ),
           Text(
             "Company's name: $company",
-            style: TextStyle(fontSize: 18, color: Colors.black54),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           SizedBox(
-            height: 5,
+            height: 10,
           ),
           Text(
             "Address: $area",
-            style: TextStyle(fontSize: 18, color: Colors.black54),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           SizedBox(
-            height: 5,
+            height: 10,
           ),
           Text(
             "Content: $content",
-            style: TextStyle(fontSize: 18, color: Colors.black54),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           SizedBox(
-            height: 5,
+            height: 10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "Salary: $salary",
-                style: TextStyle(fontSize: 18, color: Colors.black54),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Text(
                 "Deadline: $deadline",
-                style: TextStyle(fontSize: 18, color: Colors.black54),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ],
           )
         ],
       ),
     );
+  }
+
+  getWidget() {
+    if (showData == 0) {
+      return Text("Student here");
+    } else if (showData == 1) {
+      return _showRecruitmentData();
+    } else
+      Text("There is no data recently");
   }
 
   @override
@@ -226,96 +239,95 @@ class _ViewStatisticState extends State<ViewStatistic> {
       children: [
         headerCenter(context),
         Container(
-          margin: EdgeInsets.only(top: 50),
+          margin: EdgeInsets.only(top: 30),
           width: size.width * 0.8,
-          height: size.height * 1.3,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black54,
-                blurRadius: 4,
-                offset: Offset(0, 0), // Shadow position
-              ),
-            ],
-          ),
-          child: Container(
-            margin: EdgeInsets.fromLTRB(20, 15, 20, 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                color: Colors.transparent,
-                border: Border.all(width: 0.5, color: Colors.grey),
+          height: size.height * 1.36,
+          child: Scaffold(
+            appBar: AppBar(
+              leading: leadingAppbar(context, colorIcon: Colors.black87),
+              centerTitle: true,
+              backgroundColor: Colors.white,
+            ),
+            body: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
                 boxShadow: [
                   BoxShadow(
-                    spreadRadius: 0,
-                    blurRadius: 0.5,
-                    color: Colors.transparent.withOpacity(0.1),
-//offset: Offset(0, 10)
-                  )
-                ]),
-            child: Center(
+                    color: Colors.black54,
+                    blurRadius: 4,
+                    offset: Offset(0, 0), // Shadow position
+                  ),
+                ],
+              ),
               child: Container(
-                margin: EdgeInsets.fromLTRB(15, 20, 15, 20),
-                width: size.width * 1.5,
-                height: size.height * 2.0,
-                padding: EdgeInsets.all(20),
+                margin: EdgeInsets.fromLTRB(20, 15, 20, 10),
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 10,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: Colors.transparent,
+                    border: Border.all(width: 0.5, color: Colors.grey),
+                    boxShadow: [
+                      BoxShadow(
+                        spreadRadius: 0,
+                        blurRadius: 0.5,
+                        color: Colors.transparent.withOpacity(0.1),
+                        //offset: Offset(0, 10)
+                      )
+                    ]),
+                child: Center(
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(15, 20, 15, 20),
+                    width: size.width * 1.5,
+                    height: size.height * 1.8,
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
                     ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _dropDownButton(),
-                          Row(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              _btnStudent(),
-                              SizedBox(
-                                width: 30,
-                              ),
-                              _btnRecruitInfo()
+                              _dropDownButton(),
+                              Row(
+                                children: [
+                                  _btnStudent(),
+                                  SizedBox(
+                                    width: 30,
+                                  ),
+                                  _btnRecruitInfo()
+                                ],
+                              )
                             ],
-                          )
-                        ],
-                      ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(10),
+                          padding: EdgeInsets.all(20),
+                          height: size.height,
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 2, color: Colors.grey),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Center(child: getWidget()),
+                        )
+                      ],
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      padding: EdgeInsets.all(20),
-                      height: size.height,
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 0.5, color: Colors.grey),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Column(
-                        children: [
-                          if (showData == 0) ...[
-                            Text("Student here")
-                          ] else if (showData == 1) ...[
-                            _showRecruitmentData(),
-                          ] else ...[
-                            Text("No data here")
-                          ]
-                        ],
-                      ),
-                    )
-                  ],
+                  ),
                 ),
               ),
+              // child: ,
             ),
           ),
-          // child: ,
         ),
         footer(context,
             content:
