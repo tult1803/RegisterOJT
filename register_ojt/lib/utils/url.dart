@@ -19,7 +19,9 @@ String urlDenyApplication = "applications/reject";
 String urlListStuForStaff = "applications/fptstaff";
 String urlOJTStuForStaff = "applications/fptstaff/detail";
 String urlComReportForStaff = "reports/fptstaff";
+String urlGetSemester = "semesters";
 
 String urlCompany = "companies";
 
 String urlImportStuForStaff = "students/import";
+String urlGetImportStuList = "students/status";

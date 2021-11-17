@@ -4,13 +4,10 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/utils/helpers.dart';
-import 'package:http/http.dart' as http;
-import 'dart:io';
-import 'package:path/path.dart';
 import 'package:excel/excel.dart';
 import 'package:register_ojt/model/post/post_list_student_to_import.dart';
-import 'package:register_ojt/model/model_import_student_for_staff.dart';
 import 'package:register_ojt/view/fpt_admin/update_student_information.dart';
+import 'package:register_ojt/view/home_page.dart';
 
 class ImportListStudent extends StatefulWidget {
   //const ImportListStudent({Key? key}) : super(key: key);
@@ -30,12 +27,14 @@ class _ImportListStudentState extends State<ImportListStudent> {
     // TODO: implement initState
     super.initState();
     ReadFilePath();
+
     // print(widget.nameTest);
   }
 
   getData() async {
     token = await getDataSession(key: "token");
     setState(() {});
+    return 1;
   }
 
   void ReadFilePath() async {
@@ -67,6 +66,8 @@ class _ImportListStudentState extends State<ImportListStudent> {
       loadingSuccess(status: "Send Success !!!");
       statusCode = 200;
       setState(() {});
+      Navigator.push(context, MaterialPageRoute(
+          builder: (context) => HomePage(role: 1)));
     } else
       loadingFail(status: "Send Info Failed !!!");
   }
@@ -75,22 +76,22 @@ class _ImportListStudentState extends State<ImportListStudent> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextButton(
-            style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-            ),
-            onPressed: () {
-
-              Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => UpdateStudentInFo()));
-            },
-            child: Text(statusCode==200?'Click To Go Back':'', style: TextStyle(fontSize: 35,),),
-          ),
-        ],
-      ),
+      // child: Column(
+      //   mainAxisAlignment: MainAxisAlignment.center,
+      //   children: [
+      //     TextButton(
+      //       style: ButtonStyle(
+      //         foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+      //       ),
+      //       onPressed: () {
+      //
+      //         Navigator.push(context, MaterialPageRoute(
+      //             builder: (context) => HomePage(role: 1)));
+      //       },
+      //       child: Text(statusCode==200?'Click To Go Back':'', style: TextStyle(fontSize: 35,),),
+      //     ),
+      //   ],
+      // ),
     );
   }
 }

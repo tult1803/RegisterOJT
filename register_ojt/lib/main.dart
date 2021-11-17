@@ -148,11 +148,11 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         height: 40,
                       ),
-                      formLogin("Username", 0),
+                      formLogin("Username", 0, obscureText: false),
                       SizedBox(
                         height: 30,
                       ),
-                      formLogin("Password", 1),
+                      formLogin("Password", 1, obscureText: true),
                       SizedBox(
                         height: 30,
                       ),
@@ -222,7 +222,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget formLogin(hintText, int? type) {
+  Widget formLogin(hintText, int? type, {required bool obscureText}) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -237,6 +237,7 @@ class _LoginPageState extends State<LoginPage> {
         Container(
           color: Colors.white,
           child: TextField(
+            obscureText: obscureText,
             onChanged: (value) {
               if (type == 0) {
                 username = value.trim();
