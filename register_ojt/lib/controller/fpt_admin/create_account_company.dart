@@ -17,6 +17,7 @@ class _CreateAccountDataState extends State<CreateAccountData> {
   String? username, password, fullname, email;
   String? data;
   int? position;
+  bool _isObscure = true;
 
   @override
   void initState() {
@@ -107,7 +108,7 @@ class _CreateAccountDataState extends State<CreateAccountData> {
                   title: "Username: ",
                   hintText: "Input account's username",
                   pos: 1),
-              txtAccountInfo(size,
+              txtAccountPassword(size,
                   title: "Password: ",
                   hintText: "Input account's password",
                   pos: 2),
@@ -160,6 +161,50 @@ class _CreateAccountDataState extends State<CreateAccountData> {
               hintText: "${hintText ?? "-----"}",
               border: UnderlineInputBorder(),
             ),
+            onChanged: (value) {
+              setState(() {
+                data = value;
+                position = pos;
+                inputData();
+              });
+            },
+          ),
+          SizedBox(
+            height: 10,
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget txtAccountPassword(size, {String? title, String? hintText, int? pos}) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      width: size.width * 0.4,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "${title ?? "-----"}",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          TextField(
+            obscureText: _isObscure,
+            maxLines: 1,
+            decoration: InputDecoration(
+                hintText: "${hintText ?? "-----"}",
+                border: UnderlineInputBorder(),
+                suffixIcon: IconButton(
+                    icon: Icon(
+                        _isObscure ? Icons.visibility : Icons.visibility_off),
+                    onPressed: () {
+                      setState(() {
+                        _isObscure = !_isObscure;
+                      });
+                    })),
             onChanged: (value) {
               setState(() {
                 data = value;
