@@ -11,9 +11,9 @@ import 'package:register_ojt/view/company/view_all_recruitment.dart';
 import 'package:register_ojt/view/company/view_all_student.dart';
 import 'package:register_ojt/view/company/evaluation_detail_company.dart';
 import 'package:register_ojt/view/company/view_all_application.dart';
-import 'package:register_ojt/view/fpt_admin/check_update_student_information.dart';
 import 'package:register_ojt/view/fpt_admin/update_student_information.dart';
 import 'package:register_ojt/view/fpt_admin/view_all_student.dart';
+import 'package:register_ojt/view/fpt_admin/view_statistic.dart';
 import 'package:register_ojt/view/home_page.dart';
 import 'package:register_ojt/view/student/send_application.dart';
 import 'package:register_ojt/view/student/view_application.dart';
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
-      home: AllStudent(),
+      home: ViewStatistic(),
       // home: HomePage(role: 2,),
       // home: SendApplication(),
     );
@@ -149,11 +149,11 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         height: 40,
                       ),
-                      formLogin("Username", 0),
+                      formLogin("Username", 0, obscureText: false),
                       SizedBox(
                         height: 30,
                       ),
-                      formLogin("Password", 1),
+                      formLogin("Password", 1, obscureText: true),
                       SizedBox(
                         height: 30,
                       ),
@@ -223,7 +223,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget formLogin(hintText, int? type) {
+  Widget formLogin(hintText, int? type, {required bool obscureText}) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -238,6 +238,7 @@ class _LoginPageState extends State<LoginPage> {
         Container(
           color: Colors.white,
           child: TextField(
+            obscureText: obscureText,
             onChanged: (value) {
               if (type == 0) {
                 username = value.trim();

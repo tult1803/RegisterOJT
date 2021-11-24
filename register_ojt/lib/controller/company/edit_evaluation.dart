@@ -224,7 +224,8 @@ class _EditEvaluationDataState extends State<EditEvaluationData> {
                     size, "Working Date:", "Input total working date", 3),
                 _editDetails(
                     size, "Manager's name:", "Input manager's name", 4),
-                _editDetails(size, "Decription:", "Description for student", 5),
+                _editDetails(
+                    size, "Description:", "Description for student", 5),
               ],
             ),
             SizedBox(
