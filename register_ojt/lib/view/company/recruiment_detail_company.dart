@@ -44,80 +44,89 @@ class _RecruimentDetailCompanyState extends State<RecruimentDetailCompany> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-      child: Center(
-        child: Container(
-          margin: EdgeInsets.only(top: 50),
-          width: size.width * 0.5,
-          height: size.height * 0.9,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black54,
-                blurRadius: 4,
-                offset: Offset(0, 0), // Shadow position
-              ),
-            ],
-          ),
-          child: Scaffold(
-            appBar: AppBar(
-              leading: leadingAppbar(context, colorIcon: Colors.black87),
-              centerTitle: true,
-              backgroundColor: Colors.white,
-              title: Text(
-                "Recruitment Details",
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.black87),
-              ),
-            ),
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 30),
-                    width: size.width,
-                    child: Center(
-                        child: Text(
-                      "${widget.content ?? "-----"}",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    )),
+      child: Column(
+        children: [
+          headerCenter(context),
+          Center(
+            child: Container(
+              margin: EdgeInsets.only(top: 50),
+              width: size.width * 0.5,
+              height: size.height * 0.9,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black54,
+                    blurRadius: 4,
+                    offset: Offset(0, 0), // Shadow position
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  containerRecruiment(size,
-                      title: "Company:",
-                      content: "${data?.companyName ?? "-----"}"),
-                  containerRecruiment(size,
-                      title: "Address:",
-                      content: "${data?.address ?? "-----"}"),
-                  containerRecruiment(size,
-                      title: "Requirements for majors:",
-                      content: "${data?.majorName ?? "-----"}"),
-                  containerRecruiment(size,
-                      title: "Company's website:",
-                      content: "${data?.companyWebsite ?? "-----"}"),
-                  containerJobDescription(size,
-                      title: "Job Description:",
-                      content: "${data?.content ?? "-----"}"),
-                  containerRecruiment(size,
-                      title: "Salary:", content: "${data?.salary ?? "-----"}"),
-                  containerRecruiment(size,
-                      title: "Expired Date:",
-                      content: "${data?.deadline ?? "-----"}",
-                      showBottom: true),
-                  btnDelete(context, id: widget.id),
                 ],
               ),
+              child: Scaffold(
+                appBar: AppBar(
+                  leading: leadingAppbar(context, colorIcon: Colors.black87),
+                  centerTitle: true,
+                  backgroundColor: Colors.white,
+                  title: Text(
+                    "Recruitment Details",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.black87),
+                  ),
+                ),
+                body: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 30),
+                        width: size.width,
+                        child: Center(
+                            child: Text(
+                          "${widget.content ?? "-----"}",
+                          style:
+                              TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        )),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      containerRecruiment(size,
+                          title: "Company:",
+                          content: "${data?.companyName ?? "-----"}"),
+                      containerRecruiment(size,
+                          title: "Address:",
+                          content: "${data?.address ?? "-----"}"),
+                      containerRecruiment(size,
+                          title: "Requirements for majors:",
+                          content: "${data?.majorName ?? "-----"}"),
+                      containerRecruiment(size,
+                          title: "Company's website:",
+                          content: "${data?.companyWebsite ?? "-----"}"),
+                      containerJobDescription(size,
+                          title: "Job Description:",
+                          content: "${data?.content ?? "-----"}"),
+                      containerRecruiment(size,
+                          title: "Salary:", content: "${data?.salary ?? "-----"}"),
+                      containerRecruiment(size,
+                          title: "Expired Date:",
+                          content: "${data?.deadline ?? "-----"}",
+                          showBottom: true),
+                      btnDelete(context, id: widget.id),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
-        ),
+          footer(context,
+              content:
+              "Sinh viên cần hỗ trợ vui lòng liên hệ Trung tâm Dịch vụ Sinh viên tại Phòng 202, điện thoại : 028.73005585 , email: sschcm@fe.edu.vn"),
+
+        ],
       ),
     );
   }

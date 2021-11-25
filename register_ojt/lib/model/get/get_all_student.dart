@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:register_ojt/model/company/model_student_company.dart';
 import 'package:register_ojt/utils/url.dart';
@@ -13,6 +15,7 @@ class StudentsCompany {
 
     print("Status getApi Student Company:${response.statusCode}");
     if (response.statusCode == 200) {
+      print(studentCompanyFromJson(response.body));
       return studentCompanyFromJson(response.body);
     } else {
       return null;

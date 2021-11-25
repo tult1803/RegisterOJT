@@ -35,17 +35,29 @@ class _AllStudentDataState extends State<AllStudentData> {
             return ListView.builder(
               itemCount: data!.length,
               itemBuilder: (context, index) {
-                String formattedStartDate = DateFormat('MM:HH dd/MM/yyyy')
-                    .format(data![index].startDate as DateTime);
-                // String formattedEndDate = DateFormat('MM:HH dd/MM/yyyy')
-                //     .format(data![index].endDate as DateTime);
+                String? formattedStartDate, formattedEndDate;
+                try {
+                  formattedStartDate = data![index].startDate!.substring(0, 10);
+                  formattedEndDate = data![index].endDate!.substring(0, 10);
+                  // DateTime parseStartDate = DateTime.parse(
+                  //     "${data![index].startDate}");
+                  // DateTime? parseEndDate = DateTime.tryParse(
+                  //     "${data![index].endDate}");
+                  //  formattedStartDate = DateFormat('MM:HH dd/MM/yyyy')
+                  //     .format(parseStartDate);
+                  //  formattedEndDate = DateFormat('MM:HH dd/MM/yyyy')
+                  //     .format(parseEndDate!);
+                }catch (_){
+                  formattedStartDate = null;
+                  formattedEndDate = null;
+                }
                 return _student(
                   id: data![index].studentCode,
                   name: data![index].studentName,
                   position: data![index].position,
                   status: data![index].status,
                   startDate: formattedStartDate,
-                  // endDate: formattedEndDate,
+                  endDate: formattedEndDate,
                 );
               },
             );
@@ -79,7 +91,7 @@ class _AllStudentDataState extends State<AllStudentData> {
     );
   }
 
-  Widget _student({name, id, position, status, startDate}) {
+  Widget _student({name, id, position, status, startDate, endDate}) {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
@@ -122,7 +134,7 @@ class _AllStudentDataState extends State<AllStudentData> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _info("Start Date: ", "${startDate ?? "---"}"),
-                //_info("End Date: ", "${endDate ?? "Not Finish"}"),
+                _info("End Date: ", "${endDate ?? "Not Finish"}"),
               ],
             ),
           ],

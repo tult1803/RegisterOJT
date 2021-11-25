@@ -11,15 +11,15 @@ class StudentCompany {
     this.studentCode,
     this.studentName,
     this.startDate,
-    // this.endDate,
+    this.endDate,
     this.position,
     this.status,
   });
 
   String? studentCode;
   String? studentName;
-  DateTime? startDate;
-  // DateTime? endDate;
+  String? startDate;
+  String? endDate;
   String? position;
   String? status;
 
@@ -28,8 +28,8 @@ class StudentCompany {
         studentName: json["studentName"],
         position: json["position"],
         status: json["status"],
-        startDate: DateTime.parse(json["startDate"]),
-        // endDate: DateTime.parse(json["endDate"]),
+        startDate: json["startDate"],
+        endDate: json["endDate"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -37,7 +37,7 @@ class StudentCompany {
         "studentName": studentName,
         "position": position,
         "status": status,
-        "startDate": startDate?.toIso8601String(),
-        // "endDate": endDate?.toIso8601String(),
+        "startDate": startDate,
+        "endDate": endDate,
       };
 }
