@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:register_ojt/components/component.dart';
 import 'package:register_ojt/model/get/get_statistic_dropbutton_value.dart';
 import 'package:register_ojt/model/get/get_statistic_recruitment.dart';
@@ -109,6 +110,8 @@ class _ViewStatisticState extends State<ViewStatistic> {
             return ListView.builder(
               itemCount: listStudent!.length,
               itemBuilder: (context, index) {
+                print (listStudent![0].startDate);
+
                 return studentInfo(
                     marginTop: index == 0 ? true : null,
                     stuCode: listStudent![index].stuCode,
@@ -171,139 +174,54 @@ class _ViewStatisticState extends State<ViewStatistic> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "$stuCode - $stuName",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-              RichText(
-                  text: TextSpan(children: [
-                TextSpan(
-                    text: "Major: ",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                TextSpan(
-                    text: majorName,
-                    style: TextStyle(color: Colors.black, fontSize: 18))
-              ]))
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RichText(
-                  text: TextSpan(children: [
-                TextSpan(
-                    text: "GPA: ",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                TextSpan(
-                    text: gpa,
-                    style: TextStyle(color: Colors.black, fontSize: 18))
-              ])),
-              RichText(
-                  text: TextSpan(children: [
-                TextSpan(
-                    text: "Term: ",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                TextSpan(
-                    text: term,
-                    style: TextStyle(color: Colors.black, fontSize: 18))
-              ]))
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RichText(
-                  text: TextSpan(children: [
-                TextSpan(
-                    text: "Phone: ",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                TextSpan(
-                    text: phone,
-                    style: TextStyle(color: Colors.black, fontSize: 18))
-              ])),
-              RichText(
-                  text: TextSpan(children: [
-                TextSpan(
-                    text: "Email: ",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                TextSpan(
-                    text: email,
-                    style: TextStyle(color: Colors.black, fontSize: 18))
-              ]))
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RichText(
-                  text: TextSpan(children: [
-                TextSpan(
-                    text: "Company's name: ",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                TextSpan(
-                    text: companyName,
-                    style: TextStyle(color: Colors.black, fontSize: 18))
-              ])),
-              RichText(
-                  text: TextSpan(children: [
-                TextSpan(
-                    text: "Working Status: ",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                TextSpan(
-                    text: workingStatus,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: getStatusColor(workingStatus),
-                        fontSize: 18))
-              ]))
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RichText(
-                  text: TextSpan(children: [
-                TextSpan(
-                    text: "Start Date: ",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                TextSpan(
-                    text: startDate,
-                    style: TextStyle(color: Colors.black, fontSize: 18))
-              ])),
-              RichText(
-                  text: TextSpan(children: [
-                TextSpan(
-                    text: "End Date: ",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                TextSpan(
-                    text: endDate,
-                    style: TextStyle(color: Colors.black, fontSize: 18))
-              ]))
-            ],
+          Table(
+              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+              columnWidths: {
+                0: FlexColumnWidth(2),
+                1: FlexColumnWidth(2),
+                2: FlexColumnWidth(1),
+                3: FlexColumnWidth(1),
+                4: FlexColumnWidth(1),
+                5: FlexColumnWidth(3),
+                6: FlexColumnWidth(2),
+                7: FlexColumnWidth(3),
+                8: FlexColumnWidth(2),
+                9: FlexColumnWidth(2),
+                10: FlexColumnWidth(2),
+              },
+              border: TableBorder.all(color: Colors.black),
+              children:
+              [TableRow(children: [
+                Text("StudentCode".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                Text("Full Name".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                Text("Major".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                Text("Term".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                Text("GPA".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                Text("Email".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                Text("Phone".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                Text("Company".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                Text("WorkingStatus".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                Text("StartDate".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                Text("EndDate".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                // you can have more properties of course
+              ]),
+                ...(listStudent == null ? [] as List : listStudent as List)
+                    .map((item) => TableRow(children: [
+                  Text(item.stuCode.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  Text(item.stuName.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  Text(item.majorName.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  Text(item.gpa.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  Text(item.term.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  Text(item.email.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  Text(item.phone.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  Text(item.companyName.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  Text(item.workingStatus.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  Text(DateFormat('dd-MM-yyyy').format(DateFormat('yyyy-MM-dd').parse(item.startDate)), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  Text(DateFormat('dd-MM-yyyy').format(DateFormat('yyyy-MM-dd').parse(item.endDate)), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  // you can have more properties of course
+                ]))
+                    .toList()]
+
           ),
         ],
       ),
@@ -343,7 +261,7 @@ class _ViewStatisticState extends State<ViewStatistic> {
                   marginTop: index == 0 ? true : null,
                   topic: listRecruitment![index].topic,
                   company: listRecruitment![index].companyName,
-                  content: listRecruitment![index].topic,
+                  content: listRecruitment![index].content,
                   deadline:
                       "${listRecruitment![index].deadline?.substring(0, 10)}",
                   area: listRecruitment![index].area,
@@ -393,52 +311,43 @@ class _ViewStatisticState extends State<ViewStatistic> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(
-            child: Text(
-              "$major - $topic",
-              style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.orange.shade600),
-            ),
+          Table(
+              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+              columnWidths: {
+                0: FlexColumnWidth(1),
+                1: FlexColumnWidth(2),
+                2: FlexColumnWidth(3),
+                3: FlexColumnWidth(2),
+                4: FlexColumnWidth(3),
+                5: FlexColumnWidth(2),
+                6: FlexColumnWidth(2),
+              },
+              border: TableBorder.all(color: Colors.black),
+              children:
+              [TableRow(children: [
+                Text("Major".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                Text("Topic".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                Text("Company Name".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                Text("Address".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                Text("Content".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                Text("Salary".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                Text("Deadline".toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                // you can have more properties of course
+              ]),
+                ...(listRecruitment == null ? [] as List : listRecruitment as List)
+                    .map((item) => TableRow(children: [
+                  Text(item.majorName.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  Text(item.topic.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  Text(item.companyName.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  Text(item.area.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  Text(item.content.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  Text(item.salary.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  Text(DateFormat('dd-MM-yyyy').format(DateFormat('yyyy-MM-dd').parse(item.deadline)), style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold ), textAlign: TextAlign.center),
+                  // you can have more properties of course
+                ]))
+                    .toList()]
+
           ),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            "Company's name: $company",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            "Address: $area",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            "Content: $content",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Salary: $salary",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "Deadline: $deadline",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ],
-          )
         ],
       ),
     );
