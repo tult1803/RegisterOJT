@@ -11,6 +11,7 @@ class CreateRecruitmentData extends StatefulWidget {
 class _CreateRecruitmentDataState extends State<CreateRecruitmentData> {
   String? content, deadline, salary, majorName, area, topic;
   String? data, position;
+  DateTime selectedDate = DateTime.now();
 
   @override
   void initState() {
@@ -28,7 +29,7 @@ class _CreateRecruitmentDataState extends State<CreateRecruitmentData> {
       case "txtTitle":
         topic = data;
         break;
-      case "txtAddress":
+      case "txtArea":
         area = data;
         break;
       case "txtRequired":
@@ -71,6 +72,29 @@ class _CreateRecruitmentDataState extends State<CreateRecruitmentData> {
     return false;
   }
 
+  bool _decideWhichDayToEnable(DateTime day) {
+    if ((day.isAfter(DateTime.now().subtract(Duration(days: 1))) &&
+        day.isBefore(DateTime.now().add(Duration(days: 10))))) {
+      return true;
+    }
+    return false;
+  }
+
+  _selectDate(BuildContext context) async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2021),
+      lastDate: DateTime(2025),
+      selectableDayPredicate: _decideWhichDayToEnable,
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+        deadline = selectedDate.toString().substring(0, 10);
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -100,9 +124,9 @@ class _CreateRecruitmentDataState extends State<CreateRecruitmentData> {
                   hintText: "Input Recruitment's Title",
                   pos: "txtTitle"),
               txtFieldRecruiment(size,
-                  title: "Address: ",
-                  hintText: "Input Working Address",
-                  pos: "txtAddress"),
+                  title: "Area: ",
+                  hintText: "Input Area for Recruitment",
+                  pos: "txtArea"),
               txtFieldRecruiment(size,
                   title: "Requirments for major: ",
                   hintText: "Input Recruitment's requirments",
@@ -115,10 +139,8 @@ class _CreateRecruitmentDataState extends State<CreateRecruitmentData> {
                   title: "Salary: ",
                   hintText: "Input Recruitment's Salary",
                   pos: "txtSalary"),
-              txtFieldRecruiment(size,
-                  title: "Expired Date: ",
-                  hintText: "Input deadline(YYYY/MM/DD)",
-                  pos: "txtDeadline"),
+              txtFieldDate(context, size,
+                  title: "Expired Date:", time: deadline),
               SizedBox(
                 height: 20,
               ),
@@ -169,6 +191,78 @@ class _CreateRecruitmentDataState extends State<CreateRecruitmentData> {
               });
             },
           ),
+          SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget txtFieldDate(BuildContext context, size,
+      {String? title, String? time}) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 10, top: 10),
+      width: size.width * 0.4,
+      height: 50,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              height: 40,
+              child: Text(
+                "${title ?? "-----"}",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 50,
+          ),
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  width: size.width * 0.25,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: Colors.grey)),
+                  child: Text(
+                    "${time ?? "Select date ---->"}",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(
+                  width: size.width * 0.005,
+                ),
+                Container(
+                  width: size.width * 0.035,
+                  height: 50,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.orangeAccent,
+                    border: Border.all(width: 1, color: Colors.grey),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: IconButton(
+                    alignment: Alignment.center,
+                    onPressed: () => _selectDate(context),
+                    icon: Icon(
+                      Icons.calendar_today_outlined,
+                      color: Colors.black,
+                      size: 26,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
         ],
       ),
     );
@@ -204,6 +298,9 @@ class _CreateRecruitmentDataState extends State<CreateRecruitmentData> {
                 inputData();
               });
             },
+          ),
+          SizedBox(
+            height: 10,
           ),
         ],
       ),
